@@ -13,7 +13,7 @@ tags: 口罩 新冠肺炎 疫情 KN95 N95 KF94 浙粮
 1月29日，国家工信部有关负责人介绍，中国的口罩年产量占全球约50%，最大产能达每天2000多万只。根据口罩业内人士的估计，中国的实际产能肯定远超这个数字，但特殊时期，产能能否真正释放，又如何调配，都是巨大难题。
 
 嘉木木，公众号：三联生活周刊
-[口罩产能全球过半，为何还是“一罩难求”？](https://mp.weixin.qq.com/s?src=11&timestamp=1582034928&ver=2166&signature=6aPCGLQ82QiebaPwzPldIVfWW72ot3pt1yYgj6c47A5byGWxdlT7ckuLTTK66jq6IJqdp3ORuNEPi50ODxzpwhawgKec40an1jsh7yODYKMa-C8*6SEvIhoBJc51l-Fb&new=1)
+口罩产能全球过半，为何还是“一罩难求”？
 ```
 
 就算各种企业都来参与生产口罩，短期内供需矛盾依然无法化解。
