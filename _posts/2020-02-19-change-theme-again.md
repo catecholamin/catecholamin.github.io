@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '又换模版'
+title: '又换主题'
 subtitle: '使劲折腾'
 date: 2020-02-19
 categories: blog
