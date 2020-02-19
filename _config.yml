@@ -27,7 +27,7 @@ footer:
 author: 'Sunfly'
 nickname: 'Sunfly'
 bio: '外科医生'
-avatar: '/assets/img/profile.png'
+avatar: '/assets/img/profile.jpg'
 
 # Search
 search: true
@@ -57,6 +57,7 @@ postPatterns: 'circuitBoard'
 # url: email, weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
 sns:
   weibo: '//weibo.com/bugmar'
+  douban: '//www.douban.com/people/spig'
   github: '//github.com/catecholamin'
 
 # Tags 设置标签
