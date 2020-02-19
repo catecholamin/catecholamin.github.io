@@ -8,21 +8,43 @@ layout: about
     <div class="reproduce-block">
         <p><strong>联系方式：</strong></p>
         <p>发送邮件到：<a href="mailto:sfgd196@hotmail.com"><i class="fa fa-envelope-o" style="padding-right: 10px" aria-hidden="true"></i>sfgd196@hotmail.com</a></p>
-		<p>微信公众号：</p>
+		<p>微博：<a href="https://weibo.com/bugmar">儿茶分安</a></p>
+		<p>微信公众号：<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect">儿茶分安</a></p>
 		<img src="
 https://raw.githubusercontent.com/catecholamin/pictures/master/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7.jpg" />
 
     </div>
-
-    <p>
-    
-    <br><br>
-
-   
-    </p>
 </div>
 
+<head>
+  <!-- Vssue 的样式文件 -->
+  <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
+</head>
+<body>
+  <div id="vssue"></div>
+<script src="https://unpkg.com/vue/dist/vue.runtime.min.js"></script>
+<script src="https://unpkg.com/vssue/dist/vssue.github.min.js"></script>	
+  <script>
+    new Vue({
+      el: '#vssue',
 
+      render: h => h('Vssue', {
+        props: {
+          // 在这里设置当前页面对应的 Issue 标题
+          title: location.pathname, 
+
+          // 在这里设置你使用的平台的 OAuth App 配置
+          options: {
+            owner: 'catecholamin',
+            repo: 'catecholamin.github.io',
+            clientId: '1e3a0adc32661e820f72',
+            clientSecret: 'ec55ec59ef1c3f150ea3b158f9724391fc41ea6a', // 只有在使用某些平台时需要
+          },
+        }
+      })
+    })
+  </script>
+  </body>
 
 
 
