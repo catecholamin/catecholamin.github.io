@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      收到拒稿信，继续投
+title:      纯生信分析又被拒稿，继续投
 subtitle:   屡战屡败，屡败屡战
 date:       2020-02-19
 tags: 投稿 论文 NSFC 国自然 拒稿
