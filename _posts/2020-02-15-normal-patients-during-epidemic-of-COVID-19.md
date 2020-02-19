@@ -1,11 +1,11 @@
 ---
 layout: post
-title: '疫情对普通病人的影响'
+title: '新冠肺炎（COVID-19）疫情对普通病人的影响'
 subtitle: '疫情期间生个病不容易'
 date: 2020-02-15
 categories: 临床
 cover: 'https://raw.githubusercontent.com/catecholamin/pictures/master/IMG_4067.JPG'
-tags: 门诊 疫情 新冠肺炎 患者 肝脓肿 住院
+tags: 门诊 疫情 新冠肺炎 COVID-19 患者 肝脓肿 住院
 ---
 疫情开始后门诊量显著减少，目前大约是疫情前的三分之一到二分之一左右。早上上班护士给我们发2个口罩1个帽子，口罩上午1个，下午1个。还有1个护目镜重复使用，自己下班用消毒液擦擦。我所在的普通门诊的暴露危险程度，在医院里属于第三档：中等风险。因此按照规定，我们使用医用外科口罩。
 

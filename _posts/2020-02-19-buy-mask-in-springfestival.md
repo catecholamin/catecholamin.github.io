@@ -5,9 +5,9 @@ subtitle: '没想到，外科医生家里也会缺医用外科口罩'
 date: 2020-02-19
 categories: 时事
 cover: 'https://raw.githubusercontent.com/catecholamin/pictures/master/3M%20N95.jpeg'
-tags: 口罩 新冠肺炎 疫情 KN95 N95 KF94 浙粮
+tags: 口罩 新冠肺炎 COVID-19 疫情 KN95 N95 KF94 浙粮
 ---
-这个正月里就是在刷口罩中度过的。没想到，外科医生家里也会缺医用外科口罩。本来家里有少量口罩备用，这次疫情开始后，没有充分认识到口罩缺货的程度，也没有预估口罩消耗的速度。其实根源是犯了武汉政府同样的错误：低估了疫情发展的速度和规模。另外看到雪球公众号推送的这篇文章，也让我放松了对口罩缺货的警惕：[根本不存在断货！口罩的生产速度你远远想像不到！中国制造已打响健康保卫战](https://mp.weixin.qq.com/s?__biz=MzA5MjE3ODgzNA==&mid=2652252299&idx=1&sn=377dcf030ac9df76d87d3faa2468ed01&scene=21#wechat_redirect)。现在回头看这篇文章，漏洞颇多，我只是选择性地接收了符合自己预判的信息。文章说的口罩生产速度快，产量高的确是事实，但文章没有任何关于口罩产量的确切数据。另外，抛开需求谈供应，毫无意义。在这次疫情中，口罩几乎变成出门的刚需，13亿人里每天就算有1亿人要出门就要消耗1亿只口罩。而关于口罩的产能：
+这个正月里就是在刷口罩中度过的。没想到，外科医生家里也会缺医用外科口罩。本来家里有少量口罩备用，这次新冠肺炎（COVID-19）疫情开始后，没有充分认识到口罩缺货的程度，也没有预估口罩消耗的速度。其实根源是犯了武汉政府同样的错误：低估了疫情发展的速度和规模。另外看到雪球公众号推送的这篇文章，也让我放松了对口罩缺货的警惕：[根本不存在断货！口罩的生产速度你远远想像不到！中国制造已打响健康保卫战](https://mp.weixin.qq.com/s?__biz=MzA5MjE3ODgzNA==&mid=2652252299&idx=1&sn=377dcf030ac9df76d87d3faa2468ed01&scene=21#wechat_redirect)。现在回头看这篇文章，漏洞颇多，我只是选择性地接收了符合自己预判的信息。文章说的口罩生产速度快，产量高的确是事实，但文章没有任何关于口罩产量的确切数据。另外，抛开需求谈供应，毫无意义。在这次疫情中，口罩几乎变成出门的刚需，13亿人里每天就算有1亿人要出门就要消耗1亿只口罩。而关于口罩的产能：
 
 
 >1月29日，国家工信部有关负责人介绍，中国的口罩年产量占全球约50%，最大产能达每天2000多万只。根据口罩业内人士的估计，中国的实际产能肯定远超这个数字，但特殊时期，产能能否真正释放，又如何调配，都是巨大难题。
@@ -35,5 +35,5 @@ tags: 口罩 新冠肺炎 疫情 KN95 N95 KF94 浙粮
 
 随着每日确诊人数逐渐下降，疫情好像已经出现了拐点，以至于舆论都开始乐观了起来。希望疫情早日结束，不用再抢口罩了。
 
-我的微信公众号：[儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)    [原文链接](https://mp.weixin.qq.com/s/TesiG-IYJ0hXS1KAVu1xbw)
+我的微信公众号：[儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)     [原文链接](https://mp.weixin.qq.com/s/TesiG-IYJ0hXS1KAVu1xbw)
 ![](https://raw.githubusercontent.com/catecholamin/pictures/master/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7.jpg)
