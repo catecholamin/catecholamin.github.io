@@ -5,7 +5,7 @@ subtitle:   “学生信，绕不开linux”
 date:       2019-10-12
 author:     Sunfly
 header-img: "img/ubuntu.desktop.jpeg"
-cover:      "img/ubuntu.jpg"
+cover:      "img/ubuntu.desktop.jpeg"
 catalog: true
 tags: linux 生信 ubuntu win10 镜像 bioconda 安装软件
 ---
@@ -14,7 +14,8 @@ tags: linux 生信 ubuntu win10 镜像 bioconda 安装软件
 
 # 修改镜像地址
 在目录：C:\Users\用户名\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc
-\LocalState\rootfs\etc\apt找到sources.list，然后改成阿里云的源
+\LocalState\rootfs\etc\apt找到sources.list，然后改成阿里云的源：
+
 ```
 deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
@@ -27,6 +28,7 @@ deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted unive
 deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
 ```
+
 随后运行sudo apt-get update
 下载安装软件速度大大提升。
 
