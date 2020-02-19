@@ -2,6 +2,11 @@
 <html>
 {% include post-head.html %}
 
+<head>
+  <!-- Vssue 的样式文件 -->
+  <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
+</head>
+
 <body>
   <!--[if lt IE 10]>
 <div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
@@ -48,11 +53,8 @@
     {% endif %}
   </div>
 
-<head>
-  <!-- Vssue 的样式文件 -->
-  <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
-</head>
-<body>
+
+
   <div id="vssue"></div>
 <script src="https://unpkg.com/vue/dist/vue.runtime.min.js"></script>
 <script src="https://unpkg.com/vssue/dist/vssue.github.min.js"></script>	
@@ -76,7 +78,7 @@
       })
     })
   </script>
-</body>
+
 
 
   <section class="author-detail">
