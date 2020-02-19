@@ -1,16 +1,14 @@
 ---
 layout:     post
 title:      等待2篇投稿结果，基金再挣扎一下
-subtitle:   “总要挣扎一下”
+subtitle:   总要挣扎一下
 date:       2020-01-14
-author:     Sunfly
-catalog: false
 tags: 投稿 论文 基金 课题
 ---
 2019的第二篇水文已经在2020年1月3日投出，不过，既然是灌水，就做好了被拒的准备。第一篇水文杳无音讯，发了催稿信，编辑回复
 
-```Thank you for your inquiry. The Editor who is overseeing the review process of your manuscript is currently assigning it to external reviewers. Once the reviewers have submitted their reports, the Editor will be able to make a decision.
-We will notify you when the decision is finalized.```
+>Thank you for your inquiry. The Editor who is overseeing the review process of your manuscript is currently assigning it to external reviewers. Once the reviewers have submitted their reports, the Editor will be able to make a decision.
+We will notify you when the decision is finalized.
 
 好吧，再继续等。
 
