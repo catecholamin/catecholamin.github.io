@@ -25,6 +25,6 @@ tags: 门诊 疫情 新冠肺炎 COVID-19 患者 肝脓肿 住院
 普通病人看病受到疫情的影响不小，希望疫情尽快过去吧。
 <!-- 4EA33B-->
 
-首发于公众号：[儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)   ： [原文链接](https://mp.weixin.qq.com/s?__biz=MzA4MDQxMTk2Mg==&mid=2649113519&idx=1&sn=f9e17cd408a7892ec0c9c004deb4545e&chksm=87b64ffab0c1c6ec4fa2d4609b827fc11f377dc5499cbc8c433a5da8eab5b691d72dc5314b0a&token=83357096&lang=zh_CN#rd)
+首发于公众号：[儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)   ：catecholamin  [原文链接](https://mp.weixin.qq.com/s?__biz=MzA4MDQxMTk2Mg==&mid=2649113519&idx=1&sn=f9e17cd408a7892ec0c9c004deb4545e&chksm=87b64ffab0c1c6ec4fa2d4609b827fc11f377dc5499cbc8c433a5da8eab5b691d72dc5314b0a&token=83357096&lang=zh_CN#rd)
 ![](https://gitee.com/catecholamin/blogimg/raw/master/img/微信公众号.jpg)
 
