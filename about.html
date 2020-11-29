@@ -15,6 +15,7 @@ layout: about
   <!-- Vssue 的样式文件 -->
   <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
 </head>
+
 <body>
   <div id="vssue"></div>
   <!-- 先引入 Vue -->
@@ -23,7 +24,7 @@ layout: about
 <script src="https://unpkg.com/vssue/dist/vssue.github.min.js"></script>
   <!-- 将 Vssue 作为 Vue 组件使用 -->
   <!-- 对于 Vue 运行时版，使用渲染函数（render function） -->
-  <script>
+<script>
     new Vue({
       el: '#vssue',
 
@@ -37,13 +38,13 @@ layout: about
             owner: 'catecholamin',
             repo: 'catecholamin.github.io',
             clientId: '2cb10c7fad45e11cb233',
-            clientSecret: 'f26eaa57bb28f2fbd74933fbf7416d9e33207c00', //  只有在使用某些平台时需要
+            clientSecret: 'f26eaa57bb28f2fbd74933fbf7416d9e33207c00', // 只有在使用某些平台时需要
           },
         }
       })
     })
   </script>
-</body>
+  </body>
 
 
 
