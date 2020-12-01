@@ -112,8 +112,9 @@
     <section class="post-footer-item comment">
         <div id="disqus_thread"></div>
     
-	<script src="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js"></script>
+	<script id="dsqjs-script" async src="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js"></script>
     <script>
+	document.getElementById('dsqjs-script').addEventListener('load', function() {
   var dsqjs = new DisqusJS({
     shortname: 'catecholamin',
     siteName: 'catecholamin',
@@ -124,6 +125,7 @@
     apikey: 'PIiVzlYeMUcsOyHIkMnpEkYkaaR3wnUWiuF0okAHRxGt8RB9XO8QdEGqYlkTv8Mg',
     admin: 'catecholamin',
     adminLabel: ''
+});
 });
 </script>
 	</section>
