@@ -19,5 +19,5 @@ tags: 临床 急诊 手术 胃穿孔
 
 <!--2A9EAC-->
 
-首发于公众号： [儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)  ：   [原文链接]()
+首发于公众号： [儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)  ：   [原文链接](https://mp.weixin.qq.com/s/wS78TMtShR0tbVsLAomzYw)
 ![](https://gitee.com/catecholamin/blogimg/raw/master/img/微信公众号.jpg)
