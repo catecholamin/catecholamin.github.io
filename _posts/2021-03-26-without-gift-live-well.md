@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 没有天赋，也能活
-subtitle:知道自己是块什么料很重要
+subtitle: 知道自己是块什么料很重要
 date: 2021-03-26
 categories: 冯唐成事心法
 cover: '图片绝对地址或者img/2.jpg'
