@@ -21,19 +21,19 @@ var responsiveCal = function( options ) {
 	var now = new Date();
     if( $(window).width() < 420 ) {
         options.start = now.setMonth(now.getMonth());
-        options.range = 3;
+        options.range = 2;
         options.cellSize = 20;
     } else if ( $(window).width() < 730 ) {
         options.start = now.setMonth(now.getMonth() - 1);
-        options.range = 3;
+        options.range = 2;
         options.cellSize = 20;
     } else if( $(window).width() < 1400 ) {
         options.start = now.setMonth(now.getMonth() - 2);
-        options.range = 3;
+        options.range = 2;
         options.cellSize = 20;
     } else {
         options.start = now.setMonth(now.getMonth() - 3);
-        options.range = 3;
+        options.range = 2;
         options.cellSize = 20;
     }
 
@@ -55,7 +55,7 @@ caloptions = {
 	displayLegend: false,
 	verticalOrientation: true,
 	domainGutter: 2,
-	range: 3,
+	range: 2,
 	considerMissingDataAsZero:false,
 	domainDynamicDimension: true,
 	previousSelector: "#cal-heatmap-PreviousDomain-selector",
