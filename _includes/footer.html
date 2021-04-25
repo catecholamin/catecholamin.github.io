@@ -22,19 +22,19 @@ var responsiveCal = function( options ) {
     if( $(window).width() < 420 ) {
         options.start = now.setMonth(now.getMonth());
         options.range = 3;
-        options.cellSize = 20;
+        options.cellSize = 10;
     } else if ( $(window).width() < 730 ) {
         options.start = now.setMonth(now.getMonth() - 1);
         options.range = 3;
-        options.cellSize = 20;
+        options.cellSize = 10;
     } else if( $(window).width() < 1400 ) {
         options.start = now.setMonth(now.getMonth() - 2);
         options.range = 3;
-        options.cellSize = 20;
+        options.cellSize = 10;
     } else {
         options.start = now.setMonth(now.getMonth() - 3);
         options.range = 3;
-        options.cellSize = 20;
+        options.cellSize = 10;
     }
 
     if( typeof cal === "object" ) {
