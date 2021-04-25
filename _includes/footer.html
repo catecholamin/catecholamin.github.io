@@ -79,7 +79,7 @@ $(window).resize(function() {
     if(this.resizeTO) clearTimeout(this.resizeTO);
     this.resizeTO = setTimeout(function() {
         $(this).trigger('resizeEnd');
-    }, 250);
+    }, 200);
 });
 
 //resize on resizeEnd function
