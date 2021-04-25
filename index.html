@@ -100,7 +100,7 @@ header-img: https://api.dujin.org/bing/1920.php
 		
       <div id="cal-heatmap"></div>
       <script type="text/javascript">
-var cal, current_cal_year;
+var this.cal = new CalHeatMap();
     function scrollCal(obj, year){
         if (year > current_cal_year){
             cal.next((year - current_cal_year) * 12);
