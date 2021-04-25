@@ -60,7 +60,10 @@ caloptions = {
 	domainDynamicDimension: true,
 	previousSelector: "#cal-heatmap-PreviousDomain-selector",
 	nextSelector: "#cal-heatmap-NextDomain-selector",
-	domainLabelFormat: ""
+	domainLabelFormat: function(date) {
+		moment.locale("en");
+		return moment(date).format("MMMM").toUpperCase();
+	},
 	subDomainTextFormat: "%d",
 	legend: [0,1,2,3],
 	tooltip: true,
