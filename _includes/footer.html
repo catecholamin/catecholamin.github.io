@@ -21,19 +21,19 @@ var responsiveCal = function( options ) {
 	var now = new Date();
     if( $(window).width() < 420 ) {
         options.start = now.setMonth(now.getMonth());
-        options.range = 12;
+        options.range = 6;
         options.cellSize = 20;
     } else if ( $(window).width() < 730 ) {
         options.start = now.setMonth(now.getMonth() - 1);
-        options.range = 12;
+        options.range = 6;
         options.cellSize = 20;
     } else if( $(window).width() < 1400 ) {
         options.start = now.setMonth(now.getMonth() - 2);
-        options.range = 12;
+        options.range = 6;
         options.cellSize = 20;
     } else {
         options.start = now.setMonth(now.getMonth() - 3);
-        options.range = 12;
+        options.range = 6;
         options.cellSize = 20;
     }
 
@@ -65,7 +65,10 @@ caloptions = {
 		return moment(date).format("MMMM").toUpperCase();
 	},
 	subDomainTextFormat: "%d",
-	legend: [0,1,2,3],
+	legendCellSize: 20
+	legendHorizontalPosition: "right"
+	legendOrientation: "vertical"
+	legend: [0,1,2],
 	tooltip: true,
 	label: {
 		position: "top"
