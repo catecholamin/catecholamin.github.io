@@ -100,23 +100,9 @@ header-img: https://api.dujin.org/bing/1920.php
 		
       <div id="cal-heatmap"></div>
       <script type="text/javascript">
-var this.cal = new CalHeatMap();
-    function scrollCal(obj, year){
-        if (year > current_cal_year){
-            cal.next((year - current_cal_year) * 12);
-            document.getElementsByClassName("enabled")[0].classList.remove("enabled");
-            obj.classList.add("enabled");
-        } else {
-            cal.previous((current_cal_year - year) * 12);
-            document.getElementsByClassName("enabled")[0].classList.remove("enabled");
-            obj.classList.add("enabled");
-        }
-        current_cal_year = year;
-    }
-    setTimeout(() => {
-        this.cal = new CalHeatMap();
-        this.current_cal_year = {{ site.time | date: '%Y' }};
-        this.cal.init({
+  var cal = new CalHeatMap();
+        current_cal_year = {{ site.time | date: '%Y' }};
+        cal.init({
             itemSelector: "#heatmap",
             domain: "month",
             subDomain: "x_day",
