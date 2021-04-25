@@ -98,35 +98,22 @@ header-img: https://api.dujin.org/bing/1920.php
         </div>
         {% endif %}
 		
-      <div id="cal-heatmap"></div>
-      <script type="text/javascript">
-  var cal = new CalHeatMap();
-        current_cal_year = {{ site.time | date: '%Y' }};
-        cal.init({
-            itemSelector: "#heatmap",
-            domain: "month",
-            subDomain: "x_day",
-            data: "/heatmap.json",
-            cellSize: 10,
-            start: new Date(current_cal_year, 0, 1),
-            range: 12,
-            verticalOrientation: true,
-            domainDynamicDimension: false,
-            label: {
-                position: "right",
-                rotate: "left",
-                offset: {
-                    x: 0,
-                    y: 15
-                }
-            },
-            legend: [1, 2],
-            highlight: ["now"],
-            tooltip: true,
-            itemName: ["post", "posts"]
-        });
 
-      </script>
+<div id="calendar" style="margin:0 auto;">
+  <div id="cal-heatmap"></div>
+  <div style="padding-top: 10px;">
+    <a
+      href="#"
+      style="margin-right:10px;"
+      id="cal-heatmap-PreviousDomain-selector"
+      ><i class="fa fa-chevron-left"></i
+    ></a>
+    <a href="#" style="float:right;" id="cal-heatmap-NextDomain-selector"
+      ><i class="fa fa-chevron-right"></i
+    ></a>
+  </div>
+</div>
+
 
     </aside>
 
