@@ -2,7 +2,7 @@
 layout: post
 title: 麦肯锡的信任公式
 subtitle: 成功十要素和贵人
-date: 2021-03-26
+date: 2021-03-27
 categories: 冯唐成事心法
 tags: 信任公式 贵人 冯唐成事心法
 ---
