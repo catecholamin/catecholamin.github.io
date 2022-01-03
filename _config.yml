@@ -2,7 +2,7 @@
 title: '儿茶分安'
 description: '一个外科医生的自我修养'
 keyword: '儿茶分安, catecholamin, 外科, 医生, 生物信息学, 科研, 博客'
-url: 'sunfly.me' # your host
+url: '' # your host
 
 # when build blog on server, if you don't need baseurl, you should leave this value blank.
 # 在服务器上建站时，如果你不需要子域名，请将这一格留空
