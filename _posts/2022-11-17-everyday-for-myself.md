@@ -3,7 +3,7 @@ layout: post
 title: 每天为自己做一点事情
 date: 2022-11-17
 categories: 生活 
-cover: 'https://cdn.jsdelivr.net/gh/catecholamin/pictures@master/mohamed-nohassi-odxB5oIG_iA-unsplash.jpg'
+cover: 'img/mohamed-nohassi-odxB5oIG_iA-unsplash.jpg'
 tags: 生活 
 ---
 
