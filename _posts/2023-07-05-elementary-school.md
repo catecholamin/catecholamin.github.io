@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 幼升小，江晖消息
+title: 幼升小，江晖小学
 date: 2023-07-05
 categories: 鸡娃
 cover: '图片绝对地址或者img/2.jpg'
