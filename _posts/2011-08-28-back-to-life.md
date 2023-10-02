@@ -10,5 +10,5 @@ This is what life is. Family, parents, sister, eat, sleep, read, work, and no we
 
 ----
 
-backup from my abandon wordpress blog: catecholamin  [原文链接]()
+backup from my abandoned wordpress blog: catecholamin  [原文链接]()
 ![](https://catecholamin.wordpress.com/2011/08/28/back-to-life/)

@@ -23,5 +23,5 @@ Hold on.
 
 ----
 
-backup from my abandon wordpress blog: catecholamin  [原文链接]()
+backup from my abandoned wordpress blog: catecholamin  [原文链接]()
 ![](https://catecholamin.wordpress.com/2011/09/12/about-sleep/)

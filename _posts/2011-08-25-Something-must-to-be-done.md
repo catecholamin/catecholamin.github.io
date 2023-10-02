@@ -11,5 +11,5 @@ I must finish this before I go to bed. It’s my fault, I deserve it. I do all t
 
 ----
 
-backup from my abandon wordpress blog: catecholamin  [原文链接]()
+backup from my abandoned wordpress blog: catecholamin  [原文链接]()
 ![](https://catecholamin.wordpress.com/2011/08/25/something-must-to-do/)
