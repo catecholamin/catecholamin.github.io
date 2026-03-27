@@ -1,0 +1,19 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1320" cy="170" r="180" fill="#ffffff" opacity="0.10"/>
+  <circle cx="260" cy="760" r="220" fill="#ffffff" opacity="0.08"/>
+  <g filter="url(#shadow)">
+    <text x="800" y="430" text-anchor="middle" font-size="180" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-weight="700" fill="#ffffff">测试</text>
+    <text x="800" y="540" text-anchor="middle" font-size="42" font-family="'Segoe UI','Microsoft YaHei',sans-serif" letter-spacing="10" fill="#dbeafe">TEST POST</text>
+  </g>
+</svg>
