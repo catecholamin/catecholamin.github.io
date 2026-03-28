@@ -1,0 +1,98 @@
+---
+title: 搜索
+layout: default
+---
+
+{% include header.html %}
+
+<style>
+.search-page { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+.search-box-wrap { display: flex; gap: 10px; margin-bottom: 30px; }
+.search-box { flex: 1; padding: 10px 14px; font-size: 16px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; }
+.search-box:focus { border-color: #3199db; }
+.search-btn { padding: 10px 20px; background: #3199db; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; }
+.search-btn:hover { background: #2589cf; }
+.search-result-item { display: block; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; text-decoration: none; color: inherit; }
+.search-result-item:hover { background: #f9f9f9; }
+.search-result-title { font-size: 16px; font-weight: 600; color: #3199db; margin-bottom: 4px; }
+.search-result-date { font-size: 12px; color: #aaa; margin-bottom: 4px; }
+.search-result-excerpt { font-size: 13px; color: #666; line-height: 1.5; }
+.search-no-results { padding: 40px; text-align: center; color: #999; font-size: 15px; }
+.search-loading { padding: 40px; text-align: center; color: #aaa; }
+</style>
+
+<div class="search-page">
+    <div class="search-box-wrap">
+        <input type="text" id="search-input-page" class="search-box" placeholder="输入关键词搜索文章标题和内容..." autocomplete="off">
+        <button class="search-btn" onclick="doPageSearch()">搜索</button>
+    </div>
+    <div id="search-results-page"></div>
+</div>
+
+<script>
+var searchData = null;
+
+function loadSearchData(callback) {
+    if (searchData) { callback(searchData); return; }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/search.json', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            try {
+                searchData = JSON.parse(xhr.responseText);
+                callback(searchData);
+            } catch(e) {
+                document.getElementById('search-results-page').innerHTML = '<div class="search-no-results">数据加载失败，请稍后重试</div>';
+            }
+        }
+    };
+    xhr.onerror = function() {
+        document.getElementById('search-results-page').innerHTML = '<div class="search-no-results">无法加载搜索数据，请检查网络</div>';
+    };
+    xhr.send();
+}
+
+function doPageSearch() {
+    var q = document.getElementById('search-input-page').value.trim();
+    var resultsDiv = document.getElementById('search-results-page');
+    if (!q) { resultsDiv.innerHTML = ''; return; }
+    resultsDiv.innerHTML = '<div class="search-loading">加载中...</div>';
+    loadSearchData(function(data) {
+        var q2 = q.toLowerCase();
+        var results = [];
+        for (var i = 0; i < data.length; i++) {
+            var post = data[i];
+            if ((post.title && post.title.toLowerCase().indexOf(q2) >= 0) ||
+                (post.excerpt && post.excerpt.toLowerCase().indexOf(q2) >= 0) ||
+                (post.tags && post.tags.toLowerCase().indexOf(q2) >= 0)) {
+                var ex = (post.excerpt || '').substring(0, 150);
+                results.push(
+                    '<a class="search-result-item" href="' + post.url + '">' +
+                    '<div class="search-result-title">' + post.title + '</div>' +
+                    (post.date ? '<div class="search-result-date">' + post.date + '</div>' : '') +
+                    (ex ? '<div class="search-result-excerpt">' + ex + '...</div>' : '') +
+                    '</a>'
+                );
+            }
+        }
+        if (results.length === 0) {
+            resultsDiv.innerHTML = '<div class="search-no-results">没有找到相关文章</div>';
+        } else {
+            resultsDiv.innerHTML = '<div style="margin-bottom:12px;color:#888;font-size:13px">找到 ' + results.length + ' 篇相关文章</div>' + results.join('');
+        }
+    });
+}
+
+document.getElementById('search-input-page').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doPageSearch();
+});
+
+// Auto search on input
+document.getElementById('search-input-page').addEventListener('input', function() {
+    var q = this.value.trim();
+    if (q.length >= 2) doPageSearch();
+    else if (!q) document.getElementById('search-results-page').innerHTML = '';
+});
+</script>
+
+{% include footer.html %}
