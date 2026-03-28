@@ -19,24 +19,33 @@
     gap: 6px;
 }
 
-/* Sidebar Year Heatmap */
-.sidebar-year-heatmap {
+/* ========================
+   CALENDAR HEATMAP
+   ======================== */
+
+.ch-container {
     margin-bottom: 16px;
 }
 
-.syh-header {
+.ch-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.syh-year-nav {
-    display: flex;
-    gap: 2px;
+.ch-year-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
 }
 
-.syh-btn {
+.ch-nav {
+    display: flex;
+    gap: 4px;
+}
+
+.ch-btn {
     background: none;
     border: 1px solid #ddd;
     border-radius: 3px;
@@ -46,71 +55,84 @@
     cursor: pointer;
 }
 
-.syh-btn:hover {
+.ch-btn:hover {
     background: #eee;
 }
 
-.syh-year-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #555;
-}
-
-.syh-bars {
-    display: flex;
-    gap: 2px;
-    align-items: flex-end;
-    margin-bottom: 4px;
-}
-
-.syh-month {
-    flex: 1;
+.ch-month-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1px;
+    gap: 2px;
 }
 
-.syh-bar-wrap {
-    height: 42px;
+.ch-month-row {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    gap: 4px;
 }
 
-.syh-bar {
-    width: 100%;
-    background: #40c463;
-    border-radius: 2px 2px 0 0;
-    min-height: 2px;
-}
-
-.syh-label {
-    font-size: 9px;
-    color: #bbb;
-}
-
-.syh-count {
-    font-size: 9px;
-    font-weight: 700;
-    color: #888;
-}
-
-.syh-post-list {
-    display: none;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    padding: 8px 10px;
-    margin-top: 4px;
-}
-
-.syh-post-title {
+.ch-month-label {
     font-size: 11px;
-    color: #999;
-    margin-bottom: 4px;
+    font-weight: 600;
+    color: #888;
+    width: 32px;
+    flex-shrink: 0;
+    text-align: right;
 }
 
-/* Sidebar Calendar */
+.ch-month-grid {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    width: 130px;
+}
+
+.ch-cell {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    flex-shrink: 0;
+}
+
+.ch-cell:hover {
+    transform: scale(1.3);
+}
+
+.ch-cell.level-0 { background: #ebedf0; }
+.ch-cell.level-1 { background: #9be9a7; }
+.ch-cell.level-2 { background: #40c463; }
+.ch-cell.level-3 { background: #30a14e; }
+.ch-cell.level-4 { background: #216e39; }
+
+.ch-tooltip {
+    display: none;
+    position: fixed;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    z-index: 9999;
+    pointer-events: none;
+    max-width: 200px;
+}
+
+.ch-tooltip-date {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ch-tooltip-count {
+    color: #aaa;
+    font-size: 11px;
+}
+
+/* ========================
+   SIDEBAR CALENDAR
+   ======================== */
+
 .sidebar-calendar {
     margin-bottom: 0;
 }
@@ -138,9 +160,9 @@
     border: 1px solid #ddd;
     border-radius: 3px;
     padding: 1px 6px;
-    cursor: pointer;
     font-size: 12px;
     color: #888;
+    cursor: pointer;
 }
 
 .scal-btn:hover {
@@ -265,16 +287,15 @@ body.night-mode .sidebar-widget {
     background: #1e1e1e;
 }
 
-body.night-mode .widget-title {
-    color: #ccc;
-}
-
+body.night-mode .widget-title,
+body.night-mode .ch-year-label,
 body.night-mode .scal-month {
     color: #ccc;
 }
 
 body.night-mode .scal-btn,
-body.night-mode .scal-ybtn {
+body.night-mode .scal-ybtn,
+body.night-mode .ch-btn {
     border-color: #444;
     color: #999;
 }
@@ -292,15 +313,6 @@ body.night-mode .scal-post-list {
     border-color: #333;
 }
 
-body.night-mode .syh-year-label {
-    color: #ccc;
-}
-
-body.night-mode .syh-btn {
-    border-color: #444;
-    color: #999;
-}
-
 /* Mobile */
 @media (max-width: 695px) {
     .sidebar-widget {
@@ -310,5 +322,9 @@ body.night-mode .syh-btn {
     .scal-day {
         min-height: 20px;
         font-size: 10px;
+    }
+
+    .ch-month-grid {
+        width: 110px;
     }
 }
