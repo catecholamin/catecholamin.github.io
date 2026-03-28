@@ -9,7 +9,7 @@
             <li><a href="{{ i[1] | relative_url}}">{{ i[0] }}</a></li>
             {% endfor %}
             <li class="nav-search">
-                <a id="search-toggle" title="搜索">
+                <a id="search-toggle" href="#" onclick="var o=document.getElementById('search-overlay');if(o.classList.contains('active')){o.classList.remove('active')}else{o.classList.add('active');setTimeout(function(){document.getElementById('search-input').focus()},50)};return false;" title="搜索">
                     <i class="iconfont icon-search"></i>
                 </a>
             </li>
@@ -18,13 +18,15 @@
 </header>
 
 <!-- Search Overlay -->
-<div class="search-overlay" id="search-overlay">
+<div class="search-overlay" id="search-overlay" onclick="var e=window.event;if(e.target===this){this.classList.remove('active')}">
     <div class="search-overlay-inner">
         <div class="search-overlay-header">
-            <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索文章..." autocomplete="off">
-            <button class="search-close" id="search-close"><i class="iconfont icon-close"></i></button>
+            <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索文章..." autocomplete="off"
+                oninput="var q=this.value.trim();var rb=document.getElementById('search-result');var h=document.getElementById('search-hint');if(!q){rb.innerHTML='';h.style.display='';return}var paths=['../../search.json','../search.json','/search.json'];var idx=0;function tryNext(){if(idx>=paths.length){rb.innerHTML='<div class=search-no-results>未找到文章</div>';return}var p=paths[idx++];var x=new XMLHttpRequest();x.open('GET',p,true);x.onload=function(){if(x.status===200){var data=JSON.parse(x.responseText);var q2=q.toLowerCase();var r=[];for(var i=0;i<data.length;i++){var post=data[i];if(post.title.toLowerCase().indexOf(q2)>=0||(post.excerpt&&post.excerpt.toLowerCase().indexOf(q2)>=0)){var ex=(post.excerpt||'').substring(0,120);r.push('<a class=search-result-item href='+post.url+'><span class=result-title>'+post.title+'</span>'+(post.date?'<span class=result-date>'+post.date+'</span>':'')+(ex?'<span class=result-excerpt>'+ex+'...</span>':'')+'</a>')}}rb.innerHTML=r.length===0?'<div class=search-no-results>没有找到相关文章</div>':r.join('')}else{tryNext()}};x.onerror=function(){tryNext()};x.send()};h.style.display='none';tryNext()">
+            <button class="search-close" id="search-close" onclick="document.getElementById('search-overlay').classList.remove('active');return false;"><i class="iconfont icon-close"></i></button>
         </div>
         <div class="search-result" id="search-result"></div>
         <div class="search-hint" id="search-hint">输入关键词，即时搜索文章标题和内容摘要</div>
     </div>
 </div>
+<script>document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.getElementById('search-overlay');if(o)o.classList.remove('active')}});</script>
