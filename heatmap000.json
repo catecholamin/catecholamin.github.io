@@ -1,0 +1,8 @@
+---
+layout: null
+---
+{
+{% for post in site.posts %}
+        "{{ post.date | date: '%s' }}": 1 {% unless forloop.last %},{% endunless %}
+{% endfor %}
+}
