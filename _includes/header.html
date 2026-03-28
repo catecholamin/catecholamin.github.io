@@ -8,21 +8,23 @@
             {% for i in site.nav %}
             <li><a href="{{ i[1] | relative_url}}">{{ i[0] }}</a></li>
             {% endfor %}
+            <li class="nav-search">
+                <a id="search-toggle" title="搜索">
+                    <i class="iconfont icon-search"></i>
+                </a>
+            </li>
         </ul>
     </nav>
-    <div class="search-toggle" id="search-toggle" title="搜索">
-        <i class="iconfont icon-search"></i>
-    </div>
 </header>
 
 <!-- Search Overlay -->
 <div class="search-overlay" id="search-overlay">
     <div class="search-overlay-inner">
         <div class="search-overlay-header">
-            <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索..." autocomplete="off">
+            <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索文章..." autocomplete="off">
             <button class="search-close" id="search-close"><i class="iconfont icon-close"></i></button>
         </div>
         <div class="search-result" id="search-result"></div>
-        <div class="search-hint" id="search-hint">输入关键词，即时搜索文章标题和内容</div>
+        <div class="search-hint" id="search-hint">输入关键词，即时搜索文章标题和内容摘要</div>
     </div>
 </div>

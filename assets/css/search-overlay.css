@@ -142,16 +142,18 @@ body.night-mode .search-hint {
 }
 
 /* Search toggle button in header */
-.search-toggle {
-    position: absolute;
-    right: 50px;
-    top: 50%;
-    transform: translateY(-50%);
+.nav-search a {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    padding: 6px 8px;
+    padding: 0 4px;
     color: rgba(255,255,255,0.8);
     font-size: 18px;
     transition: color 0.2s;
+}
+
+.nav-search a:hover {
+    color: #fff;
 }
 
 .search-toggle:hover {
