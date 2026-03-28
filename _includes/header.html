@@ -16,3 +16,87 @@
         </ul>
     </nav>
 </header>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay">
+    <div class="search-overlay-inner">
+        <div class="search-overlay-header">
+            <input type="text" id="search-input" class="search-input" placeholder="输入关键词，即时搜索..." autocomplete="off">
+            <button class="search-close" id="search-close"><i class="iconfont icon-close"></i></button>
+        </div>
+        <div class="search-result" id="search-result"></div>
+        <div class="search-hint" id="search-hint">输入关键词，即时搜索文章标题和内容摘要</div>
+    </div>
+</div>
+<script>
+(function() {
+    var overlay = document.getElementById('search-overlay');
+    var input = document.getElementById('search-input');
+    var resultBox = document.getElementById('search-result');
+    var hint = document.getElementById('search-hint');
+
+    // Open: click nav search icon
+    document.querySelector('.nav-search a').addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.classList.add('active');
+        setTimeout(function() { input.focus(); }, 50);
+    });
+
+    // Close button
+    document.getElementById('search-close').addEventListener('click', function() {
+        overlay.classList.remove('active');
+    });
+
+    // Click outside
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.classList.remove('active');
+    });
+
+    // ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+
+    // Search
+    var cache = null;
+    function loadData(cb) {
+        if (cache) { cb(cache); return; }
+        var x = new XMLHttpRequest();
+        x.open('GET', '/search-index.json', true);
+        x.onload = function() {
+            if (x.status === 200) {
+                try { cache = JSON.parse(x.responseText); cb(cache); } catch(e) {}
+            }
+        };
+        x.send();
+    }
+
+    input.addEventListener('input', function() {
+        var q = this.value.trim();
+        if (!q) { resultBox.innerHTML = ''; hint.style.display = ''; return; }
+        hint.style.display = 'none';
+        loadData(function(data) {
+            var q2 = q.toLowerCase();
+            var results = [];
+            for (var i = 0; i < data.length; i++) {
+                var post = data[i];
+                if ((post.title && post.title.toLowerCase().indexOf(q2) >= 0) ||
+                    (post.excerpt && post.excerpt.toLowerCase().indexOf(q2) >= 0) ||
+                    (post.tags && post.tags.toLowerCase().indexOf(q2) >= 0)) {
+                    var ex = (post.excerpt || '').substring(0, 100);
+                    results.push(
+                        '<a class="search-result-item" href="' + post.url + '">' +
+                        '<span class="result-title">' + post.title + '</span>' +
+                        (post.date ? '<span class="result-date">' + post.date + '</span>' : '') +
+                        (ex ? '<span class="result-excerpt">' + ex + '...</span>' : '') +
+                        '</a>'
+                    );
+                }
+            }
+            resultBox.innerHTML = results.length === 0
+                ? '<div class="search-no-results">没有找到相关文章</div>'
+                : results.join('');
+        });
+    });
+})();
+</script>
