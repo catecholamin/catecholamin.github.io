@@ -1,4 +1,260 @@
 /* ========================
+   FULL-YEAR HEATMAP PAGE
+   ======================== */
+
+.heatmap-full-banner {
+    height: 260px;
+}
+
+.heatmap-full-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.heatmap-year-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.heatmap-nav-btn {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #555;
+    transition: background 0.15s;
+}
+
+.heatmap-nav-btn:hover {
+    background: #eee;
+}
+
+.heatmap-year-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    min-width: 100px;
+    text-align: center;
+}
+
+.heatmap-full-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #999;
+}
+
+.legend-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.heatmap-full-legend .level-0 { background: #ebedf0; }
+.heatmap-full-legend .level-1 { background: #9be9a7; }
+.heatmap-full-legend .level-2 { background: #40c463; }
+.heatmap-full-legend .level-3 { background: #30a14e; }
+.heatmap-full-legend .level-4 { background: #216e39; }
+
+.heatmap-full-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.hf-month-labels {
+    position: relative;
+    height: 18px;
+    margin-left: 24px;
+}
+
+.hf-month-label {
+    position: absolute;
+    font-size: 10px;
+    color: #999;
+}
+
+.hf-scroll {
+    overflow-x: auto;
+}
+
+.hf-inner {
+    display: inline-block;
+}
+
+.hf-grid {
+    display: flex;
+    gap: 3px;
+    margin-left: 24px;
+}
+
+.hf-day-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+}
+
+.hf-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.hf-cell:hover {
+    opacity: 0.75;
+}
+
+.hf-cell.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.hf-cell.level-0 { background: #ebedf0; }
+.hf-cell.level-1 { background: #9be9a7; }
+.hf-cell.level-2 { background: #40c463; }
+.hf-cell.level-3 { background: #30a14e; }
+.hf-cell.level-4 { background: #216e39; }
+
+.hf-day-label {
+    font-size: 9px;
+    color: #ccc;
+    height: 12px;
+    display: block;
+    text-align: center;
+    margin-top: 1px;
+}
+
+.heatmap-full-tooltip {
+    display: none;
+    position: fixed;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    z-index: 9999;
+    max-width: 300px;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.heatmap-full-tooltip .tt-date {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.heatmap-full-tooltip .tt-count {
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.heatmap-full-tooltip .tt-list a {
+    display: block;
+    color: #7fc8ff;
+    text-decoration: none;
+    padding: 2px 0;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Monthly summary */
+.heatmap-monthly-summary {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 24px;
+}
+
+.hf-summary-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.hf-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+}
+
+.hf-summary-month {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.hf-summary-bar-wrap {
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.hf-bar {
+    width: 100%;
+    max-width: 30px;
+    background: #40c463;
+    border-radius: 3px 3px 0 0;
+    min-height: 4px;
+}
+
+.hf-bar.zero {
+    background: #ebedf0;
+}
+
+.hf-summary-count {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+}
+
+.hf-summary-label {
+    font-size: 10px;
+    color: #aaa;
+}
+
+/* Night mode for full heatmap page */
+body.night-mode .heatmap-year-label {
+    color: #e0e0e0;
+}
+
+body.night-mode .heatmap-nav-btn {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ccc;
+}
+
+body.night-mode .heatmap-nav-btn:hover {
+    background: #333;
+}
+
+body.night-mode .heatmap-monthly-summary {
+    border-color: #333;
+}
+
+body.night-mode .hf-summary-title {
+    color: #ccc;
+}
+
+body.night-mode .hf-summary-count {
+    color: #e0e0e0;
+}
+
+/* ========================
    HEATMAP STYLES
    ======================== */
 
@@ -331,38 +587,111 @@
     text-decoration: underline;
 }
 
-/* Sidebar Mini Heatmap */
-.sidebar-heatmap {
-    border-top: 1px solid #eee;
-    padding-top: 12px;
+/* Sidebar Year Heatmap */
+.sidebar-year-heatmap {
+    margin-bottom: 16px;
 }
 
-.sheat-title {
-    font-size: 11px;
-    color: #aaa;
+.syh-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.sheat-grid {
+.syh-year-nav {
     display: flex;
-    flex-wrap: wrap;
     gap: 2px;
 }
 
-.sheat-cell {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
+.syh-btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 12px;
+    color: #888;
     cursor: pointer;
 }
 
-.sheat-cell.level-0 { background: #ebedf0; }
-.sheat-cell.level-1 { background: #40c463; }
-.sheat-cell.level-2 { background: #216e39; }
+.syh-btn:hover {
+    background: #eee;
+}
 
-.sheat-sep {
+.syh-year-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.syh-bars {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    margin-bottom: 4px;
+}
+
+.syh-month {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.syh-bar-wrap {
+    height: 42px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.syh-bar {
     width: 100%;
-    height: 4px;
+    background: #40c463;
+    border-radius: 2px 2px 0 0;
+    min-height: 2px;
+}
+
+.syh-label {
+    font-size: 9px;
+    color: #bbb;
+}
+
+.syh-count {
+    font-size: 9px;
+    font-weight: 700;
+    color: #888;
+}
+
+.syh-post-list {
+    display: none;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-top: 4px;
+}
+
+.syh-post-title {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+/* Scal year nav buttons */
+.scal-ybtn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 11px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.scal-ybtn:hover {
+    background: #eee;
+    color: #555;
 }
 
 /* Night mode */

@@ -142,18 +142,31 @@ body.night-mode .search-hint {
 }
 
 /* Search toggle button in header */
+.nav-search {
+    list-style: none !important;
+}
+
 .nav-search a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
-    padding: 0 4px;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.85);
     font-size: 18px;
     transition: color 0.2s;
+    text-decoration: none;
 }
 
 .nav-search a:hover {
     color: #fff;
+}
+
+body.night-mode .headerDown .nav-search a {
+    color: #666;
+}
+
+body.night-mode .headerDown .nav-search a:hover {
+    color: #333;
 }
 
 .search-toggle:hover {

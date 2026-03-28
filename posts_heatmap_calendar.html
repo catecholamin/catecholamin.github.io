@@ -1,0 +1,210 @@
+---
+layout: default
+title: 文章热图与日历
+header-img: /assets/img/hero.jpg
+---
+
+{% include header.html %}
+
+<div class="g-banner heatmap-full-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
+    <h2>文章热图</h2>
+    <h3>记录每一篇文字的温度</h3>
+</div>
+
+<main class="g-container heatmap-full-content">
+
+    <!-- Year Navigator -->
+    <div class="heatmap-year-nav">
+        <button class="heatmap-nav-btn" id="heatmap-prev-year">
+            <i class="iconfont icon-left"></i> 上一年
+        </button>
+        <span class="heatmap-year-label" id="heatmap-year-label"></span>
+        <button class="heatmap-nav-btn" id="heatmap-next-year">
+            下一年 <i class="iconfont icon-right"></i>
+        </button>
+    </div>
+
+    <!-- Legend -->
+    <div class="heatmap-full-legend">
+        <span class="legend-text">少</span>
+        <div class="legend-cell level-0"></div>
+        <div class="legend-cell level-1"></div>
+        <div class="legend-cell level-2"></div>
+        <div class="legend-cell level-3"></div>
+        <div class="legend-cell level-4"></div>
+        <span class="legend-text">多</span>
+    </div>
+
+    <!-- Heatmap Grid -->
+    <div class="heatmap-full-wrapper" id="heatmap-full-wrapper"></div>
+
+    <!-- Tooltip -->
+    <div class="heatmap-full-tooltip" id="heatmap-full-tooltip"></div>
+
+    <!-- Monthly Summary -->
+    <div class="heatmap-monthly-summary" id="heatmap-monthly-summary"></div>
+
+</main>
+
+{% include footer.html %}
+
+<script>
+var ALL_POSTS = [
+    {% for post in site.posts %}
+    {
+        title: "{{ post.title | escape }}",
+        url: "{{ post.url | relative_url }}",
+        date: "{{ post.date | date: '%Y-%m-%d' }}",
+        tags: "{% for tag in post.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+];
+
+(function () {
+    var currentYear = new Date().getFullYear();
+    var year = currentYear;
+    var yearLabel = document.getElementById('heatmap-year-label');
+    var wrapper = document.getElementById('heatmap-full-wrapper');
+    var tooltip = document.getElementById('heatmap-full-tooltip');
+    var summary = document.getElementById('heatmap-monthly-summary');
+
+    var monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var dayLabels = ['日','一','二','三','四','五','六'];
+
+    // Build date map
+    var dateMap = {};
+    ALL_POSTS.forEach(function (p) {
+        if (!dateMap[p.date]) dateMap[p.date] = [];
+        dateMap[p.date].push(p);
+    });
+
+    function getLevel(count) {
+        if (count === 0) return 0;
+        if (count === 1) return 1;
+        if (count === 2) return 2;
+        if (count <= 4) return 3;
+        return 4;
+    }
+
+    function renderYear(yr) {
+        yearLabel.textContent = yr + '年';
+
+        // Find first Sunday
+        var firstDay = new Date(yr, 0, 1);
+        var startOffset = firstDay.getDay();
+
+        // Count per date
+        var countMap = {};
+        ALL_POSTS.forEach(function (p) {
+            var d = new Date(p.date);
+            if (d.getFullYear() === yr) {
+                countMap[p.date] = (countMap[p.date] || 0) + 1;
+            }
+        });
+
+        // Build weeks
+        var weeks = [];
+        var cur = new Date(firstDay);
+        cur.setDate(cur.getDate() - startOffset);
+
+        for (var w = 0; w < 53; w++) {
+            var week = [];
+            for (var d = 0; d < 7; d++) {
+                var dateStr = cur.toISOString().slice(0, 10);
+                var inYear = cur.getFullYear() === yr;
+                var future = cur > new Date();
+                week.push({
+                    date: dateStr,
+                    count: countMap[dateStr] || 0,
+                    inYear: inYear,
+                    future: future,
+                    month: cur.getMonth()
+                });
+                cur.setDate(cur.getDate() + 1);
+            }
+            weeks.push(week);
+        }
+
+        // Month labels row
+        var monthsHtml = '<div class="hf-month-labels">';
+        var prevM = -1;
+        weeks.forEach(function (week, wi) {
+            if (week[0].inYear && week[0].month !== prevM) {
+                monthsHtml += '<span class="hf-month-label" style="left:' + (wi * 13) + 'px">' + monthNames[week[0].month] + '</span>';
+                prevM = week[0].month;
+            }
+        });
+        monthsHtml += '</div>';
+
+        // Grid
+        var gridHtml = '<div class="hf-grid">';
+        // Day columns
+        dayLabels.forEach(function (label, di) {
+            gridHtml += '<div class="hf-day-col">';
+            for (var wi = 0; wi < weeks.length; wi++) {
+                var cell = weeks[wi][di];
+                if (!cell || !cell.inYear || cell.future) {
+                    gridHtml += '<div class="hf-cell empty"></div>';
+                } else {
+                    var lvl = getLevel(cell.count);
+                    gridHtml += '<div class="hf-cell level-' + lvl + '" data-date="' + cell.date + '" data-count="' + cell.count + '"></div>';
+                }
+            }
+            gridHtml += '<span class="hf-day-label">' + (di % 2 === 1 ? label : '') + '</span></div>';
+        });
+        gridHtml += '</div>';
+
+        wrapper.innerHTML = monthsHtml + '<div class="hf-scroll"><div class="hf-inner">' + gridHtml + '</div></div>';
+
+        // Monthly summary
+        var monthlyCounts = Array(12).fill(0);
+        ALL_POSTS.forEach(function (p) {
+            var d = new Date(p.date);
+            if (d.getFullYear() === yr) {
+                monthlyCounts[d.getMonth()]++;
+            }
+        });
+        var summaryHtml = '<div class="hf-summary-title">' + yr + '年月度发文章统计</div><div class="hf-summary-grid">';
+        monthNames.forEach(function (m, i) {
+            var c = monthlyCounts[i];
+            var bar = c > 0 ? '<div class="hf-bar" style="height:' + Math.min(c * 20, 60) + 'px"></div>' : '<div class="hf-bar zero"></div>';
+            summaryHtml += '<div class="hf-summary-month"><div class="hf-summary-bar-wrap">' + bar + '</div><div class="hf-summary-count">' + c + '</div><div class="hf-summary-label">' + m + '</div></div>';
+        });
+        summaryHtml += '</div>';
+        summary.innerHTML = summaryHtml;
+
+        // Tooltip
+        wrapper.querySelectorAll('.hf-cell:not(.empty)').forEach(function (cell) {
+            cell.addEventListener('mouseenter', function (e) {
+                var date = this.getAttribute('data-date');
+                var count = parseInt(this.getAttribute('data-count'));
+                var posts = dateMap[date] || [];
+                var list = posts.map(function (p) {
+                    return '<a href="' + p.url + '">' + p.title + '</a>';
+                }).join('');
+                tooltip.innerHTML = '<div class="tt-date">' + date + '</div><div class="tt-count">' + count + ' 篇文章</div>' + (list ? '<div class="tt-list">' + list + '</div>' : '');
+                tooltip.style.display = 'block';
+                tooltip.style.left = (e.clientX + 12) + 'px';
+                tooltip.style.top = (e.clientY - 70) + 'px';
+            });
+            cell.addEventListener('mouseleave', function () {
+                tooltip.style.display = 'none';
+            });
+        });
+    }
+
+    renderYear(year);
+
+    document.getElementById('heatmap-prev-year').addEventListener('click', function () {
+        year--;
+        renderYear(year);
+    });
+
+    document.getElementById('heatmap-next-year').addEventListener('click', function () {
+        if (year < currentYear) {
+            year++;
+            renderYear(year);
+        }
+    });
+})();
+</script>

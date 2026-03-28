@@ -95,8 +95,12 @@ header-img: https://api.dujin.org/bing/1920.php
             <div class="widget-title">
                 <i class="iconfont icon-calendar"></i> 文章日历
             </div>
+
+            <!-- Year heatmap -->
+            <div class="sidebar-year-heatmap" id="sidebar-year-heatmap"></div>
+
+            <!-- Month calendar -->
             <div class="sidebar-calendar" id="sidebar-calendar"></div>
-            <div class="sidebar-heatmap" id="sidebar-heatmap"></div>
         </div>
 
     </aside>
@@ -128,6 +132,44 @@ var SIDEBAR_POSTS = [
         dateMap[p.date].push(p);
     });
 
+    // ===== Year Heatmap =====
+    var yearNow = new Date().getFullYear();
+    function renderYearHeatmap(yr) {
+        var hc = document.getElementById('sidebar-year-heatmap');
+        var monthNames = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+        var monthlyCounts = Array(12).fill(0);
+        SIDEBAR_POSTS.forEach(function(p) {
+            var d = new Date(p.date);
+            if (d.getFullYear() === yr) monthlyCounts[d.getMonth()]++;
+        });
+        var max = Math.max.apply(null, monthlyCounts.concat([1]));
+        var html = '<div class="syh-header">' +
+            '<span class="syh-year-nav"><button class="syh-btn" id="syh-prev">&lt;</button></span>' +
+            '<span class="syh-year-label" id="syh-year-label">' + yr + '年</span>' +
+            '<span class="syh-year-nav"><button class="syh-btn" id="syh-next">&gt;</button></span>' +
+            '</div>' +
+            '<div class="syh-bars">';
+        monthNames.forEach(function(m, i) {
+            var h = Math.round((monthlyCounts[i] / max) * 40) + 2;
+            html += '<div class="syh-month">' +
+                '<div class="syh-bar-wrap"><div class="syh-bar" style="height:' + h + 'px"></div></div>' +
+                '<div class="syh-label">' + m + '月</div>' +
+                '<div class="syh-count">' + monthlyCounts[i] + '</div>' +
+                '</div>';
+        });
+        html += '</div>';
+        html += '<div class="syh-post-list" id="syh-post-list"></div>';
+        hc.innerHTML = html;
+
+        document.getElementById('syh-prev').addEventListener('click', function() {
+            renderYearHeatmap(yr - 1);
+        });
+        document.getElementById('syh-next').addEventListener('click', function() {
+            if (yr < yearNow) renderYearHeatmap(yr + 1);
+        });
+    }
+    renderYearHeatmap(yearNow);
+
     // ===== Calendar =====
     var calYear, calMonth;
     var dayNames = ['日','一','二','三','四','五','六'];
@@ -140,11 +182,14 @@ var SIDEBAR_POSTS = [
         var daysInMonth = lastDay.getDate();
         var now = new Date();
 
-        var html = '<div class="scal-header">';
-        html += '<span class="scal-month">' + year + '年' + (month + 1) + '月</span>';
-        html += '<div class="scal-nav"><button class="scal-btn" id="scal-prev">&lt;</button><button class="scal-btn" id="scal-next">&gt;</button></div>';
-        html += '</div>';
-        html += '<div class="scal-week">';
+        var html = '<div class="scal-header">' +
+            '<button class="scal-ybtn" id="scal-yprev">&lt;&lt;</button>' +
+            '<button class="scal-mbtn" id="scal-prev">&lt;</button>' +
+            '<span class="scal-month">' + year + '年' + (month + 1) + '月</span>' +
+            '<button class="scal-mbtn" id="scal-next">&gt;</button>' +
+            '<button class="scal-ybtn" id="scal-ynext">&gt;&gt;</button>' +
+            '</div>' +
+            '<div class="scal-week">';
         dayNames.forEach(function(d) { html += '<div class="scal-wday">' + d + '</div>'; });
         html += '</div><div class="scal-days">';
 
@@ -154,23 +199,21 @@ var SIDEBAR_POSTS = [
             var posts = dateMap[dateStr] || [];
             var hasPosts = posts.length > 0;
             var isToday = year === now.getFullYear() && month === now.getMonth() && d === now.getDate();
-            html += '<div class="scal-day' + (hasPosts ? ' has-posts' : '') + (isToday ? ' today' : '') + '" data-date="' + dateStr + '">';
-            html += '<span class="scal-num">' + d + '</span>';
-            if (hasPosts) html += '<span class="scal-dot"></span>';
-            html += '</div>';
+            html += '<div class="scal-day' + (hasPosts ? ' has-posts' : '') + (isToday ? ' today' : '') + '" data-date="' + dateStr + '">' +
+                '<span class="scal-num">' + d + '</span>' +
+                (hasPosts ? '<span class="scal-dot"></span>' : '') + '</div>';
         }
         html += '</div>';
         html += '<div class="scal-post-list" id="scal-post-list"></div>';
         container.innerHTML = html;
 
-        // Day click
         container.querySelectorAll('.scal-day.has-posts').forEach(function(day) {
             day.addEventListener('click', function() {
                 var date = this.getAttribute('data-date');
                 var posts = dateMap[date] || [];
                 var list = document.getElementById('scal-post-list');
                 if (posts.length === 0) return;
-                list.innerHTML = '<div class="scal-post-title">' + date + '</div>' +
+                list.innerHTML = '<div class="scal-post-title">' + date + ' · ' + posts.length + '篇</div>' +
                     posts.map(function(p) { return '<a class="scal-post-item" href="' + p.url + '">' + p.title + '</a>'; }).join('');
                 list.style.display = 'block';
             });
@@ -186,32 +229,18 @@ var SIDEBAR_POSTS = [
             if (calMonth > 11) { calMonth = 0; calYear++; }
             buildSidebarCalendar(calYear, calMonth);
         });
+        document.getElementById('scal-yprev').addEventListener('click', function() {
+            calYear--;
+            buildSidebarCalendar(calYear, calMonth);
+        });
+        document.getElementById('scal-ynext').addEventListener('click', function() {
+            if (calYear < yearNow) { calYear++; buildSidebarCalendar(calYear, calMonth); }
+        });
     }
 
     var now = new Date();
     calYear = now.getFullYear();
     calMonth = now.getMonth();
     buildSidebarCalendar(calYear, calMonth);
-
-    // ===== Mini Heatmap (last 3 months) =====
-    var hcontainer = document.getElementById('sidebar-heatmap');
-    var html = '<div class="sheat-title">近三月文章分布</div><div class="sheat-grid">';
-    var months = [];
-    for (var m = 2; m >= 0; m--) {
-        var d = new Date(now.getFullYear(), now.getMonth() - m, 1);
-        months.push({year: d.getFullYear(), month: d.getMonth()});
-    }
-    months.forEach(function(m) {
-        var daysInMon = new Date(m.year, m.month + 1, 0).getDate();
-        for (var d = 1; d <= daysInMon; d++) {
-            var dateStr = m.year + '-' + String(m.month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-            var posts = dateMap[dateStr] || [];
-            var level = posts.length === 0 ? 0 : posts.length >= 3 ? 2 : 1;
-            html += '<div class="sheat-cell level-' + level + '" data-date="' + dateStr + '"></div>';
-        }
-        html += '<div class="sheat-sep"></div>';
-    });
-    html += '</div>';
-    hcontainer.innerHTML = html;
 })();
 </script>

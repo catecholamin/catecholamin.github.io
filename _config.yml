@@ -18,6 +18,7 @@ baseurl: ''
 nav:
   home: '/'
   tags: '/tags.html'
+  heatmap: '/posts_heatmap_calendar.html'
   about: '/about.html'
 
 # Footer
