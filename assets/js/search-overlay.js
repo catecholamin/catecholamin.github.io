@@ -84,7 +84,8 @@
             jsonPath = '../search.json';
         }
 
-        $.getJSON(jsonPath).done(function (data) {
+        $.getJSON(jsonPath)
+            .done(function (data) {
             var q = query.toLowerCase();
             var results = [];
             for (var i = 0; i < data.length; i++) {
