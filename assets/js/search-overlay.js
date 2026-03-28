@@ -24,14 +24,7 @@
         if (hint) hint.style.display = '';
     }
 
-    toggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        overlay.classList.contains('active') ? closeOverlay() : openOverlay();
-    });
-
     if (closeBtn) closeBtn.addEventListener('click', function (e) { e.preventDefault(); closeOverlay(); });
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeOverlay(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('active')) closeOverlay(); });
 
     var lastQuery = '';
     var searchTimeout = null;
@@ -95,20 +88,4 @@
         tryNext();
     }
 
-    if (input) {
-        input.addEventListener('input', function () {
-            var q = this.value.trim();
-            clearTimeout(searchTimeout);
-            if (!q) {
-                if (resultBox) resultBox.innerHTML = '';
-                if (hint) hint.style.display = '';
-                lastQuery = '';
-                return;
-            }
-            if (hint) hint.style.display = 'none';
-            if (q === lastQuery) return;
-            lastQuery = q;
-            searchTimeout = setTimeout(function () { doSearch(q); }, 300);
-        });
-    }
 })();
