@@ -11,18 +11,47 @@ layout: default
 
 <main class="tags-content">
 
-    <ul class="tags-list">
-        <li>
-        {% if site.recommend-tags and site.tags.size>0 %}
-            {% for tag in site.tags %}
-            <a href="#{{ tag[0] }}" class="tag">{{ tag[0]}}</a>
+    {# ===== Build sorted tag array by count ===== #}
+    {% assign raw_tags = site.tags | sort %}
+    {% assign tags_with_counts = '' | split: '' %}
+    {% for tag in raw_tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_count = tag[1].size %}
+        {% assign tags_with_counts = tags_with_counts | push: tag_name | push: tag_count %}
+    {% endfor %}
+
+    {# Find max and min counts for font sizing #}
+    {% assign max_count = 0 %}
+    {% assign min_count = 99999 %}
+    {% for tag in raw_tags %}
+        {% if tag[1].size > max_count %}{% assign max_count = tag[1].size %}{% endif %}
+        {% if tag[1].size < min_count %}{% assign min_count = tag[1].size %}{% endif %}
+    {% endfor %}
+    {% assign range = max_count | minus: min_count %}
+    {% if range == 0 %}{% assign range = 1 %}{% endif %}
+
+    {# ===== Tag Cloud ===== #}
+    <section class="tag-cloud-section">
+        <h3 class="tag-cloud-title">标签云</h3>
+        <div class="tag-cloud">
+            {% for tag in raw_tags %}
+                {% assign tag_name = tag[0] %}
+                {% assign tag_count = tag[1].size %}
+                {% assign ratio = tag_count | minus: min_count | times: 100.0 | divided_by: range %}
+                {% assign font_size = ratio | times: 0.2 | plus: 12 | round %}
+                <a href="#{{ tag_name | url_encode }}"
+                   class="tag-cloud-item"
+                   style="font-size: {{ font_size }}px;"
+                   title="{{ tag_count }} 篇文章">{{ tag_name }}</a>
             {% endfor %}
-        {% endif %}
-        </li>
-        
-        {% for tag in site.tags %}
+        </div>
+    </section>
+
+    {# ===== Sorted Tag List ===== #}
+    <ul class="tags-list">
+        {% for tag in raw_tags %}
         <li>
-            <span class="tag-name" id="{{ tag[0] }}">「{{ tag[0] }}」</span>
+            <span class="tag-name" id="{{ tag[0] | url_encode }}">「{{ tag[0] }}」×{{ tag[1].size }}</span>
             {% for post in tag[1] %}
             <a class="tag-post" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a>
             {% endfor %}
@@ -30,5 +59,115 @@ layout: default
         {% endfor%}
     </ul>
 </main>
-    
+
 {% include footer.html %}
+
+<style>
+.tag-cloud-section {
+    margin-bottom: 40px;
+}
+
+.tag-cloud-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    line-height: 1.8;
+}
+
+.tag-cloud-item {
+    color: #3199db;
+    text-decoration: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.tag-cloud-item:hover {
+    background: #3199db;
+    color: #fff;
+}
+
+.tags-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tags-list li {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tags-list li:last-child {
+    border-bottom: none;
+}
+
+.tag-name {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.tag-post {
+    display: inline-block;
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+    margin-right: 16px;
+    margin-bottom: 4px;
+    padding: 2px 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+.tag-post:hover {
+    background: #3199db;
+    color: #fff;
+}
+
+.tags-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Night mode */
+body.night-mode .tag-cloud-title,
+body.night-mode .tag-name {
+    color: #ccc;
+}
+
+body.night-mode .tag-post {
+    background: #2a2a2a;
+    color: #aaa;
+}
+
+body.night-mode .tag-post:hover {
+    background: #3199db;
+    color: #fff;
+}
+
+body.night-mode .tag-cloud-item {
+    color: #7fc8ff;
+}
+
+body.night-mode .tag-cloud-item:hover {
+    background: #7fc8ff;
+    color: #1e1e1e;
+}
+</style>
