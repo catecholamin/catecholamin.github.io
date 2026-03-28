@@ -111,14 +111,13 @@ header-img: https://api.dujin.org/bing/1920.php
 {% include footer.html %}
 
 <script>
-// Embedded post data
+// Embedded post data (for calendar post titles)
 var SIDEBAR_POSTS = [
     {% for post in site.posts %}
     {
         title: "{{ post.title | escape }}",
         url: "{{ post.url | relative_url }}",
         date: "{{ post.date | date: '%Y-%m-%d' }}",
-        tags: "{% for tag in post.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}",
         year: {{ post.date | date: '%Y' }},
         month: {{ post.date | date: '%m' }},
         day: {{ post.date | date: '%d' }}
@@ -127,17 +126,39 @@ var SIDEBAR_POSTS = [
 ];
 
 (function() {
+    // dateMap for calendar (needs titles)
     var dateMap = {};
     SIDEBAR_POSTS.forEach(function(p) {
         if (!dateMap[p.date]) dateMap[p.date] = [];
         dateMap[p.date].push(p);
     });
 
+    // Build postDates map from Unix timestamps in heatmap000.json
+    var postDates = {}; // { '2026-03-28': count }
+    function loadHeatmapData() {
+        var jsonPath = '../../heatmap000.json';
+        if (/page\d+/.test(window.location.pathname)) jsonPath = '../heatmap000.json';
+        $.getJSON(jsonPath).done(function(data) {
+            Object.keys(data).forEach(function(ts) {
+                var d = new Date(parseInt(ts) * 1000);
+                var dateStr = d.getFullYear() + '-' +
+                    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(d.getDate()).padStart(2, '0');
+                postDates[dateStr] = (postDates[dateStr] || 0) + 1;
+            });
+            renderCalendarHeatmap(currentYear);
+        }).fail(function() {
+            // fallback: use embedded data
+            Object.keys(dateMap).forEach(function(d) {
+                postDates[d] = dateMap[d].length;
+            });
+            renderCalendarHeatmap(currentYear);
+        });
+    }
+
     // ===== Calendar Heatmap =====
-    var yearNow = new Date().getFullYear();
-    var chYear = yearNow;
+    var currentYear = new Date().getFullYear();
     var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var dayHeaders = ['日','一','二','三','四','五','六'];
 
     function getLevel(count) {
         if (count === 0) return 0;
@@ -153,7 +174,6 @@ var SIDEBAR_POSTS = [
         var container = document.getElementById('ch-container');
         var tooltip = document.getElementById('ch-tooltip');
 
-        // Header
         var html = '<div class="ch-header">' +
             '<span class="ch-year-label">' + yr + '年</span>' +
             '<div class="ch-nav">' +
@@ -173,17 +193,15 @@ var SIDEBAR_POSTS = [
             html += '<div class="ch-month-label">' + monthNames[m] + '</div>';
             html += '<div class="ch-month-grid">';
 
-            // Leading empty cells
             for (var d = 0; d < startDow; d++) {
                 html += '<div style="width:14px;height:14px;flex-shrink:0"></div>';
             }
 
-            // Day cells
             for (var day = 1; day <= daysInMonth; day++) {
                 var dateStr = yr + '-' + pad(m + 1) + '-' + pad(day);
-                var posts = dateMap[dateStr] || [];
-                var level = getLevel(posts.length);
-                html += '<div class="ch-cell level-' + level + '" data-date="' + dateStr + '" data-count="' + posts.length + '"></div>';
+                var count = postDates[dateStr] || 0;
+                var level = getLevel(count);
+                html += '<div class="ch-cell level-' + level + '" data-date="' + dateStr + '" data-count="' + count + '"></div>';
             }
 
             html += '</div></div>';
@@ -192,15 +210,13 @@ var SIDEBAR_POSTS = [
         html += '</div>';
         container.innerHTML = html;
 
-        // Nav buttons
         document.getElementById('ch-prev').addEventListener('click', function() {
             renderCalendarHeatmap(yr - 1);
         });
         document.getElementById('ch-next').addEventListener('click', function() {
-            if (yr < yearNow) renderCalendarHeatmap(yr + 1);
+            if (yr < currentYear) renderCalendarHeatmap(yr + 1);
         });
 
-        // Tooltip
         container.querySelectorAll('.ch-cell').forEach(function(cell) {
             cell.addEventListener('mouseenter', function(e) {
                 var date = this.getAttribute('data-date');
@@ -222,7 +238,7 @@ var SIDEBAR_POSTS = [
         });
     }
 
-    renderCalendarHeatmap(chYear);
+    loadHeatmapData();
 
     // ===== Calendar =====
     var calYear, calMonth;
