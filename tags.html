@@ -23,7 +23,6 @@ layout: default
     {% if range == 0 %}{% assign range = 1 %}{% endif %}
 
     <section class="tag-cloud-section">
-        <h3 class="tag-cloud-title">标签云</h3>
         <div class="tag-cloud">
             {% for tag in site.tags %}
                 {% assign tag_name = tag[0] %}
@@ -59,15 +58,6 @@ layout: default
 <style>
 .tag-cloud-section {
     margin-bottom: 40px;
-}
-
-.tag-cloud-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
 }
 
 .tag-cloud {
@@ -148,7 +138,6 @@ layout: default
 }
 
 /* Night mode */
-body.night-mode .tag-cloud-title,
 body.night-mode .tag-name {
     color: #ccc;
 }
