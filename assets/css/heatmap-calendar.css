@@ -326,3 +326,26 @@ body.night-mode .scal-post-list {
         width: 110px;
     }
 }
+
+/* ========================
+   BUSUANZI COUNTER (footer)
+   ======================== */
+#busuanzi_container {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+#busuanzi_container .busuanzi-divider {
+    margin: 0 6px;
+    color: #ddd;
+}
+
+/* Night mode */
+body.night-mode #busuanzi_container {
+    color: #888;
+}
+
+body.night-mode #busuanzi_container .busuanzi-divider {
+    color: #444;
+}
