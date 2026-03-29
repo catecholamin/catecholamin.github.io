@@ -11,7 +11,7 @@ layout: default
 
 <main class="tags-content">
 
-    {# ===== Build sorted tag array by count ===== #}
+    {% comment %}===== Build sorted tag array by count ====={% endcomment %}
     {% assign raw_tags = site.tags | sort %}
     {% assign tags_with_counts = '' | split: '' %}
     {% for tag in raw_tags %}
@@ -20,7 +20,7 @@ layout: default
         {% assign tags_with_counts = tags_with_counts | push: tag_name | push: tag_count %}
     {% endfor %}
 
-    {# Find max and min counts for font sizing #}
+    {% comment %}Find max and min counts for font sizing{% endcomment %}
     {% assign max_count = 0 %}
     {% assign min_count = 99999 %}
     {% for tag in raw_tags %}
@@ -30,7 +30,7 @@ layout: default
     {% assign range = max_count | minus: min_count %}
     {% if range == 0 %}{% assign range = 1 %}{% endif %}
 
-    {# ===== Tag Cloud ===== #}
+    {% comment %}===== Tag Cloud ====={% endcomment %}
     <section class="tag-cloud-section">
         <h3 class="tag-cloud-title">标签云</h3>
         <div class="tag-cloud">
@@ -47,7 +47,7 @@ layout: default
         </div>
     </section>
 
-    {# ===== Sorted Tag List ===== #}
+    {% comment %}===== Sorted Tag List ====={% endcomment %}
     <ul class="tags-list">
         {% for tag in raw_tags %}
         <li>
