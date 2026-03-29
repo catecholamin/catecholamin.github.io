@@ -11,20 +11,25 @@ layout: default
 
 <main class="tags-content">
 
-    {% comment %}===== Tag Cloud (sorted by count desc via pre-computed position) ====={% endcomment %}
-    {% comment %}First pass: count total and find max/min for font sizing{% endcomment %}
-    {% assign tag_count = 0 %}
-    {% for tag in site.tags %}{% assign tag_count = tag_count | plus: 1 %}{% endfor %}
+    {% comment %}First pass: find max/min post counts for font sizing{% endcomment %}
+    {% assign max_size = 0 %}
+    {% assign min_size = 99999 %}
+    {% for tag in site.tags %}
+        {% assign s = tag[1] | size %}
+        {% if s > max_size %}{% assign max_size = s %}{% endif %}
+        {% if s < min_size %}{% assign min_size = s %}{% endif %}
+    {% endfor %}
+    {% assign range = max_size | minus: min_size %}
+    {% if range == 0 %}{% assign range = 1 %}{% endif %}
 
     <section class="tag-cloud-section">
         <h3 class="tag-cloud-title">标签云</h3>
         <div class="tag-cloud">
             {% for tag in site.tags %}
                 {% assign tag_name = tag[0] %}
-                {% assign tag_posts = tag[1] %}
-                {% assign tag_size = tag_posts | size %}
-                {% assign ratio = tag_size | times: 1.0 | divided_by: tag_count %}
-                {% assign font_size = ratio | times: 8 | plus: 12 | round %}
+                {% assign tag_size = tag[1] | size %}
+                {% assign ratio = tag_size | minus: min_size | times: 1.0 | divided_by: range %}
+                {% assign font_size = ratio | times: 20 | plus: 11 | round %}
                 <a href="#{{ tag_name | url_encode }}"
                    class="tag-cloud-item"
                    style="font-size: {{ font_size }}px;"
@@ -76,10 +81,17 @@ layout: default
 .tag-cloud-item {
     color: #3199db;
     text-decoration: none;
-    padding: 2px 6px;
+    padding: 2px 8px;
     border-radius: 4px;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
     white-space: nowrap;
+    display: inline-block;
+}
+
+.tag-cloud-item:hover {
+    background: #3199db;
+    color: #fff;
+    transform: scale(1.15);
 }
 
 .tag-cloud-item:hover {
