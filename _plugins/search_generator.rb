@@ -10,9 +10,17 @@ module Jekyll
       index_path = File.join(search_dir, 'search-index.json')
 
       posts = site.posts.docs.map do |post|
+        title = post.data['title']
+        title = post.slug if title.nil? || title.to_s.strip.empty?
+        url = post.url
+        # Fallback: use filename (without .md) as slug when title/url is broken
+        if url.nil? || url.strip.empty? || url =~ %r{/\d{4}/\d{2}/\d{2}/\.html$}
+          slug = post.name.sub(/\.md$/, '')
+          url = "/#{post.date.strftime('%Y/%m/%d')}/#{slug}.html"
+        end
         {
-          'title'   => post.data['title'] || post.slug,
-          'url'     => post.url,
+          'title'   => title,
+          'url'     => url,
           'date'    => post.date.strftime('%Y-%m-%d'),
           'tags'    => (post.data['tags'] || []).join(' '),
           'excerpt' => post.excerpt&.strip&.gsub(%r{<[^>]+>}, ' ')&.strip&.slice(0, 200) || ''
