@@ -14,6 +14,7 @@ module Jekyll
         title = post.slug if title.nil? || title.to_s.strip.empty?
         url = post.url
         # Fallback: use filename (without .md) as slug when title/url is broken
+        # (Jekyll's slugify strips non-ASCII chars, so Chinese titles → empty slug → broken URL)
         if url.nil? || url.strip.empty? || url =~ %r{/\d{4}/\d{2}/\d{2}/\.html$}
           slug = post.name.sub(/\.md$/, '')
           url = "/#{post.date.strftime('%Y/%m/%d')}/#{slug}.html"
