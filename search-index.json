@@ -1,7 +1,7 @@
 [
   {
     "title": "Something must to be done",
-    "url": "/2011/08/25/something-must-to-be-done.html",
+    "url": "/2011/08/25/Something-must-to-be-done.html",
     "date": "2011-08-25",
     "tags": "backup",
     "excerpt": "I must finish this before I go to bed. It’s my fault, I deserve it. I do all this for tomorrow morning’s peaseful mood. ---- backup from my abandoned wordpress blog: catecholamin [原文链接]() ![](https://..."
@@ -15,7 +15,7 @@
   },
   {
     "title": "The isolation of the IEL",
-    "url": "/2011/09/02/the-isolation-of-the-iel.html",
+    "url": "/2011/09/02/The-isolation-of-the-IEL.html",
     "date": "2011-09-02",
     "tags": "backup",
     "excerpt": "The isolation of the IEL faces some troubles, while I am dealing with them. Today I try a new method, and after the gradients, there are more cells than before, which may be the IEL, wait to be tested..."
@@ -29,7 +29,7 @@
   },
   {
     "title": "The first post",
-    "url": "/2019/07/18/the-first-post.html",
+    "url": "/2019/07/18/first-post.html",
     "date": "2019-07-18",
     "tags": "github blog",
     "excerpt": "This blog site was deployed on github with jekyll, based on the template [link9596/hydrogen](https://github.com/link9596/hydrogen) , with the reference of the post: [使用github+jekyll一小时搭建个人博客（小白专用）](ht..."
@@ -43,7 +43,7 @@
   },
   {
     "title": "解决GO和KEGG作图的问题",
-    "url": "/2019/07/19/gokegg.html",
+    "url": "/2019/07/19/GO&KEGG-problem-solving.html",
     "date": "2019-07-19",
     "tags": "R语言 GO KEGG 生物信息学",
     "excerpt": "1. 代码里没有创建文件夹的语句，于是死活都没法生成文件，因为生成的图片是要放在当前目录的figure文件夹下的，但当前目录并没有figure文件夹，于是死循环。新建一个figure文件夹后，问题解决。 2. 通过notepad++打开tsv文件来删除最后一行无数据的废行解决了这个报错： Removed 1 rows containing missing values 3. 不需要转换成TSV，可..."
@@ -85,35 +85,35 @@
   },
   {
     "title": "Rubbish article",
-    "url": "/2019/08/19/rubbish-article.html",
+    "url": "/2019/08/19/about-article.html",
     "date": "2019-08-19",
     "tags": "article",
     "excerpt": "These days, I was working on the article about the adipose. I know it's a rubbish article that make no sense and just need to be finished as soon as possible. No one care about the results in the arti..."
   },
   {
     "title": "Conference in Japan",
-    "url": "/2019/08/20/conference-in-japan.html",
+    "url": "/2019/08/20/Conference in Japan.html",
     "date": "2019-08-20",
     "tags": "Japan conference",
     "excerpt": "May be I will go to Japan later this month, to attend an academic conference. The visa is not yet ready, so I'm not sure if I can take the trip or not."
   },
   {
     "title": "Misfortune might be a blessing in disguise",
-    "url": "/2019/08/27/misfortune-might-be-a-blessing-in-disguise.html",
+    "url": "/2019/08/27/Misfortune might be a blessing in disguise.html",
     "date": "2019-08-27",
     "tags": "article",
     "excerpt": "Due to visa issues, I won't make the trip to Japan at the end of this month. So I get 5 days to write the article. I hope I can finish it."
   },
   {
     "title": "Paper",
-    "url": "/2019/08/28/paper.html",
+    "url": "/2019/08/28/Paper.html",
     "date": "2019-08-28",
     "tags": "article paper",
     "excerpt": "The article is almost done. So I review some paper and try to finish this one. I found someone published some paper, as expected, by using the database. I had tend to do this 3 years ago, but I failed..."
   },
   {
     "title": "Cairo导出图片",
-    "url": "/2019/09/06/cairo.html",
+    "url": "/2019/09/06/figures.html",
     "date": "2019-09-06",
     "tags": "Cairo R语言 图片 论文",
     "excerpt": "投稿准备阶段，整理图片格式，并重新按照杂志要求生成图片。本来是用Cairo来生成图片的，但是发现 ```R library(Cairo) Cairo.capabilities() png jpeg tiff pdf svg ps x11 win raster TRUE FALSE FALSE TRUE TRUE TRUE FALSE TRUE TRUE ``` 网上搜索了一圈，没找到怎么让Cair..."
@@ -169,7 +169,7 @@
   },
   {
     "title": "“在Win10上安装Ubuntu 18”",
-    "url": "/2019/10/12/win10ubuntu-18.html",
+    "url": "/2019/10/12/Ubuntu18-setup-in-win10.html",
     "date": "2019-10-12",
     "tags": "linux 生信 ubuntu win10 镜像 bioconda 安装软件",
     "excerpt": "学生物信息学，绕不开linux，学linux，最简单的可能就是在win 10自带的ubuntu子系统了吧。参考这个帖子[如何在Windows10上直接运行Linux？](https://baijiahao.baidu.com/s?id=1607159570058814753)，在windows 应用市场下载安装ubuntu，并完成配置，安装一些软件。简述一下安装配置过程中的要点和遇到的一些坑。 #..."
@@ -197,7 +197,7 @@
   },
   {
     "title": "新冠肺炎（COVID-19）疫情对普通病人的影响",
-    "url": "/2020/02/15/covid-19.html",
+    "url": "/2020/02/15/normal-patients-during-epidemic-of-COVID-19.html",
     "date": "2020-02-15",
     "tags": "门诊 疫情 新冠肺炎 COVID-19 患者 肝脓肿 住院",
     "excerpt": "疫情开始后门诊量显著减少，目前大约是疫情前的三分之一到二分之一左右。早上上班护士给我们发2个口罩1个帽子，口罩上午1个，下午1个。还有1个护目镜重复使用，自己下班用消毒液擦擦。我所在的普通门诊的暴露危险程度，在医院里属于第三档：中等风险。因此按照规定，我们使用医用外科口罩。 ![](https://gitee.com/catecholamin/blogimg/raw/master/img/病人穿防..."
@@ -246,7 +246,7 @@
   },
   {
     "title": "医院发了10个N95口罩",
-    "url": "/2020/03/12/10n95.html",
+    "url": "/2020/03/12/医院发了10个N95口罩.html",
     "date": "2020-03-12",
     "tags": "日记",
     "excerpt": "## 今天心情怎么样？ 今天工作一天，心情在上班时有起伏，总体平静。今天没有遇到特别难弄的病人。 ## 今天完成了什么事情？ 今天上了一天班。看了77个病人，不算多。说了一天的话。说要完成的事情的话，这篇日记算是一件。 ## 今天印象最深刻的一件事情是什么？ 今天医院给我们每人发了10个N95口罩。 ## 明天要做什么？ 明天要继续写NSFC。"
@@ -295,7 +295,7 @@
   },
   {
     "title": "wiki文章修回",
-    "url": "/2020/09/10/wiki.html",
+    "url": "/2020/09/10/wiki-revision2.html",
     "date": "2020-09-10",
     "tags": "论文 投稿",
     "excerpt": "二次修回：Decision D: (major revision & re-review)。第一个reviewer相当nice，还帮我改句式。但是另一个reviewer的评论则相当尖锐：I reckon the paper is not up to the standard for publishing unless the authors can clearly and directly add..."
@@ -316,7 +316,7 @@
   },
   {
     "title": "更换为utterances评论系统",
-    "url": "/2020/12/06/utterances.html",
+    "url": "/2020/12/06/comment-with-utterances.html",
     "date": "2020-12-06",
     "tags": "blog 评论 utterances",
     "excerpt": "之前的Vssue评论系统不知道什么原因总是报错，无法使用。于是又到处搜索了一下，找到这篇帖子[关于静态博客的评论系统](https://www.cnblogs.com/nodecat/p/13058292.html)，在里面发现了[utterances](https://utteranc.es/) 这个评论系统，也是基于github issue. 顺利安装。终于清静了。虽然也没别人看这个博客。算是..."
@@ -337,14 +337,14 @@
   },
   {
     "title": "启用sunfly.me域名",
-    "url": "/2020/12/18/sunflyme.html",
+    "url": "/2020/12/18/my-domain.html",
     "date": "2020-12-18",
     "tags": "blog 域名",
     "excerpt": "没忍住，在[GoDaddy](https://sg.godaddy.com/) 上买了个域名，sunfly.me，简单明了，第一年只要23元，价格实惠。先用用看，如果未来一年发文量能达到平均每周一篇，那么这个域名可以续费，否则，就算了吧。"
   },
   {
     "title": "手机用CodeHub更新github博客",
-    "url": "/2020/12/18/codehubgithub.html",
+    "url": "/2020/12/18/post-with-codehub.html",
     "date": "2020-12-18",
     "tags": "blog CodeHub",
     "excerpt": "发现用CodeHub可以在手机上提交commit，那也就可以用手机来更新github博客了。需要先在锤子便签里编辑好模版，再粘贴进posts文件夹下新建的markdown文件里。这篇就是用手机发的。"
@@ -372,7 +372,7 @@
   },
   {
     "title": "苦是因为坚持太难，还是因为坚持太难所以苦",
-    "url": "/2021/03/25/life-is-hard.html",
+    "url": "/2021/03/15/life-is-hard.html",
     "date": "2021-03-25",
     "tags": "坚持 生活",
     "excerpt": "想要坚持每天做点什么真的很难呢。我之前想过每天写个日记，每天早睡，每天深蹲，每天早起，每天做点有意义的事情，每天陪娃。没有一个能做到的。说坚持太难，其实是自己太软弱，没有对自己下狠心。但是话说回来，生活这么苦，何必对自己这么狠让自己更苦呢？随即，生活就一个大嘴巴抽来：苦？你现在还在U型曲线的下降段，还有你受的呢！"
@@ -498,14 +498,14 @@
   },
   {
     "title": "PolyGit 手机端更新Github博客",
-    "url": "/2022/04/10/polygit-github.html",
+    "url": "/2022/04/10/new-client-on-ios.html",
     "date": "2022-04-10",
     "tags": "ios github app",
     "excerpt": "原来用的Codehub不知怎地从app store下架，不能用了。理论上我得再找一个app用来手机端更新github博客不是？虽然我去年一年也没写几篇。于是找了好多了app，试用了几个，发现这个PolyGit不错，每天能Push3次Commit。另外有个Clone，要收费才能Push。那就用PolyGit吧，一天三次肯定够用了。"
   },
   {
     "title": "ERCP",
-    "url": "/2022/05/06/ercp.html",
+    "url": "/2022/05/06/ERCP.html",
     "date": "2022-05-06",
     "tags": "临床 工作 ERCP 学习",
     "excerpt": "从年初开始学ERCP到现在，已经4个多月了。进展比较慢，一共上台了50多个，做得也少。所以比一起学的进修医生学得慢，被冷嘲热讽了。阴阳怪气的陈康杰和阮崇凯。还是余杭好，都很和谐。学这个技术，要想掌握，是要有一个量的积累的。我量没到，就没法迎来质变。而做得少的原因，一方面是因为进修医生人多，分摊的机会就少了，另一方面，我还在做兼职教秘，时间精力上面还有很大一块需要分出去做教学，显然是影响了学ERCP..."
@@ -617,14 +617,14 @@
   },
   {
     "title": "Spencer和Misty告别",
-    "url": "/2025/06/23/spencermisty.html",
+    "url": "/2025/6/23/goodbye-misty.html",
     "date": "2025-06-23",
     "tags": "生活 告别 英语课",
     "excerpt": "儿子在线上上菲律宾外教的英语课已经一年多了，现在这个老师上课很能哄娃，口语发音也相对好，一年多上下来，虽然进步慢，但我们还是满意的。 但是进步慢的确是个问题，所以我们最近打算换成线下课，虽然贵，但是效果更确切一点。所以今天晚上是Spencer在Misty这边上的最后一次课。今天晚上我值班，想到娃又结束了一个阶段，告别一个老师，而且可能永远不会再联系了，我就不禁悲从中来，很是伤感。这种伤感有点像是追..."
   },
   {
     "title": "03-27 自动提醒终于跑通了",
-    "url": "/2026/03/27/03-27.html",
+    "url": "/2026/03/27/daily-note.html",
     "date": "2026-03-27",
     "tags": "",
     "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory 终于把博客草稿的自动提醒这件事搞定了。 之前一直想每天自动生成一篇，结果草稿倒是能生成，但自己常常不知道——第二天打开才发现昨天已经有内容了，这样就没有意义了。 昨天..."
