@@ -3,4 +3,5 @@
 
 node_modules
 
-_sitesearch-index.json
+_site/search-index.json
+search-index.json
