@@ -11,48 +11,32 @@ layout: default
 
 <main class="tags-content">
 
-    {% comment %}===== Build sorted tag array by count ====={% endcomment %}
-    {% assign raw_tags = site.tags | sort %}
-    {% assign tags_with_counts = '' | split: '' %}
-    {% for tag in raw_tags %}
-        {% assign tag_name = tag[0] %}
-        {% assign tag_count = tag[1].size %}
-        {% assign tags_with_counts = tags_with_counts | push: tag_name | push: tag_count %}
-    {% endfor %}
-
-    {% comment %}Find max and min counts for font sizing{% endcomment %}
-    {% assign max_count = 0 %}
-    {% assign min_count = 99999 %}
-    {% for tag in raw_tags %}
-        {% if tag[1].size > max_count %}{% assign max_count = tag[1].size %}{% endif %}
-        {% if tag[1].size < min_count %}{% assign min_count = tag[1].size %}{% endif %}
-    {% endfor %}
+    {% comment %}===== Tag Cloud (sorted by count desc) ====={% endcomment %}
+    {% assign max_count = site.data.sorted_tags[0].count %}
+    {% assign min_count = site.data.sorted_tags.last.count %}
     {% assign range = max_count | minus: min_count %}
     {% if range == 0 %}{% assign range = 1 %}{% endif %}
 
-    {% comment %}===== Tag Cloud ====={% endcomment %}
     <section class="tag-cloud-section">
         <h3 class="tag-cloud-title">标签云</h3>
         <div class="tag-cloud">
-            {% for tag in raw_tags %}
-                {% assign tag_name = tag[0] %}
-                {% assign tag_count = tag[1].size %}
-                {% assign ratio = tag_count | minus: min_count | times: 100.0 | divided_by: range %}
+            {% for tag in site.data.sorted_tags %}
+                {% assign ratio = tag.count | minus: min_count | times: 100.0 | divided_by: range %}
                 {% assign font_size = ratio | times: 0.2 | plus: 12 | round %}
-                <a href="#{{ tag_name | url_encode }}"
+                <a href="#{{ tag.name | url_encode }}"
                    class="tag-cloud-item"
                    style="font-size: {{ font_size }}px;"
-                   title="{{ tag_count }} 篇文章">{{ tag_name }}</a>
+                   title="{{ tag.count }} 篇文章">{{ tag.name }}</a>
             {% endfor %}
         </div>
     </section>
 
-    {% comment %}===== Sorted Tag List ====={% endcomment %}
+    {% comment %}===== Sorted Tag List (by count desc) ====={% endcomment %}
     <ul class="tags-list">
-        {% for tag in raw_tags %}
+        {% for tag in site.data.sorted_tags %}
         <li>
-            <span class="tag-name" id="{{ tag[0] | url_encode }}">「{{ tag[0] }}」×{{ tag[1].size }}</span>
-            {% for post in tag[1] %}
+            <span class="tag-name" id="{{ tag.name | url_encode }}">「{{ tag.name }}」×{{ tag.count }}</span>
+            {% for post in site.tags[tag.name] %}
             <a class="tag-post" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a>
             {% endfor %}
         </li>
