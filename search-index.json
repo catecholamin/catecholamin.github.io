@@ -635,5 +635,12 @@
     "date": "2026-03-28",
     "tags": "",
     "excerpt": "最近把博客的\"每日记录\"流程自动化了。 起因很简单：每天结束的时候，打开编辑器、写当天的流水账，这个动作本身就是摩擦。以前用 AI 帮忙整理过一段时间，但每次还是要手动把内容粘进去。 现在的工作流是这样的：每天早上七点半，一个脚本自动读取前一天的对话记录和内存笔记，生成一篇草稿，发一条飞书提醒给我。我看一遍，觉得可以就发出去，不想发就放着。 写起来比之前轻松多了。大部分时候我就是看一眼，不满意就让..."
+  },
+  {
+    "title": "一次假的报错",
+    "url": "/2026/03/29/update-error-g.html",
+    "date": "2026-03-29",
+    "tags": "",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-03-29 日记 早上起来，打开 OpenClaw 的控制界面，看到一行红字：Update error: global update (omit opt..."
   }
 ]
