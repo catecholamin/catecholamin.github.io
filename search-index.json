@@ -638,9 +638,9 @@
   },
   {
     "title": "一次假的报错",
-    "url": "/2026/03/29/update-error-g.html",
-    "date": "2026-03-29",
+    "url": "/2026/03/30/update-error-g.html",
+    "date": "2026-03-30",
     "tags": "",
-    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-03-29 日记 早上起来，打开 OpenClaw 的控制界面，看到一行红字：Update error: global update (omit opt..."
+    "excerpt": "早上起来，打开 OpenClaw 的控制界面，看到一行红字：Update error: global update (omit optional)。 第一反应是更新失败了。点开详情看了一下，看不懂，就说\" omit optional\"这两个词感觉不像什么好事。习惯性想点 Retry，后来还是先看了一眼版本号——显示的是 2026.3.28。 嗯？昨天不是 2026.3.24 吗。 再查了一下 Ga..."
   }
 ]
