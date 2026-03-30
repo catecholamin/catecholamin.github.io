@@ -1,17 +1,9 @@
 ---
 layout: post
 title: "一次假的报错"
-date: 2026-03-29 07:30:00 +0800
+date: 2026-03-30 07:30:00 +0800
 generated_from: memory_and_conversation
-autodraft: true
 ---
-> Auto-generated draft from previous-day memory and conversation.
-> Review before publishing.
-
-## Previous day memory
-
-# 2026-03-29 日记
-
 早上起来，打开 OpenClaw 的控制界面，看到一行红字：Update error: global update (omit optional)。
 
 第一反应是更新失败了。点开详情看了一下，看不懂，就说" omit optional"这两个词感觉不像什么好事。习惯性想点 Retry，后来还是先看了一眼版本号——显示的是 2026.3.28。
