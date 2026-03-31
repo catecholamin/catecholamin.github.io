@@ -642,5 +642,19 @@
     "date": "2026-03-30",
     "tags": "",
     "excerpt": "早上起来，打开 OpenClaw 的控制界面，看到一行红字：Update error: global update (omit optional)。 第一反应是更新失败了。点开详情看了一下，看不懂，就说\" omit optional\"这两个词感觉不像什么好事。习惯性想点 Retry，后来还是先看了一眼版本号——显示的是 2026.3.28。 嗯？昨天不是 2026.3.24 吗。 再查了一下 Ga..."
+  },
+  {
+    "title": "门诊问题与系统性思考",
+    "url": "/2026/03/31/dydrogesterone-and-liver-nodule.html",
+    "date": "2026-03-31",
+    "tags": "[临床, 用药安全, 思考]",
+    "excerpt": "今天门诊遇到一个患者，肥胖，月经不规律，连续两年服用地屈孕酮，每年吃六个月。最近检查发现肝内结节，考虑良性。她问我：这药还能不能继续吃，要不要停。 说实话，这个问题我没有立刻回答。 不是因为不懂，而是因为这类问题涉及太多变量——结节性质、肥胖相关的代谢问题、长期用药的获益与风险比——不是一句话能说清楚的。 地屈孕酮这个药本身肝毒性不高，但它需要肝脏代谢，肥胖人群本身又是脂肪肝的高危人群。肝内结节的..."
+  },
+  {
+    "title": "03-31 record",
+    "url": "/2026/03/31/record.html",
+    "date": "2026-03-31",
+    "tags": "",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-03-31 > (No conversation records found for this date.) > _鏈枃鐢?OpenClaw 鑷姩鐢..."
   }
 ]
