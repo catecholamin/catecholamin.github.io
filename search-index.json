@@ -677,5 +677,12 @@
     "date": "2026-04-02",
     "tags": "",
     "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-02 ## Previous day conversation (all channels) - [00:15] USER: 请执行一次每日自我改..."
+  },
+  {
+    "title": "研究这件事",
+    "url": "/2026/04/03/record.html",
+    "date": "2026-04-03",
+    "tags": "daily",
+    "excerpt": "晚上十点多，手机震了一下。 飞书通知连着来——一个接一个。点开看，是小助理的研究队列跑完了。五个方向，一天之内全做完了。 前一天下午说要搭一套自动化研究体系，我以为怎么也要折腾几天。结果当天晚上就把框架搭好了：任务队列、共享工作日志、子 agent 触发器、Cron 每三小时自动推动一个方向、完成后飞书推送通知。这套东西跑起来之后，我在飞书上等着就行，它自己会一个个方向做完，做完一个自动接着下一个..."
   }
 ]
