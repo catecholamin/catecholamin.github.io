@@ -749,6 +749,13 @@
     "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-10 ## Previous day conversation (all channels) - [20:01] USER: [Thu 2026-..."
   },
   {
+    "title": "文献通跑了一整夜",
+    "url": "/2026/04/10/文献通跑了一整夜.html",
+    "date": "2026-04-10",
+    "tags": "[文献通, 科研工具, 论文阅读, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "睡前设好关键词，点击运行，第二天醒来文献通已经跑完了。 这就是最近的工作流。 前一天晚上跟小助理把整个流程捋了一遍：输入关键词 → PubMed 搜索 → 用影响因子初筛 → 下载全文 → 丢给 LLM 总结记录。之前大部分环节已经通了，唯独影响因子筛选是这次新加的。把 IF2024 数据接进去，设置一个最低门槛，剩下的自动跑。 4月10号凌晨，文献通正式开始跑。中间有一些进程被系统 kill 掉..."
+  },
+  {
     "title": "04-11 record",
     "url": "/2026/04/11/record.html",
     "date": "2026-04-11",
@@ -756,10 +763,24 @@
     "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-11 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
   },
   {
+    "title": "文献通又更新了，这次解决了一个实际问题",
+    "url": "/2026/04/11/文献通又更新了，这次解决了一个实际问题.html",
+    "date": "2026-04-11",
+    "tags": "[文献通, 围手术期, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "最近用文献通跑了几篇文章，跑出了一个实际问题：一篇论文里有图有表，但这些内容没被保存下来。用的时候才发现，原始文件里什么都有，就是调不出来。 这个问题其实很直接——做文献整理最终是为了用，不是为了存一堆链接。图表才是论文里最直观的东西，光有文字描述不够。 所以加了两个功能。 **图片和表格提取。** PMC 里论文的图片是独立文件，现在会自动下载保存到每篇论文的目录下，文件名用内容哈希命名，不会重..."
+  },
+  {
     "title": "文献通又卡在全文获取上了，这次换了个浏览器方案",
     "url": "/2026/04/11/文献通和ScienceDirect的较量.html",
     "date": "2026-04-11",
     "tags": "[文献通, 工具, \"AI 生成\", \"OpenClaw\"]",
     "excerpt": "昨晚跑了一批胆囊相关论文，今天想把\"internet surgery LLM\"和\"internet gallbladder\"也扫一遍。 跑起来倒是快，PubMed搜索几十秒就出结果了。但到抓全文的时候就卡住了——ScienceDirect、Wiley、LWW这几家，返回的都是一坨机器人检测代码。 ## 问题出在哪 用`requests`直接抓，出版社服务器一眼就能认出来不是真人浏览器。没有Cook..."
+  },
+  {
+    "title": "04-12 record",
+    "url": "/2026/04/12/record.html",
+    "date": "2026-04-12",
+    "tags": "[daily, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-12 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
   }
 ]
