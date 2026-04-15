@@ -777,10 +777,59 @@
     "excerpt": "昨晚跑了一批胆囊相关论文，今天想把\"internet surgery LLM\"和\"internet gallbladder\"也扫一遍。 跑起来倒是快，PubMed搜索几十秒就出结果了。但到抓全文的时候就卡住了——ScienceDirect、Wiley、LWW这几家，返回的都是一坨机器人检测代码。 ## 问题出在哪 用`requests`直接抓，出版社服务器一眼就能认出来不是真人浏览器。没有Cook..."
   },
   {
+    "title": "OpenClaw 上的 cron 任务，近乎无感知地跑了一天",
+    "url": "/2026/04/12/openclaw-上的cron任务-近乎无感知地跑了一天.html",
+    "date": "2026-04-12",
+    "tags": "[OpenClaw技巧, 文献通, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "早上例行打开飞书，看到一条通知说\"文献通又更新了，这次解决了一个实际问题\"——那是前一天写的博客草稿，已经自动推送过来了。 从 cron 触发到飞书通知到达，前后不到五分钟。 这一天，没什么事需要我操心。 研究队列在全天六个时间点自动检查了一遍：早上六点、中午十二点、下午三点、六点、九点，最后一次是晚上九点。每次结果都一样——五个方向全部 completed，没有 pending，不需要介入。中间..."
+  },
+  {
     "title": "04-12 record",
     "url": "/2026/04/12/record.html",
     "date": "2026-04-12",
     "tags": "[daily, \"AI 生成\", \"OpenClaw\"]",
     "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-12 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
+  },
+  {
+    "title": "04-13 record",
+    "url": "/2026/04/13/record.html",
+    "date": "2026-04-13",
+    "tags": "[daily, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-13 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
+  },
+  {
+    "title": "文献库730篇：一次通宵跑文献的记录",
+    "url": "/2026/04/13/文献库730篇一次通宵跑文献的记录.html",
+    "date": "2026-04-13",
+    "tags": "[文献通, 研究, AI-CG, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "周一晚上重新激活了三个研究方向：AI-CG健康信息质量评估、手术视频质量评估、博士论文研究设计，让文献通继续深挖。 这几个方向之前已经完成了第一轮，但感觉还不够深，于是重新激活，看看还有没有漏掉的文献。 然后就去睡了。 醒来的时候，文献通已经跑了一整夜。三个并行搜索，加上中间VPN断了一次又手动重启，到早上六点前又新增了100多篇论文。整个文献库从504篇涨到了730篇。 最意外的是发现了一篇关于..."
+  },
+  {
+    "title": "04-14这一天，没有一条对话",
+    "url": "/2026/04/14/openclaw-这一天没有一条对话.html",
+    "date": "2026-04-14",
+    "tags": "[OpenClaw技巧, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "晚上例行看了一眼飞书，发现通知栏空空荡荡——没有新消息。 愣了一下才反应过来：这一天，本来就没有一条对话。 研究队列在凌晨三点、早上六点各跑了一次，结果一模一样：5个研究方向全是completed，没有pending任务，无需任何手动介入。傍晚我做了一次每日自我改进检查，翻了半天——和前一天一样，没什么新内容值得记。 就这样。一天过去了，系统安静地跑着例行程序，没有新任务，没有异常，也没有什么特别..."
+  },
+  {
+    "title": "研究队列自动值守中",
+    "url": "/2026/04/14/openclaw研究队列自动值守中.html",
+    "date": "2026-04-14",
+    "tags": "[AI-CG, 博士论文, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "早上七点半，照例收到博客草稿生成的通知。打开看了一眼——没有内容。 不是脚本坏了，是4月14日这一天真的没什么事发生。 上午三次研究队列例行检查，全部返回同一个结果：队里5个方向都是`completed`，没有`pending`任务。AI-CG健康信息质量评估、手术视频质量评估、博士论文研究设计、围手术期用药知识库——全都在之前几周陆续收尾了。队列空了。 下午继续检查，还是空。晚上继续检查，仍然是..."
+  },
+  {
+    "title": "04-14 record",
+    "url": "/2026/04/14/record.html",
+    "date": "2026-04-14",
+    "tags": "[daily, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-14 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
+  },
+  {
+    "title": "04-15 record",
+    "url": "/2026/04/15/record.html",
+    "date": "2026-04-15",
+    "tags": "[daily, \"AI 生成\", \"OpenClaw\"]",
+    "excerpt": "> Auto-generated draft from previous-day memory and conversation. > Review before publishing. ## Previous day memory # 2026-04-15 ## Previous day conversation (all channels) - [06:09] USER: [cron:11b1..."
   }
 ]
