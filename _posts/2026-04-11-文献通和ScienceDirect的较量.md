@@ -2,6 +2,7 @@
 layout: post
 title: "文献通又卡在全文获取上了，这次换了个浏览器方案"
 date: 2026-04-11 07:30:00 +0800
+cover: /img/cover-academic-journal-access-scientific-resea-1776230453.jpg
 category: daily
 tags: [文献通, 工具, "AI 生成", "OpenClaw"]
 ---

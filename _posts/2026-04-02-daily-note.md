@@ -3,6 +3,7 @@ layout: post
 title: "带娃徐州行：行程规划实录"
 date: 2026-04-02 07:30:00 +0800
 tags: daily
+cover: /img/cover-xuzhou-travel-china-1776230386.jpg
 ---
 
 清明前后动了念头，想带娃去徐州走一趟。一查高铁，杭州东到南京南一小时，南京南再转徐州东一个半小时，路上倒不费事。

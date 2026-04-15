@@ -4,6 +4,7 @@ title: "飞书没反应，排查了一圈发现是个包没装上"
 date: 2026-04-04 07:30:00 +0800
 category: daily
 tags: [daily]
+cover: /img/cover-debugging-error-code-screen-1776230403.jpg
 ---
 
 飞书突然发消息没反应了。
