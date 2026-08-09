@@ -4,3 +4,7 @@
 node_modules
 
 _site/search-index.json
+
+# === privacy (2026-08-09) ===
+_drafts/
+*record.md
