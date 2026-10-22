@@ -62,7 +62,7 @@ header-img: /img/header-bg.jpg
 <main class="g-container home-content">
     <div class="article-list">
         {% for post in paginator.posts %}
-            <article class="article-item">
+            <article class="article-item{% unless post.cover %} no-cover{% endunless %}">
                 {% if post.cover %}
                 <div class="post-cover">
                     <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}"></a>

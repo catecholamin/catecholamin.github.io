@@ -1,0 +1,67 @@
+/* 首页文章列表：左缩略图 + 右标题摘要
+   由 index.html 引入，只在首页生效。 */
+
+.article-item {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+    grid-template-areas: "cover preview" "cover meta";
+    grid-template-rows: auto 1fr;
+    column-gap: 20px;
+    padding: 20px 22px;
+    margin-bottom: 10px;
+    align-items: start;
+}
+.article-item .post-cover {
+    grid-area: cover;
+    width: 128px;
+    height: 128px;
+    max-height: none;
+    margin: 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.article-item .post-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.article-item .post-preview { grid-area: preview; }
+.article-item .post-preview .post-title {
+    margin: 0 0 7px;
+    font-size: 19px;
+    line-height: 1.45;
+}
+.article-item .post-preview .post-excerpt {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.72;
+    color: #6f7681;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.article-item .post-meta { grid-area: meta; margin-top: 9px; }
+.article-item .post-meta .post-tag { font-size: 12px; }
+
+/* 没有封面的文章（存量里有 51 篇）：让文字占满整行，不留空列 */
+.article-item.no-cover {
+    grid-template-columns: 1fr;
+    grid-template-areas: "preview" "meta";
+}
+
+body.night-mode .article-item .post-preview .post-excerpt { color: #8e939c; }
+
+@media (max-width: 768px) {
+    .article-item {
+        grid-template-columns: 96px 1fr;
+        column-gap: 14px;
+        padding: 16px 14px;
+    }
+    .article-item .post-cover { width: 96px; height: 96px; }
+    .article-item .post-preview .post-title { font-size: 17px; }
+    .article-item .post-preview .post-excerpt { font-size: 13px; }
+    .article-item.no-cover { grid-template-columns: 1fr; }
+}

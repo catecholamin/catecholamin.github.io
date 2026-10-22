@@ -17,18 +17,24 @@
 	{% endif %}
     {% include anchor.html %}
     <style>
-    /* 图片出处：做成图注而不是正文段落 —— 更小、更淡、右对齐、非斜体 */
-    .image-credit {
-        font-size: 0.62em;
-        color: #b9b9b9;
+    /* 图片出处：做成图注而不是正文段落。
+       必须带 .markdown-body 前缀 —— 主题里 .markdown-body p 的
+       font-size:17px / text-align:justify 权重 (0,1,1)，高过单写 .image-credit
+       的 (0,1,0)，只写类选择器会被正文规则整条压掉，看上去毫无变化。 */
+    .markdown-body p.image-credit,
+    p.image-credit {
+        font-size: 12.5px;
+        color: #b0b0b0;
         text-align: right;
-        margin: -0.2em 0 1.6em;
+        margin: -4px 0 20px;
         font-style: normal;
-        line-height: 1.5;
+        font-weight: 400;
+        line-height: 1.55;
         letter-spacing: 0.01em;
     }
     @media (max-width: 768px) {
-        .image-credit { font-size: 0.6em; margin-bottom: 1.2em; }
+        .markdown-body p.image-credit,
+        p.image-credit { font-size: 12px; margin-bottom: 16px; }
     }
     </style>
 </head>

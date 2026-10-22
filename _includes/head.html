@@ -4,6 +4,7 @@
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     {% include seo.html %}
     <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-list.css">{% endif %}
     <link rel="stylesheet" href="//at.alicdn.com/t/font_271755_rdxzzo2kqwk.css">
     <link rel="stylesheet" href="{{ "/assets/css/github-markdown.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/prism.css" | relative_url }}">
