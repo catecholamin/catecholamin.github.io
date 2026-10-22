@@ -1,0 +1,185 @@
+<!-- 阅读进度条 -->
+<div class="read-progress" id="readProgress"></div>
+
+<!-- 文章目录（≥1280px 才显示，正文有 2 个以上小标题才生成） -->
+<aside class="post-toc" id="postToc">
+  <div class="post-toc-inner">
+    <p class="post-toc-title">目录</p>
+    <ul class="post-toc-list" id="postTocList"></ul>
+  </div>
+</aside>
+
+<!-- 图片灯箱 -->
+<div class="img-lightbox" id="imgLightbox"><img id="imgLightboxImg" alt=""></div>
+
+<!-- 回到顶部 -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部">↑</button>
+
+<style>
+.read-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, #3199DB, #5ac8fa);
+    z-index: 1001; pointer-events: none;
+}
+.post-toc { display: none; }
+@media (min-width: 1280px) {
+    .post-toc.has-toc {
+        display: block; position: fixed; top: 110px;
+        left: calc(50% + 388px); width: 188px;
+        max-height: 68vh; overflow-y: auto; font-size: 13px; line-height: 1.65;
+    }
+}
+.post-toc-inner { border-left: 2px solid #e7eaf1; padding: 2px 0 2px 14px; }
+.post-toc-title {
+    margin: 0 0 8px; font-size: 12px; letter-spacing: .12em;
+    color: #b3b3b3; text-transform: uppercase;
+}
+.post-toc-list { list-style: none; margin: 0; padding: 0; }
+.post-toc-list li { margin: 0; }
+.post-toc-list a {
+    display: block; padding: 2px 0; color: #999;
+    text-decoration: none; transition: color .2s, border-color .2s;
+    border-left: 2px solid transparent; margin-left: -16px; padding-left: 14px;
+}
+.post-toc-list a:hover { color: #3199DB; }
+.post-toc-list a.active { color: #3199DB; font-weight: 600; border-left-color: #3199DB; }
+.post-toc-list li.lv3 { padding-left: 12px; font-size: 12.5px; }
+body.night-mode .post-toc-inner { border-left-color: rgba(255,255,255,.12); }
+body.night-mode .post-toc-list a { color: #868a94; }
+body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5ac8fa; }
+
+.markdown-body img { cursor: zoom-in; }
+.img-lightbox {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,.92); cursor: zoom-out; padding: 24px;
+    align-items: center; justify-content: center;
+}
+.img-lightbox.open { display: flex; }
+.img-lightbox img {
+    max-width: 95vw; max-height: 92vh; cursor: default;
+    box-shadow: 0 12px 48px rgba(0,0,0,.6); border-radius: 2px;
+}
+
+.back-to-top {
+    position: fixed; right: 26px; bottom: 34px; width: 42px; height: 42px;
+    border: none; border-radius: 50%; background: rgba(49,153,219,.92); color: #fff;
+    font-size: 17px; line-height: 1; cursor: pointer; z-index: 999;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity .25s, visibility .25s, transform .25s;
+}
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: #3199DB; }
+@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 20px; width: 38px; height: 38px; } }
+</style>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ---------- 阅读进度 + 回到顶部 ---------- */
+    var bar = document.getElementById('readProgress');
+    var btn = document.getElementById('backToTop');
+    var ticking = false;
+
+    function onScroll() {
+        var el = document.documentElement;
+        var total = el.scrollHeight - el.clientHeight;
+        var y = el.scrollTop || document.body.scrollTop || 0;
+        if (bar) bar.style.width = (total > 0 ? (y / total) * 100 : 0) + '%';
+        if (btn) btn.classList.toggle('show', y > 600);
+        ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    onScroll();
+
+    if (btn) {
+        btn.addEventListener('click', function () {
+            try { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            catch (e) { window.scrollTo(0, 0); }
+        });
+    }
+
+    /* ---------- 目录 ---------- */
+    var article = document.querySelector('.markdown-body');
+    var toc = document.getElementById('postToc');
+    var tocList = document.getElementById('postTocList');
+
+    if (article && toc && tocList) {
+        var heads = [].slice.call(article.querySelectorAll('h2, h3'))
+            .filter(function (h) { return h.textContent.trim().length > 0; });
+
+        if (heads.length >= 2) {
+            var used = {};
+            heads.forEach(function (h, i) {
+                if (!h.id) h.id = 'sec-' + i;
+                if (used[h.id]) { h.id = h.id + '-' + i; }
+                used[h.id] = 1;
+                h.style.scrollMarginTop = '72px';
+
+                var li = document.createElement('li');
+                if (h.tagName === 'H3') li.className = 'lv3';
+                var a = document.createElement('a');
+                a.href = '#' + h.id;
+                a.textContent = h.textContent.trim();
+                a.addEventListener('click', function (ev) {
+                    ev.preventDefault();
+                    h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    history.replaceState(null, '', '#' + h.id);
+                });
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+            toc.classList.add('has-toc');
+
+            // 滚动时高亮当前小节
+            var links = [].slice.call(tocList.querySelectorAll('a'));
+            var map = {};
+            links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (!en.isIntersecting) return;
+                        links.forEach(function (a) { a.classList.remove('active'); });
+                        var cur = map[en.target.id];
+                        if (cur) cur.classList.add('active');
+                    });
+                }, { rootMargin: '-72px 0px -68% 0px', threshold: 0 });
+                heads.forEach(function (h) { obs.observe(h); });
+            }
+        }
+    }
+
+    /* ---------- 图片灯箱 ---------- */
+    var lb = document.getElementById('imgLightbox');
+    var lbImg = document.getElementById('imgLightboxImg');
+
+    if (lb && lbImg && article) {
+        article.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t && t.tagName === 'IMG') {
+                var src = t.currentSrc || t.src;
+                if (!src) return;
+                e.preventDefault();
+                lbImg.src = src;
+                lbImg.alt = t.alt || '';
+                lb.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        function closeLb() {
+            lb.classList.remove('open');
+            lbImg.removeAttribute('src');
+            document.body.style.overflow = '';
+        }
+        lb.addEventListener('click', closeLb);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
+        });
+    }
+})();
+</script>

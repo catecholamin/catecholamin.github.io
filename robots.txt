@@ -4,5 +4,6 @@ layout: null
 User-agent: *
 Allow: /
 Disallow: /search.html
+Disallow: /preview/
 
 Sitemap: {{ "/sitemap.xml" | absolute_url }}

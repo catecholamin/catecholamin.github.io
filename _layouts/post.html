@@ -24,6 +24,7 @@
       <div class="post-meta">
         <span class="post-meta-item"><i class="iconfont icon-author"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</span>
         <time class="post-meta-item" datetime="{{ page.date | date:"%y-%m-%d" }}"><i class="iconfont icon-date"></i>{{ page.date | date_to_string }}</time>
+        <span class="post-meta-item"><i class="iconfont icon-date"></i>约 {{ page.content | strip_html | strip_newlines | size | divided_by: 350 | plus: 1 }} 分钟</span>
       </div>
     </div>
     {% if page.cover %}
@@ -31,6 +32,8 @@
       <div class="post-cover" style="background: url('{{ page.cover | relative_url }}') center no-repeat; background-size: cover;"></div>
     {% endif %}
   </header>
+
+  {% include post-enhance.html %}
 
   <div class="post-content visible">
     {% if page.subtitle %}
