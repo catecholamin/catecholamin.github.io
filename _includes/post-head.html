@@ -17,12 +17,18 @@
 	{% endif %}
     {% include anchor.html %}
     <style>
+    /* 图片出处：做成图注而不是正文段落 —— 更小、更淡、右对齐、非斜体 */
     .image-credit {
-        font-size: 0.75em;
-        color: #999;
-        text-align: center;
-        margin-top: 0.2em;
-        font-style: italic;
+        font-size: 0.62em;
+        color: #b9b9b9;
+        text-align: right;
+        margin: -0.2em 0 1.6em;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: 0.01em;
+    }
+    @media (max-width: 768px) {
+        .image-credit { font-size: 0.6em; margin-bottom: 1.2em; }
     }
     </style>
 </head>

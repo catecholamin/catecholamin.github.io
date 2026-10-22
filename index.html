@@ -16,6 +16,49 @@ header-img: /img/header-bg.jpg
     <h3>{{ page.description }}</h3>
 </div>
 
+<script>
+/* 首页横幅：每天换成 Bing 当日的每日一图。
+   思路 —— 先用本地 header-bg.jpg 兜底保证首屏立即有图，再异步取当日图，
+   图片预加载完成后再无缝替换背景，取不到就保持本地图，不会白屏。
+   接口 bing.biturl.top 带 access-control-allow-origin: *，前端可直接 fetch
+   （Bing 官方 HPImageArchive 没有 CORS 头，浏览器取不了）。
+   每天只请求一次，结果按本地日期缓存在 localStorage。 */
+(function () {
+  var el = document.querySelector('.home-banner');
+  if (!el || !window.fetch) return;
+
+  var KEY = 'bing-daily-bg';
+  var d = new Date();
+  var today = d.getFullYear() + '-' +
+              ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + d.getDate()).slice(-2);
+
+  function apply(url) {
+    var img = new Image();
+    img.onload = function () { el.style.backgroundImage = 'url("' + url + '")'; };
+    img.src = url;
+  }
+
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (cached && cached.date === today && cached.url) { apply(cached.url); return; }
+
+  var res = window.matchMedia('(max-width: 768px)').matches ? 1080 : 1920;
+  var ctrl = window.AbortController ? new AbortController() : null;
+  if (ctrl) setTimeout(function () { ctrl.abort(); }, 6000);
+
+  fetch('https://bing.biturl.top/?resolution=' + res + '&format=json&index=0&mkt=zh-CN',
+        ctrl ? { signal: ctrl.signal } : {})
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!data || !data.url) return;
+      apply(data.url);
+      try { localStorage.setItem(KEY, JSON.stringify({ date: today, url: data.url })); } catch (e) {}
+    })
+    .catch(function () { /* 取不到就留着本地兜底图 */ });
+})();
+</script>
+
 <main class="g-container home-content">
     <div class="article-list">
         {% for post in paginator.posts %}
