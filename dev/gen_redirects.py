@@ -29,7 +29,14 @@ from build_search_index import parse_front_matter, slugify_keep_amp  # noqa: E40
 SITE = "https://catecholamin.github.io"
 DATE_PREFIX = re.compile(r"^(\d{4})-(\d{1,2})-(\d{1,2})-")
 
-TPL = """<!DOCTYPE html>
+# 加 front matter 是为了让 jekyll-sitemap 跳过这些跳转页（它会收录所有 .html page，
+# 不加的话 15 个跳转页会混进 sitemap，稀释抓取预算）。跳转页正文里没有 Liquid
+# 语法（只有百分号编码的 URL），所以 layout: null 不会被模板解析破坏。
+TPL = """---
+layout: null
+sitemap: false
+---
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
