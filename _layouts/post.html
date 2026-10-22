@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 {% include post-head.html %}
 
 <body>
@@ -38,7 +38,7 @@
     {% endif %}
 
     <article class="markdown-body">
-      {{ page.content }}
+      {{ page.content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
     </article>
 
     {% if site.social-share %}

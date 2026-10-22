@@ -2,7 +2,7 @@
 layout: default
 home-title: 儿茶分安
 description: 一个外科医生的自我修养
-header-img: https://api.dujin.org/bing/1920.php
+header-img: /img/header-bg.jpg
 ---
 
 {% include header.html %}
@@ -23,7 +23,7 @@ header-img: https://api.dujin.org/bing/1920.php
                 {% if post.cover %}
                 <div class="post-cover">
                     <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}"></a>
-                    <img src="{{ post.cover | relative_url }}" href="{{ post.url | relative_url }}" alt="">
+                    <img src="{{ post.cover | relative_url }}" alt=""{% if forloop.index > 1 %} loading="lazy" decoding="async"{% endif %}>
                 </div>
                 {% endif %}
                 <section class="post-preview">
