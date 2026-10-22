@@ -106,7 +106,14 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
 }
 
 /* ---------- 图片灯箱 ---------- */
-.markdown-body img { cursor: zoom-in; }
+.markdown-body img {
+    cursor: zoom-in;
+    /* 关键：图片带了 width/height 属性后，主题的 max-width:100% 会把宽度压窄，
+       但没有 height:auto 的话高度仍按属性值钉死 —— 窄屏下图片会被压扁/拉长。
+       高度交给浏览器按属性推导的宽高比算，既不变形也不丢 CLS 占位。 */
+    height: auto;
+    max-width: 100%;
+}
 .img-lightbox {
     display: none; position: fixed; inset: 0; z-index: 2000;
     background: rgba(0,0,0,.92); cursor: zoom-out; padding: 24px;
