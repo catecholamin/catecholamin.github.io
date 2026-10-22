@@ -134,6 +134,16 @@ def excerpt_of(body, n=200):
     return txt[:n]
 
 
+def content_of(body, n=2000):
+    """正文纯文本，供全文搜索。
+
+    和 excerpt_of 同一套清洗规则，只是长度放宽到 2000 字——128 篇的存量
+    正文大多在 1000~4000 字，2000 字能覆盖绝大多数关键词，同时把
+    search-index.json 控制在搜索浮层可接受的体积内（只在打开搜索时加载）。
+    """
+    return excerpt_of(body, n)
+
+
 def build():
     posts, problems = [], []
     for path in glob.glob(os.path.join(POSTS, "*.md")):
@@ -160,6 +170,7 @@ def build():
             "date": iso_date,
             "tags": " ".join(tags),
             "excerpt": excerpt_of(body),
+            "content": content_of(body),
         })
     posts.sort(key=lambda p: p["date"], reverse=True)
     return posts, problems
@@ -191,7 +202,7 @@ def main():
             pass
 
     with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(posts, f, ensure_ascii=False, indent=2)
+        json.dump(posts, f, ensure_ascii=False, separators=(",", ":"))
         f.write("\n")
     print("\n已写入 %s" % OUT)
     print("旧索引: %d 条 / 最新 %s" % (old_n, old_max))

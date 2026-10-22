@@ -25,7 +25,7 @@
             <button class="search-close" id="search-close"><i class="iconfont icon-close"></i></button>
         </div>
         <div class="search-result" id="search-result"></div>
-        <div class="search-hint" id="search-hint">输入关键词，即时搜索文章标题和内容摘要</div>
+        <div class="search-hint" id="search-hint">输入关键词，搜索标题、标签与全文</div>
     </div>
 </div>
 <script>
@@ -78,12 +78,28 @@
         loadData(function(data) {
             var q2 = q.toLowerCase();
             var results = [];
+
+            // 命中点在正文里时，截命中位置前后一段做上下文，比固定返回开头 100 字有用
+            function ctxOf(text, needle) {
+                var i = text.toLowerCase().indexOf(needle);
+                if (i < 0) return '';
+                var s = Math.max(0, i - 30);
+                var e = Math.min(text.length, i + needle.length + 70);
+                return (s > 0 ? '…' : '') + text.substring(s, e) + (e < text.length ? '…' : '');
+            }
+
             for (var i = 0; i < data.length; i++) {
                 var post = data[i];
-                if ((post.title && post.title.toLowerCase().indexOf(q2) >= 0) ||
-                    (post.excerpt && post.excerpt.toLowerCase().indexOf(q2) >= 0) ||
-                    (post.tags && post.tags.toLowerCase().indexOf(q2) >= 0)) {
-                    var ex = (post.excerpt || '').substring(0, 100);
+                var body = post.content || '';
+                var hitTitle   = post.title   && post.title.toLowerCase().indexOf(q2) >= 0;
+                var hitExcerpt = post.excerpt && post.excerpt.toLowerCase().indexOf(q2) >= 0;
+                var hitTags    = post.tags    && post.tags.toLowerCase().indexOf(q2) >= 0;
+                var hitBody    = body && body.toLowerCase().indexOf(q2) >= 0;
+
+                if (hitTitle || hitExcerpt || hitTags || hitBody) {
+                    var ex = hitBody && !hitTitle && !hitExcerpt && !hitTags
+                        ? ctxOf(body, q2)
+                        : (post.excerpt || '').substring(0, 100);
                     results.push(
                         '<a class="search-result-item" href="' + post.url + '">' +
                         '<span class="result-title">' + post.title + '</span>' +

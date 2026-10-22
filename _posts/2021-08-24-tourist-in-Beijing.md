@@ -11,68 +11,68 @@ tags: 北京 旅游 游记
 
 看看天坛吧。
 
-![](/images/legacy/天坛鸟瞰图.webp)
+![天坛鸟瞰图](/images/legacy/天坛鸟瞰图.webp)
 
 天坛公园占地面积很大，有空分散在这么一大片面积里，就不会显得很拥挤。
 
-![](/images/legacy/圜丘坛.webp)
+![圜丘坛](/images/legacy/圜丘坛.webp)
 
 当然圜丘坛上人还是挺多的，最上面那层的中间有块凸起的圆石，有人站在上面尝试与天沟通。我沟通能力不好，就没尝试。
 
-![](/images/legacy/皇穹宇.webp)
+![皇穹宇](/images/legacy/皇穹宇.webp)
 
 皇穹宇旁边的墙壁就是传说中的回音壁。好多人对着墙壁大喊，不过我也没听到明显的回声，可能人太多声音太杂了吧。
 
-![](/images/legacy/丹陛桥.webp)
+![丹陛桥](/images/legacy/丹陛桥.webp)
 
 沿着这条道走，穿过前面那个门洞，就可以看到天坛最著名的标志，祈年殿。这条路着实长，以前皇帝也在这走。
 
-![](/images/legacy/祈年殿1.webp)
+![祈年殿1](/images/legacy/祈年殿1.webp)
 
-![](/images/legacy/祈年殿2.webp)
+![祈年殿2](/images/legacy/祈年殿2.webp)
 
 中国建筑的杰出代表，看着很舒服、和谐。
 
-![](/images/legacy/大栅栏附近.webp)
+![大栅栏附近](/images/legacy/大栅栏附近.webp)
 
 逛完天坛公园就到中午饭点了，于是去一直在大众点评收藏夹里的四季民福烤鸭店，最近的一家在大栅栏附近。大栅栏这几个字是读（da shi lan），不是（da zha lan），这是出租车师傅告诉我的。
 
-![](/images/legacy/叫号.webp)
+![叫号](/images/legacy/叫号.webp)
 
 不得不感叹哪的网红店都得排队啊，况且是在景区。等前面19桌叫完，我吃上烤鸭已经三点多了。不过味道么，就是烤鸭的味道，可能比我以前吃过的烤鸭香一些，总体满意，但没有惊喜。
 
 吃完得散散步消消食。就在大栅栏周围逛一下北京胡同。都是生活气息浓重的民居，要是我住这边，整天有各种游客走来走去拍照什么的，我肯定觉得烦。不清静。
 
-![](/images/legacy/胡同1.webp)
+![胡同1](/images/legacy/胡同1.webp)
 
 其实胡同里游客也不多，而我力图做一个清静的游客。
 
-![](/images/legacy/胡同2.webp)
+![胡同2](/images/legacy/胡同2.webp)
 
 太阳很大很晒。
 
-![](/images/legacy/胡同3.webp)
+![胡同3](/images/legacy/胡同3.webp)
 
 这是其中一条街，这片胡同区有N条胡同，大同小异，感受一下就行了。话说回来，我们长河的老街，西兴的老街，按这标准也是胡同，也没差多少。
 
-![](/images/legacy/人口普查.webp)
+![人口普查](/images/legacy/人口普查.webp)
 
 人口普查
 
-![](/images/legacy/胡同4.webp)
+![胡同4](/images/legacy/胡同4.webp)
 
 边逛胡同边朝天安门方向走。我以前不知道天安门附近是一片胡同区，走出来发现，原来是挨着的。住这里真是住在中国的中心了。
 
-![](/images/legacy/天安门广场外围.webp)
+![天安门广场外围](/images/legacy/天安门广场外围.webp)
 天安门广场外围
 
-![](/images/legacy/人民英雄纪念碑.webp)
+![人民英雄纪念碑](/images/legacy/人民英雄纪念碑.webp)
 人民英雄纪念碑
 
-![](/images/legacy/天安门广场1.webp)
+![天安门广场1](/images/legacy/天安门广场1.webp)
 天安门广场上等看收旗的人们
 
-![](/images/legacy/天安门广场2.webp)
+![天安门广场2](/images/legacy/天安门广场2.webp)
 
 人太多，风又大，我就赶紧撤了。
 
@@ -81,4 +81,4 @@ tags: 北京 旅游 游记
 -----------------------------------
 
 首发于公众号： [儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)  ：   [原文链接](https://mp.weixin.qq.com/s/pHc4RjMdR3QMzj0fLf3P8w)
-![](/images/legacy/微信公众号.jpg)
+![微信公众号二维码](/images/legacy/微信公众号.jpg)

@@ -1,0 +1,152 @@
+---
+title: Archive
+layout: default
+---
+
+{% include header.html %}
+
+<div class="g-banner tags-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
+    <h2>ARCHIVE</h2>
+</div>
+
+<main class="archive-content">
+
+    {% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+    <nav class="archive-nav">
+        {% for y in years %}
+        <a href="#y{{ y.name }}">{{ y.name }}<span>{{ y.items | size }}</span></a>
+        {% endfor %}
+    </nav>
+
+    {% for y in years %}
+    {% assign months = y.items | group_by_exp: "post", "post.date | date: '%m'" %}
+    <section class="archive-year" id="y{{ y.name }}">
+        <h2 class="archive-year-title">{{ y.name }}<em>{{ y.items | size }} 篇</em></h2>
+
+        {% for m in months %}
+        <div class="archive-month">
+            <h3 class="archive-month-title">{{ m.name }} 月<em>{{ m.items | size }}</em></h3>
+            <ul class="archive-list">
+                {% for post in m.items %}
+                <li>
+                    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d" }}</time>
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </section>
+    {% endfor %}
+
+</main>
+
+{% include footer.html %}
+
+<style>
+.archive-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    box-sizing: border-box;
+}
+
+.archive-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eef0f4;
+}
+.archive-nav a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    background: #f5f7fa;
+    color: #4a5260;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background .15s, color .15s;
+}
+.archive-nav a:hover { background: #3199db; color: #fff; }
+.archive-nav a span { font-size: 11px; opacity: .6; }
+
+.archive-year { margin-bottom: 48px; }
+.archive-year-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #2c3340;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3199db;
+    display: block;
+}
+.archive-year-title em {
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9aa2ae;
+    margin-left: 10px;
+}
+
+.archive-month { margin-bottom: 26px; }
+.archive-month-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #6b7280;
+    margin: 0 0 10px;
+    padding-left: 2px;
+}
+.archive-month-title em {
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    color: #b2b8c2;
+    margin-left: 6px;
+}
+
+.archive-list { list-style: none; margin: 0; padding: 0; }
+.archive-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 7px 4px;
+    border-radius: 3px;
+    transition: background .12s;
+}
+.archive-list li:hover { background: #f5f7fa; }
+.archive-list time {
+    flex: 0 0 52px;
+    font-size: 13px;
+    color: #b2b8c2;
+    font-variant-numeric: tabular-nums;
+}
+.archive-list a {
+    color: #3c4450;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.6;
+    transition: color .15s;
+}
+.archive-list a:hover { color: #3199db; }
+
+body.night-mode .archive-nav { border-bottom-color: #2a2e36; }
+body.night-mode .archive-nav a { background: #22262d; color: #b6bcc6; }
+body.night-mode .archive-year-title { color: #e4e7ec; }
+body.night-mode .archive-month-title { color: #9aa2ae; }
+body.night-mode .archive-list li:hover { background: #22262d; }
+body.night-mode .archive-list time { color: #6b7280; }
+body.night-mode .archive-list a { color: #cfd4dc; }
+
+@media (max-width: 768px) {
+    .archive-content { padding: 20px 16px 50px; }
+    .archive-year-title { font-size: 24px; }
+    .archive-list li { gap: 10px; }
+    .archive-list time { flex-basis: 44px; font-size: 12px; }
+    .archive-list a { font-size: 14px; }
+}
+</style>
