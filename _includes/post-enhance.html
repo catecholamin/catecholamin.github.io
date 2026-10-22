@@ -63,6 +63,9 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
     box-shadow: 0 2px 12px rgba(0,0,0,.18);
 }
 .toc-fab.show { display: block; }
+@media (min-width: 1280px) {
+    .toc-fab, .toc-fab.show { display: none; }   /* 宽屏右侧已有固定目录，浮动按钮多余 */
+}
 
 @media (max-width: 1279px) {
     .post-toc.has-toc.mobile-open {
@@ -168,6 +171,8 @@ body.night-mode .related-thumb { background: #2a2e36; }
 <script>
 (function () {
     'use strict';
+
+    function init() {
 
     /* ---------- 阅读进度 + 回到顶部 ---------- */
     var bar = document.getElementById('readProgress');
@@ -289,6 +294,17 @@ body.night-mode .related-thumb { background: #2a2e36; }
             if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
             if (e.key === 'Escape') closeTocPanel();
         });
+    }
+
+    }   /* end init */
+
+    // 这段 include 在 </header> 之后、正文 <article> 之前，脚本一执行正文还没进 DOM，
+    // 直接 querySelector('.markdown-body') 会拿到 null —— 目录和灯箱都会静默失效。
+    // 统一等 DOM 就绪再初始化。
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();
 </script>
