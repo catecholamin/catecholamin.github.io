@@ -13,7 +13,8 @@
 用法：
     python3 dev/link_audit.py              # 只查本地（图片 + 站内链接），秒出
     python3 dev/link_audit.py --external   # 额外检查外链，慢，需要网络
-    python3 dev/link_audit.py --json       # 机器可读输出，给 cron 用
+    python3 dev/link_audit.py --json       # 机器可读输出
+    python3 dev/link_audit.py --external --quiet   # 有问题才输出，给 cron 用
 
 退出码：0 干净；1 发现问题。
 """
@@ -174,6 +175,7 @@ def check_external(urls, timeout=15):
 def main():
     as_json = "--json" in sys.argv
     do_external = "--external" in sys.argv
+    quiet = "--quiet" in sys.argv       # 只在发现问题时输出，给 cron 用
 
     img_problems, link_problems, externals = scan()
     ext_bad = check_external(externals) if do_external else []
@@ -186,7 +188,21 @@ def main():
         "external_bad": [{"url": u, "code": c, "why": w} for u, c, w in ext_bad],
     }
 
-    if as_json:
+    if quiet:
+        # cron 模式：干净就一个字都不输出（cron 不会推空消息）
+        lines = []
+        for f, r, w in img_problems:
+            lines.append("坏图：%s -> %s (%s)" % (f, r, w))
+        for f, r, w in link_problems:
+            lines.append("坏链：%s -> %s (%s)" % (f, r, w))
+        for u, c, w in ext_bad:
+            lines.append("外链：%s [%s] %s" % (u, c, w))
+        if lines:
+            print("博客自检发现 %d 个问题：" % len(lines))
+            print("\n".join(lines[:40]))
+            if len(lines) > 40:
+                print("... 另有 %d 条" % (len(lines) - 40))
+    elif as_json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         print("=== 图片引用 ===")
