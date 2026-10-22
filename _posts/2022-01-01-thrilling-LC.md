@@ -21,4 +21,4 @@ P.S. 上周门诊遇到病人来复查，没什么不舒服，血化验和B超�
 ----
 
 首发于公众号： [儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)  ：   [原文链接](https://mp.weixin.qq.com/s/Y8kvmmbZ-_tflkthQr_gsw)
-![微信公众号二维码](/images/legacy/微信公众号.jpg)
+![微信公众号二维码](/images/legacy/微信公众号.jpg){: width="258" height="258"}

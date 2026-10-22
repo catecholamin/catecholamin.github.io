@@ -1,13 +1,14 @@
 <!-- 阅读进度条 -->
 <div class="read-progress" id="readProgress"></div>
 
-<!-- 文章目录（≥1280px 才显示，正文有 2 个以上小标题才生成） -->
+<!-- 文章目录：宽屏固定右侧，窄屏点按钮滑出 -->
 <aside class="post-toc" id="postToc">
   <div class="post-toc-inner">
-    <p class="post-toc-title">目录</p>
+    <p class="post-toc-title"><span>目录</span><button class="post-toc-close" id="tocClose" type="button" aria-label="关闭目录">×</button></p>
     <ul class="post-toc-list" id="postTocList"></ul>
   </div>
 </aside>
+<button class="toc-fab" id="tocFab" type="button" aria-label="打开目录">目录</button>
 
 <!-- 图片灯箱 -->
 <div class="img-lightbox" id="imgLightbox"><img id="imgLightboxImg" alt=""></div>
@@ -21,7 +22,12 @@
     background: linear-gradient(90deg, #3199DB, #5ac8fa);
     z-index: 1001; pointer-events: none;
 }
+
+/* ---------- 目录 ---------- */
 .post-toc { display: none; }
+.post-toc-title { display: flex; justify-content: space-between; align-items: center; }
+.post-toc-close { display: none; }
+
 @media (min-width: 1280px) {
     .post-toc.has-toc {
         display: block; position: fixed; top: 110px;
@@ -48,6 +54,55 @@ body.night-mode .post-toc-inner { border-left-color: rgba(255,255,255,.12); }
 body.night-mode .post-toc-list a { color: #868a94; }
 body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5ac8fa; }
 
+/* 窄屏目录按钮：只有文章有小标题时才由 JS 显示 */
+.toc-fab {
+    display: none; position: fixed; right: 26px; bottom: 88px; z-index: 999;
+    padding: 0 15px; height: 42px; border: none; border-radius: 21px;
+    background: rgba(49,153,219,.92); color: #fff; font-size: 14px;
+    letter-spacing: .06em; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.toc-fab.show { display: block; }
+
+@media (max-width: 1279px) {
+    .post-toc.has-toc.mobile-open {
+        display: block; position: fixed; inset: 0; width: 100%;
+        max-height: none; z-index: 1600; overflow-y: auto;
+        background: #fff; padding: 22px 26px 44px; box-sizing: border-box;
+        font-size: 16px; line-height: 1.9;
+    }
+    .post-toc.has-toc.mobile-open .post-toc-inner { border-left: none; padding: 0; }
+    .post-toc.has-toc.mobile-open .post-toc-title {
+        font-size: 14px; color: #8b93a0; margin-bottom: 16px;
+        padding-bottom: 14px; border-bottom: 1px solid #eef1f5;
+    }
+    .post-toc.has-toc.mobile-open .post-toc-close {
+        display: block; border: none; background: none; font-size: 26px;
+        line-height: 1; color: #b6bcc6; cursor: pointer; padding: 0 4px;
+    }
+    .post-toc.has-toc.mobile-open .post-toc-list a {
+        padding: 10px 0; margin-left: 0; padding-left: 0;
+        border-left: none; border-bottom: 1px solid #f2f4f7;
+        color: #3c4450; font-size: 16px;
+    }
+    .post-toc.has-toc.mobile-open .post-toc-list li.lv3 { padding-left: 18px; }
+    .post-toc.has-toc.mobile-open .post-toc-list li.lv3 a { font-size: 15px; color: #6b7280; }
+    body.night-mode .post-toc.has-toc.mobile-open { background: #1b1f26; }
+    body.night-mode .post-toc.has-toc.mobile-open .post-toc-title { border-bottom-color: #2a2e36; }
+    body.night-mode .post-toc.has-toc.mobile-open .post-toc-list a {
+        color: #cfd4dc; border-bottom-color: #2a2e36;
+    }
+    body.night-mode .post-toc.has-toc.mobile-open .post-toc-list li.lv3 a { color: #9aa2ae; }
+}
+
+/* 手机正文略放大：中文长文 16px 偏紧 */
+@media (max-width: 768px) {
+    .markdown-body p,
+    .markdown-body ul > li,
+    .markdown-body ol > li { font-size: 17px; line-height: 1.85; }
+}
+
+/* ---------- 图片灯箱 ---------- */
 .markdown-body img { cursor: zoom-in; }
 .img-lightbox {
     display: none; position: fixed; inset: 0; z-index: 2000;
@@ -60,6 +115,7 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
     box-shadow: 0 12px 48px rgba(0,0,0,.6); border-radius: 2px;
 }
 
+/* ---------- 回到顶部 ---------- */
 .back-to-top {
     position: fixed; right: 26px; bottom: 34px; width: 42px; height: 42px;
     border: none; border-radius: 50%; background: rgba(49,153,219,.92); color: #fff;
@@ -70,7 +126,43 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
 }
 .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
 .back-to-top:hover { background: #3199DB; }
-@media (max-width: 768px) { .back-to-top { right: 16px; bottom: 20px; width: 38px; height: 38px; } }
+@media (max-width: 768px) {
+    .back-to-top { right: 16px; bottom: 20px; width: 38px; height: 38px; }
+    .toc-fab { right: 16px; bottom: 70px; height: 38px; font-size: 13px; }
+}
+
+/* ---------- 相关文章 ---------- */
+.related-posts { margin-top: 30px; }
+.related-heading {
+    font-size: 15px; font-weight: 600; color: #8b93a0;
+    margin: 0 0 14px; letter-spacing: .04em;
+}
+.related-list { display: grid; gap: 8px; }
+.related-item {
+    display: flex; gap: 13px; align-items: center;
+    padding: 10px; border-radius: 4px; text-decoration: none;
+    transition: background .15s;
+}
+.related-item:hover { background: #f5f7fa; }
+.related-thumb {
+    flex: 0 0 64px; width: 64px; height: 64px;
+    border-radius: 3px; overflow: hidden; background: #eef1f5;
+}
+.related-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; }
+.related-text { min-width: 0; }
+.related-title {
+    display: block; color: #3c4450; font-size: 15px; line-height: 1.55;
+    overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.related-date { display: block; color: #b2b8c2; font-size: 12px; margin-top: 4px; }
+body.night-mode .related-item:hover { background: #22262d; }
+body.night-mode .related-title { color: #cfd4dc; }
+body.night-mode .related-thumb { background: #2a2e36; }
+@media (max-width: 768px) {
+    .related-thumb { flex-basis: 54px; width: 54px; height: 54px; }
+    .related-title { font-size: 14px; }
+}
 </style>
 
 <script>
@@ -106,6 +198,14 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
     var article = document.querySelector('.markdown-body');
     var toc = document.getElementById('postToc');
     var tocList = document.getElementById('postTocList');
+    var tocFab = document.getElementById('tocFab');
+    var tocClose = document.getElementById('tocClose');
+
+    function closeTocPanel() {
+        if (!toc) return;
+        toc.classList.remove('mobile-open');
+        document.body.style.overflow = '';
+    }
 
     if (article && toc && tocList) {
         var heads = [].slice.call(article.querySelectorAll('h2, h3'))
@@ -126,6 +226,7 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
                 a.textContent = h.textContent.trim();
                 a.addEventListener('click', function (ev) {
                     ev.preventDefault();
+                    closeTocPanel();
                     h.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     history.replaceState(null, '', '#' + h.id);
                 });
@@ -133,6 +234,7 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
                 tocList.appendChild(li);
             });
             toc.classList.add('has-toc');
+            if (tocFab) tocFab.classList.add('show');
 
             // 滚动时高亮当前小节
             var links = [].slice.call(tocList.querySelectorAll('a'));
@@ -152,6 +254,12 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
             }
         }
     }
+
+    if (tocFab) tocFab.addEventListener('click', function () {
+        toc.classList.add('mobile-open');
+        document.body.style.overflow = 'hidden';
+    });
+    if (tocClose) tocClose.addEventListener('click', closeTocPanel);
 
     /* ---------- 图片灯箱 ---------- */
     var lb = document.getElementById('imgLightbox');
@@ -179,6 +287,7 @@ body.night-mode .post-toc-list a.active { color: #5ac8fa; border-left-color: #5a
         lb.addEventListener('click', closeLb);
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
+            if (e.key === 'Escape') closeTocPanel();
         });
     }
 })();

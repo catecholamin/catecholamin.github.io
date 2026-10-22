@@ -72,6 +72,39 @@
       </ul>
       {% endif %}
     </section>
+    {% comment %}
+    相关文章：按标签重合取 3 篇。同一条链接可能被多个标签命中，
+    用 rel_seen 记已出现的 URL 去重，rel_count 在 Liquid 里可以跨循环累加。
+    {% endcomment %}
+    {% assign rel_seen = "|" %}
+    {% assign rel_count = 0 %}
+    {% capture rel_items %}
+    {% for t in page.tags %}
+      {% for p in site.tags[t] %}
+        {% if p.url != page.url and rel_count < 3 %}
+          {% assign key = "|" | append: p.url | append: "|" %}
+          {% unless rel_seen contains key %}
+            {% assign rel_seen = rel_seen | append: p.url | append: "|" %}
+            {% assign rel_count = rel_count | plus: 1 %}
+            <a class="related-item" href="{{ p.url | relative_url }}">
+              {% if p.cover %}<span class="related-thumb"><img src="{{ p.cover | relative_url }}" alt="" loading="lazy"></span>{% endif %}
+              <span class="related-text">
+                <span class="related-title">{{ p.title }}</span>
+                <span class="related-date">{{ p.date | date: "%Y-%m-%d" }}</span>
+              </span>
+            </a>
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    {% endcapture %}
+    {% if rel_count > 0 %}
+    <section class="post-footer-item related-posts">
+      <h3 class="related-heading">相关文章</h3>
+      <div class="related-list">{{ rel_items }}</div>
+    </section>
+    {% endif %}
+
     <section class="post-footer-item read-next">
       {% if page.next.url %}
       <div class="read-next-item">
