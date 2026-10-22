@@ -3,7 +3,7 @@ layout: post
 title: 有惊无险LC一例
 date: 2022-01-01
 categories: 临床 
-cover: 'https://gitee.com/catecholamin/blogimg/raw/master/img/胆囊.jpg'
+cover: '/images/legacy/胆囊.jpg'
 tags: LC 临床 手术 胆囊
 ---
 
@@ -21,4 +21,4 @@ P.S. 上周门诊遇到病人来复查，没什么不舒服，血化验和B超�
 ----
 
 首发于公众号： [儿茶分安](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MDQxMTk2Mg==&scene=124#wechat_redirect)  ：   [原文链接](https://mp.weixin.qq.com/s/Y8kvmmbZ-_tflkthQr_gsw)
-![](https://gitee.com/catecholamin/blogimg/raw/master/img/微信公众号.jpg)
+![](/images/legacy/微信公众号.jpg)

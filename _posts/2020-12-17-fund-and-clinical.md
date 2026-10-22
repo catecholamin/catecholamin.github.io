@@ -3,7 +3,7 @@ layout: post
 title: 心不在此
 date: 2020-12-17
 categories: 临床 
-cover: 'https://gitee.com/catecholamin/blogimg/raw/master/img/临床和科研.jpeg'
+cover: '/images/legacy/临床和科研.jpeg'
 tags: 课题 论文 临床
 ---
 

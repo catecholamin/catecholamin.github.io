@@ -4,7 +4,7 @@ title: 论文科研奖励没咯
 subtitle: 写论文赚钱的时代过去了
 date: 2021-04-23
 categories: 论文
-cover: 'https://gitee.com/catecholamin/blogimg/raw/master/img/no risk no reward.jpeg'
+cover: '/images/legacy/no-risk-no-reward.jpg'
 tags: 论文 科研奖励
 ---
 

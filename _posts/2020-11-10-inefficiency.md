@@ -3,7 +3,7 @@ layout: post
 title: 效率玄学
 date: 2020-11-10
 categories: 论文 
-cover: 'https://gitee.com/catecholamin/blogimg/raw/master/img/monkey-2500919_1280.jpg'
+cover: '/images/legacy/monkey-2500919_1280.jpg'
 tags: 论文 效率 玄学
 ---
 
