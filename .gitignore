@@ -8,3 +8,8 @@ _site/search-index.json
 # === privacy (2026-08-09) ===
 _drafts/
 *record.md
+
+# python cache
+dev/__pycache__/
+__pycache__/
+*.pyc
