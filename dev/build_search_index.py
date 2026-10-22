@@ -82,12 +82,12 @@ def slugify_keep_amp(name):
 def post_url(fm, filename):
     """按 permalink /:year/:month/:day/:title.html 拼 URL。
 
-    ⚠️ 时区陷阱（2026-10-22 实测确认）：
-        GitHub Pages 构建机是 UTC，Jekyll 用 front matter 里的 date 换算后
-        取日期部分做 permalink。`date: 2026-04-16 07:30:00 +0800` 在 UTC 下是
-        2026-04-15 23:30，于是线上 URL 变成 /2026/04/15/...，比文件名日期
-        早一天。凡 +0800 且时刻在 08:00 之前的文章都中招（实测 4 篇全中）。
-        所以这里必须按 UTC 折算，否则索引里的链接一半是 404。
+    2026-10-22 已在 _config.yml 里设 `timezone: Asia/Shanghai`，Jekyll 现在按
+    东八区取日期，所以这里**直接用 front matter date 的本地日期，不再折 UTC**。
+
+    历史背景（保留备查）：改配置之前构建机是 UTC，`date: 2026-04-16 07:30 +0800`
+    会被算成 04-15 23:30，导致 87 篇文章的线上 URL 比文件名早一天；那次用
+    `dev/gen_redirects.py` 给旧 URL 补了跳转页。
     """
     base = filename[:-3] if filename.endswith(".md") else filename
     raw_date = str(fm.get("date", "")).strip()
@@ -105,7 +105,10 @@ def post_url(fm, filename):
             tzs = tz[1:].replace(":", "")
             offset = sign * (int(tzs[:2]) * 60 + int(tzs[2:]))
         try:
-            d = datetime.datetime(y, mo, dd, hh, mi) - datetime.timedelta(minutes=offset)
+            # timezone: Asia/Shanghai 之后，permalink 用本地日期，不做 UTC 折算。
+            # 若某篇 date 写成别的时区（如 +0000），Jekyll 仍会换算到东八区，
+            # 这里也照样换算，保证与线上一致。
+            d = datetime.datetime(y, mo, dd, hh, mi) + datetime.timedelta(minutes=-offset + 480)
         except ValueError:
             d = None
 
