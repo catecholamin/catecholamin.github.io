@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ "/assets/css/search-overlay.css" | relative_url }}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% if page.cover %}<link rel="preload" as="image" href="{{ page.cover | relative_url }}" fetchpriority="high">{% endif %}
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
 	{% if site.mathjax %}
 	{% include mathjax.html %}
 	{% endif %}
