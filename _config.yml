@@ -3,6 +3,8 @@ title: '儿茶分安'
 description: '一个外科医生的自我修养'
 keyword: '儿茶分安, catecholamin, 外科, 医生, 生物信息学, 科研, 博客'
 url: 'https://catecholamin.github.io' # your host
+# 注：这个 url 影响 sitemap / feed / canonical 的绝对地址。
+# 部署到 Cloudflare Pages（或以后换自有域名）后，这一行要跟着改。
 
 # when build blog on server, if you don't need baseurl, you should leave this value blank.
 # 在服务器上建站时，如果你不需要子域名，请将这一格留空
@@ -71,7 +73,7 @@ recommend-condition-size: 18 # a tag will be recommended if the size of it is mo
 timezone: Asia/Shanghai
 paginate: 10
 paginate_path: 'page:num'
-exclude: ['node_modules', 'dev', 'package.json', 'gulpfile.js', '.gitignore', 'README.md']
+exclude: ['node_modules', 'dev', 'package.json', 'gulpfile.js', '.gitignore', 'README.md', 'Gemfile', 'Gemfile.lock', 'vendor', '.bundle', 'CNAME']
 
 # Markdown
 markdown: kramdown
