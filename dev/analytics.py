@@ -32,17 +32,23 @@ def _creds():
     return d["cloudflare_api_token"], d["cloudflare_account_id"]
 
 
-def query(dims, date_from, bot_only_real=True, limit=100, order="count_DESC"):
-    """向 Cloudflare GraphQL 查 rumPageloadEventsAdaptiveGroups。"""
+def query(dims, date_from, bot_only_real=True, limit=100, order="count_DESC", with_sampling=False):
+    """向 Cloudflare GraphQL 查 rumPageloadEventsAdaptiveGroups。
+
+    注意：这个数据集是自适应采样的。Cloudflare 只保留最近几天的原始事件
+    （实测约 4-7 天），更早的数据按 1/10 采样并四舍五入，数字会失真。
+    查询时务必带上 avg { sampleInterval }：1 表示精确，10 表示只有十分之一。
+    """
     token, acc = _creds()
     filt = f'date_geq:"{date_from}"'
     if bot_only_real:
         filt += ", bot:0"
+    sampling = " avg { sampleInterval }" if with_sampling else ""
     gql = (
         '{ viewer { accounts(filter:{accountTag:"%s"}) { '
         "rumPageloadEventsAdaptiveGroups(limit:%d, filter:{%s}, orderBy:[%s]) "
-        "{ count sum { visits } dimensions { %s } } } } }"
-    ) % (acc, limit, filt, order, dims)
+        "{ count sum { visits }%s dimensions { %s } } } } }"
+    ) % (acc, limit, filt, order, sampling, dims)
     out = subprocess.run(
         ["curl", "-s", "-X", "POST", ENDPOINT,
          "-H", f"Authorization: Bearer {token}",
@@ -60,9 +66,33 @@ def query(dims, date_from, bot_only_real=True, limit=100, order="count_DESC"):
     return (accs[0].get("rumPageloadEventsAdaptiveGroups") or []) if accs else []
 
 
+def check_sampling(days):
+    """报告这段时间的数据是不是采样数据。超过约 7 天就会失真。"""
+    date_from = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
+    rows = query("date", date_from, with_sampling=True, order="date_ASC", limit=400)
+    if not rows:
+        return None
+    worst = 1
+    for r in rows:
+        si = (r.get("avg") or {}).get("sampleInterval") or 1
+        try:
+            si = float(si)
+        except (TypeError, ValueError):
+            si = 1
+        worst = max(worst, si)
+    return worst
+
+
 def report(days=7, section="overview"):
     date_from = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
-    print(f"\n统计区间: {date_from} 起至今（{days} 天）  仅真实读者 bot=0\n")
+    worst = check_sampling(days)
+    print(f"\n统计区间: {date_from} 起至今（{days} 天）  仅真实读者 bot=0")
+    if worst and worst > 1:
+        print(f"⚠ 警告：最老的数据采样率为 1/{worst:g}，数字是估算值且有四舍五入。")
+        print(f"  Cloudflare 只保留最近约 4-7 天的原始事件。想看准确数字请用 7 天以内的窗口。")
+    elif worst == 1:
+        print("采样率 1/1，全部为精确计数。")
+    print()
 
     if section in ("overview", "all"):
         print("=" * 60)
