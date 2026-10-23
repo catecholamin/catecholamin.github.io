@@ -1,0 +1,13 @@
+# Cloudflare Workers（静态站点）部署配置。
+#
+# 项目里配的 Deploy command 是 `npx wrangler deploy`，它必须读到这个文件
+# 才知道发布什么；没有它，即使 jekyll build 成功，部署这一步也会失败。
+# directory 指向 Jekyll 的输出目录 _site。
+name = "catecholamin"
+compatibility_date = "2026-10-23"
+
+[assets]
+directory = "./_site"
+
+# 站点是纯静态的，没有 Worker 脚本；下面几项是 SPA 式回退不需要的，
+# 保持默认即可。404.html 由 Jekyll 生成，Workers 静态资源会自动识别。
