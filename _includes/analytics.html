@@ -1,0 +1,19 @@
+    {%- if site.cf_analytics_github_token and site.cf_analytics_pages_token %}
+    <!-- Cloudflare Web Analytics：按访问域名分发 token，github.io 与 pages.dev 分开计数 -->
+    <script>
+    (function () {
+      var h = location.hostname;
+      // 本地预览不统计
+      if (/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(h)) return;
+      var token = /github\.io$/i.test(h)
+        ? {{ site.cf_analytics_github_token | jsonify }}
+        : {{ site.cf_analytics_pages_token | jsonify }};
+      var s = document.createElement('script');
+      s.type = 'module';
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.setAttribute('data-cf-beacon', JSON.stringify({ token: token }));
+      document.head.appendChild(s);
+    })();
+    </script>
+    <!-- End Cloudflare Web Analytics -->
+    {%- endif %}
