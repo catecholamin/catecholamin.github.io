@@ -141,13 +141,24 @@
     </section>
     {% endif %}
 	
-<script src="https://utteranc.es/client.js"
-        repo="catecholamin/catecholamin.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script> 
+{% comment %}
+评论系统：Twikoo 2.0.17
+后端跑在 Netlify Functions，前面接 MongoDB Atlas。
+国内可达（实测 1.4-2.6s），读者不用注册账号，填个昵称就能评。
+path 用 location.pathname 而不是文章标题——以后改标题不会断掉历史评论。
+{% endcomment %}
+<section class="post-footer-item comment">
+  <div id="tcomment"></div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@2.0.17/dist/twikoo.all.min.js"></script>
+<script>
+twikoo.init({
+  envId: 'https://radiant-brigadeiros-972078.netlify.app/.netlify/functions/twikoo',
+  el: '#tcomment',
+  path: location.pathname,
+  lang: 'zh-CN'
+});
+</script>
 
 
 </section>
