@@ -8,9 +8,13 @@
     python3 dev/analytics.py 7 referer    # 只看来源
     python3 dev/analytics.py 7 all        # 全部维度
 
-siteTag 映射（2026-10-23 用 /search.html 对照实验确定）:
+siteTag 映射（2026-10-24 由 Cloudflare 后台确认）:
+    3ef33b1271d44172aa6e236c2138d1f0  ->  996196.xyz          （主站）
     6eeecc7aa4704b5bac837601622b8878  ->  catecholamin.github.io
     faa2ebce5e194ce1934cd687d9ad0adb  ->  catecholamin.pages.dev
+
+注意：siteTag 与页面里 data-cf-beacon 的 token 是两个不同的值，
+查询只能用 siteTag，token 查不到数据。
 """
 import json
 import os
@@ -22,6 +26,7 @@ SECRETS = os.path.expanduser("~/.hermes/secrets.json")
 ENDPOINT = "https://api.cloudflare.com/client/v4/graphql"
 
 SITE_TAGS = {
+    "3ef33b1271d44172aa6e236c2138d1f0": "996196.xyz",
     "6eeecc7aa4704b5bac837601622b8878": "github.io",
     "faa2ebce5e194ce1934cd687d9ad0adb": "pages.dev",
 }
