@@ -19,6 +19,7 @@ baseurl: ''
 # Cloudflare Web Analytics —— 两个域名分别统计（token 会明文出现在页面 HTML 里，非秘密）
 cf_analytics_github_token: '71bbf061fd914bff8430ab81b93300bf'
 cf_analytics_pages_token: 'd319e892415f45bab66f3184cc24c5b3'
+cf_analytics_xyz_token: 'f8b62b6f7f75422d977670838a1ef585'
 
 # Navigation links
 nav:
