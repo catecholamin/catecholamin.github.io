@@ -33,6 +33,9 @@
         display: block; position: fixed; top: 110px;
         left: calc(50% + 388px); width: 188px;
         max-height: 68vh; overflow-y: auto; font-size: 13px; line-height: 1.65;
+        /* .post-content 是 position:relative + width:100% + 白色背景，
+           DOM 顺序在后，会盖住固定定位的目录。必须抬高层级。 */
+        z-index: 100;
     }
 }
 .post-toc-inner { border-left: 2px solid #e7eaf1; padding: 2px 0 2px 14px; }
