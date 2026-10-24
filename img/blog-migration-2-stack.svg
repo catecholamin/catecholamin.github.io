@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="520" viewBox="0 0 880 520" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <rect width="880" height="520" fill="#f7f8fa"/>
+
+  <text x="440" y="42" text-anchor="middle" font-size="21" font-weight="600" fill="#2c3e50">评论系统的三层结构</text>
+  <text x="440" y="68" text-anchor="middle" font-size="13" fill="#8a94a6">五个坑分别出在哪一层</text>
+
+  <!-- 第一层：浏览器 -->
+  <rect x="60" y="96" width="760" height="78" rx="8" fill="#ffffff" stroke="#e7eaf1"/>
+  <rect x="60" y="96" width="6" height="78" rx="3" fill="#1494fb"/>
+  <text x="92" y="122" font-size="14" font-weight="600" fill="#2c3e50">① 读者浏览器</text>
+  <text x="92" y="144" font-size="12" fill="#7a8699">加载 twikoo.all.min.js（jsdelivr CDN），渲染评论框，发起请求</text>
+  <text x="92" y="163" font-size="11" fill="#9aa4b5">实测：CDN 脚本 2.4s 可达</text>
+  <rect x="700" y="108" width="104" height="24" rx="12" fill="#eef9f3"/>
+  <text x="752" y="124" text-anchor="middle" font-size="11" fill="#1e7e5a">这一层没问题</text>
+
+  <!-- 箭头 1 -->
+  <line x1="440" y1="174" x2="440" y2="204" stroke="#c3ccda" stroke-width="2"/>
+  <path d="M 440 210 L 435 200 M 440 210 L 445 200" fill="none" stroke="#c3ccda" stroke-width="2" stroke-linecap="round"/>
+  <text x="452" y="196" font-size="10.5" fill="#9aa4b5">POST</text>
+
+  <!-- 第二层：Netlify -->
+  <rect x="60" y="214" width="760" height="86" rx="8" fill="#ffffff" stroke="#e7eaf1"/>
+  <rect x="60" y="214" width="6" height="86" rx="3" fill="#e0a03a"/>
+  <text x="92" y="240" font-size="14" font-weight="600" fill="#2c3e50">② Netlify Functions</text>
+  <text x="92" y="262" font-size="12" fill="#7a8699">读环境变量 MONGODB_URI，建立数据库连接，处理事件，返回 JSON</text>
+  <text x="92" y="281" font-size="11" fill="#c0392b">坑 1：环境变量里填了占位符（尖括号 / 星号）</text>
+  <text x="92" y="296" font-size="11" fill="#c0392b">坑 2：Node 版本低于 22，mongodb 驱动 7.x 跑不起来</text>
+  <rect x="700" y="226" width="104" height="24" rx="12" fill="#fdf2f1"/>
+  <text x="752" y="242" text-anchor="middle" font-size="11" fill="#c0392b">两个坑在这</text>
+
+  <!-- 箭头 2 -->
+  <line x1="440" y1="300" x2="440" y2="330" stroke="#c3ccda" stroke-width="2"/>
+  <path d="M 440 336 L 435 326 M 440 336 L 445 326" fill="none" stroke="#c3ccda" stroke-width="2" stroke-linecap="round"/>
+  <text x="452" y="322" font-size="10.5" fill="#9aa4b5">mongodb+srv</text>
+
+  <!-- 第三层：MongoDB -->
+  <rect x="60" y="340" width="760" height="86" rx="8" fill="#ffffff" stroke="#e7eaf1"/>
+  <rect x="60" y="340" width="6" height="86" rx="3" fill="#4caf82"/>
+  <text x="92" y="366" font-size="14" font-weight="600" fill="#2c3e50">③ MongoDB Atlas（M0 免费版）</text>
+  <text x="92" y="388" font-size="12" fill="#7a8699">集合 comment / config / counter，存储评论与配置</text>
+  <text x="92" y="407" font-size="11" fill="#c0392b">坑 3：连接串没写库名，数据全进了默认的 test 库</text>
+  <rect x="700" y="352" width="104" height="24" rx="12" fill="#fdf2f1"/>
+  <text x="752" y="368" text-anchor="middle" font-size="11" fill="#c0392b">一个坑在这</text>
+
+  <!-- 接口命名坑 -->
+  <rect x="60" y="444" width="760" height="56" rx="8" fill="#fffaf0" stroke="#f0d9a8"/>
+  <text x="92" y="466" font-size="12" font-weight="600" fill="#8a6d20">坑 4 &amp; 5：不在任何一层，在接口约定上</text>
+  <text x="92" y="486" font-size="11" fill="#9a8040">Twikoo 2.0 把 GET_COMMENTS 改成了 GET_COMMENTS_COUNT；path 要用 location.pathname 而不是文章标题</text>
+
+</svg>

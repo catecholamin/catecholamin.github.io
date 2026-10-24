@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="500" viewBox="0 0 880 500" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <rect width="880" height="500" fill="#f7f8fa"/>
+
+  <text x="440" y="42" text-anchor="middle" font-size="21" font-weight="600" fill="#2c3e50">245 毫秒说明了一切</text>
+  <text x="440" y="68" text-anchor="middle" font-size="13" fill="#8a94a6">当报错信息是错的，该相信哪个线索</text>
+
+  <!-- 错误信息框 -->
+  <rect x="60" y="96" width="760" height="70" rx="8" fill="#fdf2f1" stroke="#e0908a"/>
+  <text x="84" y="122" font-size="12" fill="#b08a86">后端返回的错误信息</text>
+  <text x="84" y="146" font-size="14" font-family="ui-monospace,Consolas,monospace" fill="#c0392b">请更新 Twikoo 云函数至最新版本</text>
+  <text x="620" y="146" font-size="11.5" fill="#c0392b">← 这句话是假的</text>
+
+  <!-- 但是 -->
+  <text x="440" y="196" text-anchor="middle" font-size="12" fill="#7a8699">前后端版本完全一致（都是 2.0.17），这个报错指向了错误的方向</text>
+
+  <!-- 时间对比条 -->
+  <text x="60" y="234" font-size="13" font-weight="600" fill="#2c3e50">换个角度看：每次请求花了多久</text>
+
+  <!-- 正常请求 -->
+  <text x="60" y="268" font-size="11.5" fill="#566172">正常查库</text>
+  <rect x="150" y="254" width="560" height="22" rx="3" fill="#eef9f3" stroke="#4caf82"/>
+  <text x="430" y="270" text-anchor="middle" font-size="11" fill="#1e7e5a">1.4 – 5.1 秒</text>
+
+  <!-- 失败请求 -->
+  <text x="60" y="302" font-size="11.5" fill="#566172">报错那次</text>
+  <rect x="150" y="288" width="42" height="22" rx="3" fill="#fdf2f1" stroke="#c0392b"/>
+  <text x="212" y="304" font-size="11" fill="#c0392b" font-weight="600">245 毫秒</text>
+
+  <!-- 关键推理 -->
+  <rect x="60" y="330" width="760" height="96" rx="8" fill="#eef4fb" stroke="#1494fb"/>
+  <text x="84" y="356" font-size="13" font-weight="600" fill="#1a6ab0">推理链</text>
+  <text x="84" y="380" font-size="12" fill="#3d6f9e">① MongoDB 在新加坡，光 TLS 握手就要 100–300 毫秒</text>
+  <text x="84" y="400" font-size="12" fill="#3d6f9e">② 245 毫秒连握手都来不及，说明请求根本没发出去</text>
+  <text x="84" y="420" font-size="12" fill="#3d6f9e">③ 所以问题在连接数据库之前就发生了 —— 不是密码、不是网络、不是库名</text>
+
+  <!-- 真正的根因 -->
+  <rect x="60" y="446" width="760" height="42" rx="8" fill="#fffaf0" stroke="#f0d9a8"/>
+  <text x="84" y="472" font-size="12.5" fill="#8a6d20">
+    真正原因：Node 版本低于 22，mongodb 驱动 7.x 在运行时直接崩溃，连网络都没碰
+  </text>
+
+</svg>

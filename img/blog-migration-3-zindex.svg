@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="470" viewBox="0 0 880 470" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <rect width="880" height="470" fill="#f7f8fa"/>
+
+  <text x="440" y="42" text-anchor="middle" font-size="21" font-weight="600" fill="#2c3e50">目录为什么被挡住了</text>
+  <text x="440" y="68" text-anchor="middle" font-size="13" fill="#8a94a6">两个定位元素都没写 z-index 时，按 DOM 顺序层叠，后写的压住先写的</text>
+
+  <!-- ===== 左：修复前 ===== -->
+  <rect x="40" y="94" width="380" height="330" rx="8" fill="#ffffff" stroke="#e7eaf1"/>
+  <text x="230" y="122" text-anchor="middle" font-size="14" font-weight="600" fill="#c0392b">修复前</text>
+
+  <!-- 层叠示意：侧视 -->
+  <!-- 目录在最下层 -->
+  <rect x="80" y="200" width="120" height="150" rx="4" fill="#eef4fb" stroke="#1494fb" stroke-dasharray="4 3"/>
+  <text x="140" y="218" text-anchor="middle" font-size="10.5" fill="#1494fb">目录</text>
+  <text x="140" y="234" text-anchor="middle" font-size="9.5" fill="#7a9bc4">fixed</text>
+  <text x="140" y="248" text-anchor="middle" font-size="9.5" fill="#7a9bc4">z-index: auto</text>
+
+  <!-- 正文覆盖在上 -->
+  <rect x="170" y="170" width="216" height="210" rx="4" fill="#f2f4f8" stroke="#9aa4b5" stroke-width="1.5"/>
+  <text x="278" y="196" text-anchor="middle" font-size="11.5" fill="#566172">正文 .post-content</text>
+  <text x="278" y="214" text-anchor="middle" font-size="10" fill="#7a8699">relative · width:100% · 白底</text>
+  <text x="278" y="232" text-anchor="middle" font-size="10" fill="#7a8699">z-index: auto</text>
+  <text x="278" y="256" text-anchor="middle" font-size="10.5" fill="#c0392b">DOM 顺序在目录之后</text>
+  <text x="278" y="274" text-anchor="middle" font-size="10.5" fill="#c0392b">把目录整个盖住</text>
+
+  <!-- 结果标注 -->
+  <text x="230" y="346" text-anchor="middle" font-size="11.5" fill="#c0392b">目录只在正文上下的空白处可见</text>
+  <text x="230" y="368" text-anchor="middle" font-size="10.5" fill="#9aa4b5">→ 滚到文章中间就消失</text>
+
+  <!-- ===== 右：修复后 ===== -->
+  <rect x="460" y="94" width="380" height="330" rx="8" fill="#ffffff" stroke="#e7eaf1"/>
+  <text x="650" y="122" text-anchor="middle" font-size="14" font-weight="600" fill="#1e7e5a">修复后</text>
+
+  <!-- 正文在下 -->
+  <rect x="510" y="200" width="200" height="150" rx="4" fill="#f2f4f8" stroke="#9aa4b5"/>
+  <text x="610" y="224" text-anchor="middle" font-size="11" fill="#566172">正文 .post-content</text>
+  <text x="610" y="242" text-anchor="middle" font-size="10" fill="#7a8699">z-index: auto</text>
+
+  <!-- 目录在上 -->
+  <rect x="600" y="170" width="200" height="150" rx="4" fill="#eef4fb" stroke="#1494fb" stroke-width="1.5"/>
+  <text x="700" y="196" text-anchor="middle" font-size="11.5" fill="#1494fb">目录 .post-toc</text>
+  <text x="700" y="214" text-anchor="middle" font-size="10" fill="#7a9bc4">fixed</text>
+  <text x="700" y="232" text-anchor="middle" font-size="10.5" fill="#1e7e5a" font-weight="600">z-index: 100</text>
+  <text x="700" y="254" text-anchor="middle" font-size="10" fill="#7a9bc4">抬到正文之上</text>
+
+  <!-- 结果标注 -->
+  <text x="650" y="346" text-anchor="middle" font-size="11.5" fill="#1e7e5a">目录全程可见</text>
+  <text x="650" y="368" text-anchor="middle" font-size="10.5" fill="#9aa4b5">→ 滚动时不会消失</text>
+
+  <!-- 底部层级表 -->
+  <rect x="40" y="436" width="800" height="26" rx="4" fill="#eef2f7"/>
+  <text x="440" y="454" text-anchor="middle" font-size="10.5" fill="#7a8699">
+    层级：阅读进度条 1001 ＞ 顶部导航 1000 ＞ 目录 100 ＞ 正文 auto ＞ 文章头图 0
+  </text>
+
+</svg>
