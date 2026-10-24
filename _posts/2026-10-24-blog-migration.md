@@ -4,6 +4,7 @@ title: 折腾了两天，把博客迁到自己的域名上
 subtitle: 一次从 GitHub Pages 到 Cloudflare Pages 的搬迁记录
 date: 2026-10-24
 categories: 技术
+cover: /img/cover-20261024-migration.jpg
 tags: Cloudflare Pages 域名 DNS 评论系统 Twikoo MongoDB Jekyll
 ---
 
@@ -41,6 +42,8 @@ export LANG=C.UTF-8 && export LC_ALL=C.UTF-8 && export RUBYOPT=-EUTF-8 && bundle
 ![迁移前后的访问路径对比](/img/blog-migration-1-path.svg)
 
 左边是原来的样子：请求绕出去再绕回来，实测三次只有一次能成。右边是现在，直接落到最近的边缘节点。同一台机器、同一网络环境下连续测的。
+
+![机房里的一捆网线](/images/2026-10-24-1.jpg)
 
 ## 二、买了个域名
 
@@ -84,6 +87,8 @@ OnlyDomains 的页面上写得很直白：6 位数字域名按"标准注册费"�
 
 **判断一个域名贵不贵，看续费价，别看首年价。** 首年是招徕，续费才是成本。
 
+![桌上摊开的笔记本](/images/2026-10-24-2.jpg)
+
 ## 三、DNS 配置踩的两个坑
 
 买完域名要把它接到 Cloudflare。
@@ -126,6 +131,8 @@ marty.ns.cloudflare.com
 这是两个系统。Namecheap 提交变更后，注册局的 WHOIS 数据库马上更新，但顶级域服务器（`.xyz` 的权威 DNS）的委派记录要等 TTL 过期才刷新。DNS 查询走的是后者。
 
 所以那一个小时里，WHOIS 看起来一切正常，实际解析还是指向 Namecheap。
+
+![路口的指示牌](/images/2026-10-24-3.jpg)
 
 **判断 NS 有没有真正生效，别看 WHOIS，要查 DNS**：
 
@@ -192,6 +199,8 @@ github.com/login  超时三次        ← 发不了
 ![评论系统的三层结构](/img/blog-migration-2-stack.svg)
 
 结构不复杂，但每一层都有各自的脾气。下面五个坑，两个在中间那层，一个在数据库那层，还有两个根本不在层里——在接口约定上。
+
+![亮着背光的键盘](/images/2026-10-24-4.jpg)
 
 ### 坑 1：环境变量填了占位符
 
@@ -353,6 +362,8 @@ CSS 层叠规则里，`z-index: auto` 的定位元素按 DOM 顺序层叠，**�
 ![目录被正文遮挡的层叠问题](/img/blog-migration-3-zindex.svg)
 
 左边是原来的样子，目录被压在最底下，只有正文上下两头的空白处能露出来。右边抬高之后就一直在最上面了。
+
+![桌上的放大镜](/images/2026-10-24-5.jpg)
 
 ## 八、现在的状态
 
