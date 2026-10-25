@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 折腾了两天，把博客迁到自己的域名上
-subtitle: 一次从 GitHub Pages 到 Cloudflare Pages 的搬迁记录
+title: "从 github.io 到 996196.xyz：一个没什么人看的博客的搬家档案"
+subtitle: 七年的博客，两个晚上，和一堆看起来都对的错
 date: 2026-10-24
 categories: 技术
 cover: /img/cover-20261024-migration.jpg
