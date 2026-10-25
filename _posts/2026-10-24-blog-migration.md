@@ -43,7 +43,8 @@ export LANG=C.UTF-8 && export LC_ALL=C.UTF-8 && export RUBYOPT=-EUTF-8 && bundle
 
 左边是原来的样子：请求绕出去再绕回来，实测三次只有一次能成。右边是现在，直接落到最近的边缘节点。同一台机器、同一网络环境下连续测的。
 
-![机房里的一捆网线](/images/2026-10-24-1.jpg)
+![机房里的一捆网线](/images/2026-10-24-1.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Scott Rodgerson on Unsplash</p>
 
 ## 二、买了个域名
 
@@ -87,7 +88,8 @@ OnlyDomains 的页面上写得很直白：6 位数字域名按"标准注册费"�
 
 **判断一个域名贵不贵，看续费价，别看首年价。** 首年是招徕，续费才是成本。
 
-![桌上摊开的笔记本](/images/2026-10-24-2.jpg)
+![桌上摊开的笔记本](/images/2026-10-24-2.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Kelly Sikkema on Unsplash</p>
 
 ## 三、DNS 配置踩的两个坑
 
@@ -132,7 +134,8 @@ marty.ns.cloudflare.com
 
 所以那一个小时里，WHOIS 看起来一切正常，实际解析还是指向 Namecheap。
 
-![路口的指示牌](/images/2026-10-24-3.jpg)
+![路口的指示牌](/images/2026-10-24-3.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Prince Adufah on Unsplash</p>
 
 **判断 NS 有没有真正生效，别看 WHOIS，要查 DNS**：
 
@@ -200,7 +203,8 @@ github.com/login  超时三次        ← 发不了
 
 结构不复杂，但每一层都有各自的脾气。下面五个坑，两个在中间那层，一个在数据库那层，还有两个根本不在层里——在接口约定上。
 
-![亮着背光的键盘](/images/2026-10-24-4.jpg)
+![亮着背光的键盘](/images/2026-10-24-4.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Paul Zoetemeijer on Unsplash</p>
 
 ### 坑 1：环境变量填了占位符
 
@@ -363,7 +367,8 @@ CSS 层叠规则里，`z-index: auto` 的定位元素按 DOM 顺序层叠，**�
 
 左边是原来的样子，目录被压在最底下，只有正文上下两头的空白处能露出来。右边抬高之后就一直在最上面了。
 
-![桌上的放大镜](/images/2026-10-24-5.jpg)
+![桌上的放大镜](/images/2026-10-24-5.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Markus Winkler on Unsplash</p>
 
 ## 八、现在的状态
 
@@ -397,6 +402,6 @@ CSS 层叠规则里，`z-index: auto` 的定位元素按 DOM 顺序层叠，**�
 
 *本文记录于 2026 年 10 月 24 日深夜。*
 
-<p class="image-credit">Cover photo by Winston Chen on Unsplash. In-post photos by Scott Rodgerson, Kelly Sikkema, Prince Adufah, Paul Zoetemeijer, Markus Winkler.</p>
+<p class="image-credit">Cover photo by Winston Chen on Unsplash</p>
 
 *本文由Hermes自动整理*
