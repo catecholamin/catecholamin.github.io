@@ -3,11 +3,16 @@
    ======================== */
 
 .sidebar-widget {
-    margin-top: 16px;
-    background: #fafafa;
-    border-radius: 2px;
-    padding: 16px;
-    box-shadow: 0 0 .6px #d5dae1;
+    margin-top: 20px;
+    /* 上方 .tags-card 本身是透明的，透出 .g-sidebar 的白底。
+       这里原来给了 #fafafa 的灰底 + 阴影，所以两块看着不一样。
+       改成透明，跟标签栏保持一致，靠 margin 和标题分隔。 */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    border-top: 1px solid #f0f2f6;
+    padding-top: 18px;
 }
 
 .widget-title {
@@ -109,12 +114,12 @@
     outline-offset: 0;
 }
 
-/* 配色跟页面主色走，原来是 GitHub 那套绿 */
-.ch-cell.level-0 { background: #eef1f6; }
-.ch-cell.level-1 { background: #cfe6fb; }
-.ch-cell.level-2 { background: #7dc0fa; }
-.ch-cell.level-3 { background: #3ea6f9; }
-.ch-cell.level-4 { background: #1494fb; }
+/* 配色恢复成 GitHub 那套绿 */
+.ch-cell.level-0 { background: #ebedf0; }
+.ch-cell.level-1 { background: #9be9a7; }
+.ch-cell.level-2 { background: #40c463; }
+.ch-cell.level-3 { background: #30a14e; }
+.ch-cell.level-4 { background: #216e39; }
 
 .ch-tooltip {
     display: none;
@@ -317,7 +322,8 @@
 
 /* Night mode */
 body.night-mode .sidebar-widget {
-    background: #1e1e1e;
+    background: transparent;
+    border-top-color: #333;
 }
 
 body.night-mode .widget-title,
