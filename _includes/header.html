@@ -3,6 +3,11 @@
       <a href="{{ "/" | relative_url }}"></a>
     </div>
     <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <!-- 移动端专用：搜索图标常驻，不需要先展开汉堡菜单。
+         桌面上这个按钮隐藏，用 .g-nav 里那个就行。 -->
+    <a href="/search.html" class="mobile-search" id="mobile-search" title="搜索" aria-label="搜索">
+        <i class="iconfont icon-search"></i>
+    </a>
     <nav class="g-nav">
         <ul>
             {% for i in site.nav %}

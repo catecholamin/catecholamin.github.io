@@ -144,7 +144,7 @@
 
     /* ---------- 事件 ---------- */
 
-    var triggers = document.querySelectorAll('.nav-search a');
+    var triggers = document.querySelectorAll('.nav-search a, #mobile-search');
     for (var i = 0; i < triggers.length; i++) {
         triggers[i].addEventListener('click', openOverlay);
     }

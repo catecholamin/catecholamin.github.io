@@ -146,6 +146,34 @@ body.night-mode .search-hint {
     list-style: none !important;
 }
 
+/* 移动端常驻搜索按钮：桌面隐藏，手机上定位在汉堡图标左边 */
+.mobile-search {
+    display: none;
+}
+
+@media screen and (max-width: 695px) {
+    .mobile-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 28px;
+        right: 56px;
+        width: 32px;
+        height: 32px;
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        font-size: 18px;
+        z-index: 10;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-search:active {
+        color: #fff;
+        opacity: .7;
+    }
+}
+
 .nav-search a {
     display: inline-flex;
     align-items: center;
