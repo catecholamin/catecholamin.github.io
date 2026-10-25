@@ -587,6 +587,9 @@ setTimeout(function () { input.focus(); }, 80);
 
 我以为是十分钟能修好的事，改了四次才发现不对。
 
+![一整面玻璃幕墙](/images/2026-10-24-6.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Adrian Siaril on Unsplash</p>
+
 ### 四次都失败了
 
 **第一次**，看到 `.post-meta` 写着 `height: 22px`，改成 `auto`。
@@ -699,6 +702,9 @@ g_sidebar    left 953   right 1193
 ```
 
 左右边界完全重合。
+
+![搭到一半的脚手架](/images/2026-10-24-7.jpg){: width="1200" height="800"}
+<p class="image-credit">Photo by Paul Becker on Unsplash</p>
 
 **这个教训比权重更值钱**：看着像样式问题，其实是结构问题。元素在哪儿，决定了它在哪个框里。
 
