@@ -384,7 +384,8 @@ body.night-mode .scal-post-list {
 .article-list .article-item .post-meta {
     height: auto;
     display: flex;
-    align-items: flex-start;
+    /* 日期跟标签区的底部对齐，而不是贴着第一行标签的顶边 */
+    align-items: flex-end;
     justify-content: space-between;
     gap: 12px;
 }
