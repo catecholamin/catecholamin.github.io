@@ -372,20 +372,25 @@ body.night-mode .scal-post-list {
    ARTICLE CARD — 首页文章列表
    ======================== */
 
-/* 卡片用的是 home-list.css 里的 CSS Grid：
-     grid-template-areas: "cover preview" "cover meta"
-     grid-template-rows: auto 1fr
+/* 这一块必须用四层选择器。
+   app.min.css 里写的是：
+     .article-list .article-item .post-meta { height: 22px }
+     .article-list .article-item .post-meta .post-tags { float: left; display: inline-block }
+     .article-list .article-item .post-meta .post-date { float: right }
+   权重 (0,3,0) 和 (0,4,0)，用两层选择器（0,2,0）压不住，
+   所以前几版改了半天都不生效。
 
-   第二行的 1fr 会把 meta 区域锁死成「剩余空间」，标签再多也撑不开它，
-   换行的标签于是溢出到卡片外，日期跟着跑偏。
-   两行都改成 auto，让内容自己决定高度。 */
-.article-item {
+   再加上卡片是 CSS Grid：
+     grid-template-rows: auto 1fr
+   第二行的 1fr 把 meta 区域锁死成剩余空间，标签换了行也撑不开它。
+   两行都改 auto，加上下面的 flex 重排，标签才能把卡片自然撑高。 */
+
+.article-list .article-item {
     grid-template-rows: auto auto;
     align-content: start;
 }
 
-/* meta 内部再排一次：标签靠左自动换行，日期靠右不压缩 */
-.article-item .post-meta {
+.article-list .article-item .post-meta {
     height: auto;
     display: flex;
     align-items: flex-start;
@@ -393,7 +398,7 @@ body.night-mode .scal-post-list {
     gap: 12px;
 }
 
-.article-item .post-tags {
+.article-list .article-item .post-meta .post-tags {
     float: none;
     display: flex;
     flex-wrap: wrap;
@@ -402,14 +407,17 @@ body.night-mode .scal-post-list {
     min-width: 0;
 }
 
-.article-item .post-date {
+.article-list .article-item .post-meta .post-date {
     float: none;
     flex: 0 0 auto;
     white-space: nowrap;
 }
 
-.article-item .post-tag {
-    margin-bottom: 0;
+/* 原设计在 500px 以下隐藏标签、只留日期，这里保留 */
+@media screen and (max-width: 500px) {
+    .article-list .article-item .post-meta .post-tags {
+        display: none;
+    }
 }
 
 /* 侧边栏标签在纯白底上几乎看不见边界，稍微加深 */
