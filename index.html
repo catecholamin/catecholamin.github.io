@@ -136,7 +136,9 @@ header-img: /img/header-bg.jpg
             {%- endcomment -%}
             {%- capture tag_lines -%}
                 {%- for tag in site.tags -%}
-                    {{ tag[1].size | prepend: "0000" | slice: -4 }}::{{ tag[0] }};;
+                    {%- assign tn = tag[1].size -%}
+                    {%- if tn < 10 -%}000{{ tn }}{%- elsif tn < 100 -%}00{{ tn }}{%- elsif tn < 1000 -%}0{{ tn }}{%- else -%}{{ tn }}{%- endif -%}
+                    ::{{ tag[0] }};;
                 {%- endfor -%}
             {%- endcapture -%}
             {%- assign tag_ranked = tag_lines | split: ";;" | sort | reverse -%}
