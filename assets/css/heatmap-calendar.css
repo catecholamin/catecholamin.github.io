@@ -12,19 +12,28 @@
     border-radius: 0;
     padding: 0;
     box-shadow: none;
-    border-top: 1px solid #f0f2f6;
-    padding-top: 16px;
+    /* 不再自己画分隔线：.tags-card 本身带 border-bottom，
+       两条叠在一起会变成双线。 */
+    padding-top: 14px;
 }
 
 .widget-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: #a6abb2;
-    margin-bottom: 12px;
+    color: #9aa4b5;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    letter-spacing: .3px;
+    gap: 8px;
+    letter-spacing: 1.2px;
+}
+
+/* 标题后面拖一条细线到右边，当作小节的收尾，比孤零零一行字干净 */
+.widget-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #eef0f4;
 }
 
 /* ========================
@@ -421,15 +430,18 @@ body.night-mode .scal-post-list {
     }
 }
 
-/* 侧边栏标签在纯白底上几乎看不见边界，稍微加深 */
+/* 标签原来铺了实心底纹，一排下来 18 个方块显得碎。
+   去掉底色靠间距区分，静态时干净，鼠标移上去才浮出来。 */
 .tags-card .tag {
-    background-color: #f0f2f6;
+    background-color: transparent;
     color: #6b7280;
     box-shadow: none;
+    padding: 0 6px;
+    margin-right: 4px;
 }
 
 .tags-card .tag:hover {
-    background-color: #e4e8ef;
+    background-color: #eef1f6;
     color: #1494fb;
 }
 
