@@ -3,16 +3,17 @@
    ======================== */
 
 .sidebar-widget {
-    margin-top: 20px;
-    /* 上方 .tags-card 本身是透明的，透出 .g-sidebar 的白底。
-       这里原来给了 #fafafa 的灰底 + 阴影，所以两块看着不一样。
-       改成透明，跟标签栏保持一致，靠 margin 和标题分隔。 */
+    /* 原来这个 div 写在 .g-sidebar 外面，单独悬在侧边栏下方，
+       所以看起来是「框外的一条」，跟标签栏对不上。
+       现在移进 .g-sidebar 内部，跟 author-card / tags-card 共用同一条白框，
+       这里只需要一条分隔线把两块内容分开。 */
+    margin-top: 18px;
     background: transparent;
     border-radius: 0;
     padding: 0;
     box-shadow: none;
     border-top: 1px solid #f0f2f6;
-    padding-top: 18px;
+    padding-top: 16px;
 }
 
 .widget-title {
