@@ -5,35 +5,14 @@
 .sidebar-widget {
     /* 原来这个 div 写在 .g-sidebar 外面，单独悬在侧边栏下方，
        所以看起来是「框外的一条」，跟标签栏对不上。
-       现在移进 .g-sidebar 内部，跟 author-card / tags-card 共用同一条白框，
-       这里只需要一条分隔线把两块内容分开。 */
+       现在移进 .g-sidebar 内部，跟 author-card / tags-card 共用同一条白框。
+       分隔线交给 .tags-card 自带的 border-bottom，这里不再画线。 */
     margin-top: 18px;
     background: transparent;
     border-radius: 0;
     padding: 0;
     box-shadow: none;
-    /* 不再自己画分隔线：.tags-card 本身带 border-bottom，
-       两条叠在一起会变成双线。 */
     padding-top: 14px;
-}
-
-.widget-title {
-    font-size: 12px;
-    font-weight: 600;
-    color: #9aa4b5;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: 1.2px;
-}
-
-/* 标题后面拖一条细线到右边，当作小节的收尾，比孤零零一行字干净 */
-.widget-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #eef0f4;
 }
 
 /* ========================
@@ -106,13 +85,15 @@
 
 .ch-month-grid {
     display: grid;
-    grid-template-columns: repeat(7, 15px);
+    /* 18px：7 列 = 126px + 间距 12px = 138px，
+       加上月份标签，整行 166px 落在 198px 的容器里。 */
+    grid-template-columns: repeat(7, 18px);
     gap: 2px;
 }
 
 .ch-cell {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 2px;
     cursor: pointer;
     transition: transform .1s;
