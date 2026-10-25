@@ -372,20 +372,25 @@ body.night-mode .scal-post-list {
    ARTICLE CARD — 首页文章列表
    ======================== */
 
-/* 日期溢出卡片的真正原因不是 meta 的固定高度，而是 .post-tags 用了 float: left。
-   浮动的元素不参与父元素的高度计算，所以 .post-meta 永远只有 22px，
-   标签一多就换行、溢出，日期也被挤出正常位置。
+/* 卡片用的是 home-list.css 里的 CSS Grid：
+     grid-template-areas: "cover preview" "cover meta"
+     grid-template-rows: auto 1fr
 
-   改成 flex：标签区 flex:1 自动换行，日期 flex-shrink:0 固定在右侧，
-   meta 高度随标签行数自然增长。 */
+   第二行的 1fr 会把 meta 区域锁死成「剩余空间」，标签再多也撑不开它，
+   换行的标签于是溢出到卡片外，日期跟着跑偏。
+   两行都改成 auto，让内容自己决定高度。 */
+.article-item {
+    grid-template-rows: auto auto;
+    align-content: start;
+}
+
+/* meta 内部再排一次：标签靠左自动换行，日期靠右不压缩 */
 .article-item .post-meta {
     height: auto;
-    min-height: 22px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    overflow: visible;
 }
 
 .article-item .post-tags {
@@ -403,7 +408,6 @@ body.night-mode .scal-post-list {
     white-space: nowrap;
 }
 
-/* 标签换行时行间留点空 */
 .article-item .post-tag {
     margin-bottom: 0;
 }
