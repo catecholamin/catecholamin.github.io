@@ -122,13 +122,31 @@ header-img: /img/header-bg.jpg
             </section>
 
             {% if site.recommend-tags and site.tags.size>0 %}
+            {%- comment -%}
+              侧边标签按「该标签下的文章数」排序，取前 N 个。
+
+              原来直接遍历 site.tags 取前 recommend-condition-size 个，
+              而 Liquid 拿到的是 Ruby Hash 的插入顺序 —— 也就是文章被处理的先后。
+              结果是 2011 年那批老文章的标签（backup / github / blog）永远霸占前排，
+              后来新增的标签再热门也挤不进去，看起来就像"从来没有变过"。
+
+              这里不依赖插件（Cloudflare Pages 不跑 _plugins），纯 Liquid 解决：
+              把每个标签拼成「4 位补零的文章数::标签名」的字符串，
+              靠字符串字典序排出多少，再 split 回来。
+            {%- endcomment -%}
+            {%- capture tag_lines -%}
+                {%- for tag in site.tags -%}
+                    {{ tag[1].size | prepend: "0000" | slice: -4 }}::{{ tag[0] }};;
+                {%- endfor -%}
+            {%- endcapture -%}
+            {%- assign tag_ranked = tag_lines | split: ";;" | sort | reverse -%}
             <section class="tags-card">
-                {% for tag in site.tags %}
-                    {% if forloop.index > site.recommend-condition-size %}
-                        {% break %}
-                    {% endif %}
-                    <a href="{{ "tags.html#" | append: tag[0] | relative_url }}" class="tag">{{ tag[0]}}</a>
-                {% endfor %}
+                {%- for entry in tag_ranked limit: site.recommend-condition-size -%}
+                    {%- assign parts = entry | split: "::" -%}
+                    {%- if parts.size == 2 -%}
+                    <a href="{{ "tags.html#" | append: parts[1] | relative_url }}" class="tag">{{ parts[1] }}</a>
+                    {%- endif -%}
+                {%- endfor -%}
             </section>
             {% endif %}
         </div>
