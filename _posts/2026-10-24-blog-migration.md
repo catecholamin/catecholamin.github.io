@@ -456,7 +456,130 @@ OpenClaw     12 篇
 
 ---
 
-## 九、现在的状态
+## 九、搜索框在手机上是坏的
+
+有人在手机上试了一下，说点搜索按钮直接跳走了，到了页面又搜不了。
+
+先用无头浏览器在桌面尺寸下测，一切正常：点了弹层出现，输入有结果。**但换成 390×844 的 iPhone 视口重测，问题就出来了。**
+
+### 先看 JS，它第一行就死了
+
+```javascript
+var toggle = document.getElementById('search-toggle');
+if (!overlay || !toggle) return;      // ← 这里
+```
+
+`header.html` 里**根本没有** `search-toggle` 这个 id。整个 IIFE 到这里就 `return` 了，后面全部逻辑——包括搜索本身——从来没跑过。
+
+翻下去还有三个问题：
+
+1. **输入框从来没绑过 `input` 事件**。`doSearch()` 定义了，但没有任何地方调用它。
+2. **数据源写的是 `search.json`**，而构建产物叫 `search-index.json`。
+3. **依赖 jQuery 的 `$.getJSON`**，而 jQuery 只在部分布局里加载。
+
+### 两份实现互相打脸
+
+`header.html` 里还藏着一份内联脚本，做几乎一样的事。它用：
+
+```javascript
+document.querySelector('.nav-search a')
+```
+
+**`querySelector` 只抓第一个匹配。**
+
+桌面端导航是静态渲染的，抓得到。但手机上的菜单是折叠的、由 JS 后插入的节点——`querySelector` 抓到的是那个不可见的桌面版本，真正的移动端菜单项没被拦截，于是走默认的 `href`：
+
+```html
+<a href="/search.html">   ← 拦住就没跳转，没拦住就跳到这
+```
+
+这就是"点了按钮直接跳走"的来源。
+
+### 还有一个更根本的问题
+
+`.g-nav` 在手机上本来就是 `display: none`：
+
+```css
+@media screen and (max-width: 695px) {
+    .g-header .g-nav { display: none; }
+}
+```
+
+**搜索图标藏在这个折叠菜单里。** 用户得先点汉堡展开菜单、再点搜索——中间任何一步出岔子，就表现为"点了没反应"或者"跳走了"。
+
+而且父元素 `display: none` 时，子元素用 CSS 是救不回来的。必须在 DOM 层面单独放一个入口。
+
+### 改法
+
+**一、合并成一份实现**
+
+删掉 `header.html` 里的内联脚本，交互全部交给 `search-overlay.js`。触发点改成抓全部：
+
+```javascript
+var triggers = document.querySelectorAll('.nav-search a, #mobile-search');
+triggers.forEach(function (el) {
+    el.addEventListener('click', openOverlay);
+});
+```
+
+**二、移动端给一个常驻按钮**
+
+```html
+<a href="/search.html" class="mobile-search" id="mobile-search">
+    <i class="iconfont icon-search"></i>
+</a>
+```
+
+```css
+.mobile-search { display: none; }
+@media screen and (max-width: 695px) {
+    .mobile-search {
+        display: flex;
+        position: absolute;
+        top: 28px;
+        right: 56px;
+    }
+}
+```
+
+桌面隐藏，手机上固定在右上角、汉堡左边。不用展开菜单就能点到。
+
+**三、focus 要延迟**
+
+```javascript
+setTimeout(function () { input.focus(); }, 80);
+```
+
+弹层刚 `display: flex` 就立刻 `focus()`，移动端键盘经常不弹。等一帧以上再调。
+
+**四、静态资源加版本号**
+
+```html
+<script src="/assets/js/search-overlay.js?v=2"></script>
+```
+
+因为 `cache-control: public, max-age=14400`——**四小时缓存**。我改完推上去，手机上很可能还在跑几小时前的旧文件，改了也看不见效果。带个 `?v=2` 是全新 URL，浏览器必须重新拉。
+
+### 验证
+
+用 CDP 驱动无头 Chrome，设成 iPhone 视口真点一遍：
+
+```
+=== 手机首屏（不点任何菜单）===
+  搜索按钮可见  true      位置 302,28  32×32
+  点击后 active true
+  URL 未跳转    true
+  输入框聚焦    search-input
+  输入「胰腺」  3 条结果
+```
+
+四项全过：元素可见、点击生效、URL 没误跳、focus 到位。
+
+**这次教训是"只测一个端不够"**。桌面 headless 全绿的时候，手机上完全是另一回事——折叠菜单、触摸事件、键盘唤起，每一层都有自己的脾气。
+
+---
+
+## 十、现在的状态
 
 ```
 博客地址     https://996196.xyz          首字节 0.898s
