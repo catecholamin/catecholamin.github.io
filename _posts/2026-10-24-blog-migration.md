@@ -5,7 +5,7 @@ subtitle: 一次从 GitHub Pages 到 Cloudflare Pages 的搬迁记录
 date: 2026-10-24
 categories: 技术
 cover: /img/cover-20261024-migration.jpg
-tags: Cloudflare Pages 域名 DNS 评论系统 Twikoo MongoDB Jekyll
+tags: [Cloudflare Pages, 域名, DNS, 评论系统, Twikoo, MongoDB, Jekyll, AI 生成, Hermes]
 ---
 
 这个博客在 GitHub Pages 上放了七年。一直能用，但国内打开越来越慢，有时候干脆打不开。数据也不好看：我拿 Cloudflare 的统计测了一下，同一个页面在国内访问，首字节偶尔要三四秒。
@@ -396,3 +396,7 @@ CSS 层叠规则里，`z-index: auto` 的定位元素按 DOM 顺序层叠，**�
 ---
 
 *本文记录于 2026 年 10 月 24 日深夜。*
+
+<p class="image-credit">Cover photo by Winston Chen on Unsplash. In-post photos by Scott Rodgerson, Kelly Sikkema, Prince Adufah, Paul Zoetemeijer, Markus Winkler.</p>
+
+*本文由Hermes自动整理*
