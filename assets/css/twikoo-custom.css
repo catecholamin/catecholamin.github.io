@@ -1,0 +1,257 @@
+/* ==========================================================================
+   Twikoo 评论区 · 与 H2O 主题对齐的样式覆盖
+   --------------------------------------------------------------------------
+   Twikoo 自带样式来自 twikoo.css，主色是 Element UI 的 #409eff，
+   圆角 4px、边框 #dcdfe6、字体走系统默认，和本站的视觉语言对不上。
+
+   本站的设计参数（全部取自 assets/css/app.min.css）：
+     主色        #1494fb
+     正文色      #4e4e4e
+     次要灰      #868a94 / #a6abb2
+     边框        #e7eaf1
+     浅底        #fafafa
+     圆角        2px
+     阴影        0 0 .6px #d5dae1
+     字体        -apple-system, Verdana, "PingFang SC", ...
+
+   这里只改颜色、字体、圆角、留白，不动任何布局和交互，
+   所以 Twikoo 升级时不会因为这个文件坏掉。
+   选择器全部以 .twikoo 或 .tk- 开头，不会漏到页面其它地方。
+   ========================================================================== */
+
+/* ---------- 整体容器 ---------- */
+.twikoo,
+.twikoo .tk-content,
+.twikoo .tk-comments,
+.twikoo .tk-submit {
+  font-family: -apple-system, Verdana, "PingFang SC", "Helvetica Neue",
+               Arial, "Hiragino Sans GB", "Microsoft YaHei",
+               "WenQuanYi Micro Hei", sans-serif;
+  color: #4e4e4e;
+}
+
+.twikoo {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 评论区标题 */
+.twikoo .tk-comments-title {
+  color: #4e4e4e;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+/* 评论条数那个小徽标 */
+.twikoo .tk-comments-count span,
+.twikoo .tk-comments-count {
+  color: #a6abb2;
+}
+
+/* ---------- 输入区 ---------- */
+
+/* 昵称 / 邮箱 / 网址 */
+.twikoo .tk-input {
+  font-family: inherit;
+  color: #4e4e4e;
+  border: 1px solid #e7eaf1;
+  border-radius: 2px;
+  background: #fafafa;
+  transition: border-color .2s, background .2s;
+}
+
+.twikoo .tk-input:focus,
+.twikoo .tk-textarea:focus {
+  border-color: #1494fb;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(20, 148, 251, .08);
+  outline: none;
+}
+
+.twikoo .tk-input::placeholder,
+.twikoo .tk-textarea::placeholder {
+  color: #a6abb2;
+}
+
+/* 评论正文输入框 */
+.twikoo .tk-textarea {
+  font-family: inherit;
+  color: #4e4e4e;
+  border: 1px solid #e7eaf1;
+  border-radius: 2px;
+  background: #fafafa;
+  line-height: 1.7;
+  transition: border-color .2s, background .2s;
+}
+
+/* ---------- 按钮 ---------- */
+
+.twikoo .tk-button {
+  font-family: inherit;
+  border-radius: 2px;
+  transition: all .2s;
+}
+
+/* 主按钮 */
+.twikoo .tk-button--primary {
+  background-color: #1494fb;
+  border-color: #1494fb;
+  color: #fff;
+}
+
+.twikoo .tk-button--primary:hover {
+  background-color: #0d7fd8;
+  border-color: #0d7fd8;
+}
+
+.twikoo .tk-button--primary:disabled {
+  background-color: #b9d9f7;
+  border-color: #b9d9f7;
+}
+
+/* 文字按钮 */
+.twikoo .tk-button--text {
+  color: #868a94;
+}
+
+.twikoo .tk-button--text:hover {
+  color: #1494fb;
+}
+
+/* ---------- 头像 ---------- */
+
+.twikoo .tk-avatar {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.twikoo .tk-avatar-img {
+  border-radius: 2px;
+}
+
+/* ---------- 单条评论 ---------- */
+
+.twikoo .tk-comment {
+  border-radius: 2px;
+}
+
+.twikoo .tk-nick-link,
+.twikoo .tk-nick {
+  color: #4e4e4e;
+  font-weight: 600;
+}
+
+.twikoo .tk-nick-link:hover {
+  color: #1494fb;
+}
+
+/* 时间戳、设备信息这些次要文字 */
+.twikoo .tk-time,
+.twikoo .tk-extra,
+.twikoo .tk-time-relative {
+  color: #a6abb2;
+  font-size: 12px;
+}
+
+/* 评论正文 */
+.twikoo .tk-content {
+  color: #4e4e4e;
+}
+
+/* 正文里的链接 */
+.twikoo .tk-content a {
+  color: #1494fb;
+  border-bottom: 1px solid rgba(20, 148, 251, .25);
+  transition: border-color .2s;
+}
+
+.twikoo .tk-content a:hover {
+  border-bottom-color: #1494fb;
+}
+
+/* 正文里的引用与代码，和 markdown-body 保持一致 */
+.twikoo .tk-content blockquote {
+  border-left: 3px solid #e7eaf1;
+  color: #868a94;
+  background: #fafafa;
+  margin: 8px 0;
+  padding: 6px 12px;
+}
+
+.twikoo .tk-content code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: .9em;
+  background: #f4f6f9;
+  border-radius: 2px;
+  padding: 2px 5px;
+  color: #c0392b;
+}
+
+/* ---------- 操作区（回复 / 点赞 / 删除）---------- */
+
+.twikoo .tk-action-link,
+.twikoo .tk-action-icon {
+  color: #a6abb2;
+  transition: color .2s;
+}
+
+.twikoo .tk-action-link:hover,
+.twikoo .tk-action-text:hover {
+  color: #1494fb;
+}
+
+/* 已赞状态 */
+.twikoo .tk-liked,
+.twikoo .tk-action-icon-solid {
+  color: #1494fb;
+}
+
+/* ---------- 回复区 ---------- */
+
+.twikoo .tk-replies {
+  background: #fafafa;
+  border-radius: 2px;
+  border-left: 2px solid #e7eaf1;
+}
+
+/* ---------- 分割线 ---------- */
+
+.twikoo hr,
+.twikoo .tk-comment + .tk-comment {
+  border-color: #f0f2f6;
+}
+
+/* ---------- 分页 ---------- */
+
+.twikoo .tk-pagination .tk-pagination-item {
+  border-radius: 2px;
+  border-color: #e7eaf1;
+  color: #868a94;
+}
+
+.twikoo .tk-pagination .tk-pagination-item.is-active {
+  background-color: #1494fb;
+  border-color: #1494fb;
+  color: #fff;
+}
+
+/* ---------- 暗色模式跟随本站 ---------- */
+
+[data-theme="dark"] .twikoo .tk-content,
+[data-theme="dark"] .twikoo .tk-nick-link,
+[data-theme="dark"] .twikoo .tk-input,
+[data-theme="dark"] .twikoo .tk-textarea {
+  color: #d8dde5;
+}
+
+[data-theme="dark"] .twikoo .tk-input,
+[data-theme="dark"] .twikoo .tk-textarea {
+  background: #24262b;
+  border-color: #3a3d44;
+}
+
+[data-theme="dark"] .twikoo .tk-replies,
+[data-theme="dark"] .twikoo .tk-content blockquote {
+  background: #24262b;
+  border-color: #3a3d44;
+}
