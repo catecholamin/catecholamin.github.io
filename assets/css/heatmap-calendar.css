@@ -4,19 +4,21 @@
 
 .sidebar-widget {
     margin-top: 16px;
-    background: #f9f9f9;
-    border-radius: 8px;
+    background: #fafafa;
+    border-radius: 2px;
     padding: 16px;
+    box-shadow: 0 0 .6px #d5dae1;
 }
 
 .widget-title {
     font-size: 13px;
     font-weight: 600;
-    color: #555;
+    color: #a6abb2;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 6px;
+    letter-spacing: .3px;
 }
 
 /* ========================
@@ -31,13 +33,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    padding: 0 2px;
 }
 
 .ch-year-label {
     font-size: 12px;
     font-weight: 600;
-    color: #555;
+    color: #4e4e4e;
 }
 
 .ch-nav {
@@ -46,85 +49,117 @@
 }
 
 .ch-btn {
-    background: none;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 1px 6px;
+    background: #fafafa;
+    border: 1px solid #e7eaf1;
+    border-radius: 2px;
+    padding: 1px 7px;
     font-size: 12px;
-    color: #888;
+    line-height: 16px;
+    color: #a6abb2;
     cursor: pointer;
+    transition: all .2s;
 }
 
 .ch-btn:hover {
-    background: #eee;
+    background: #fff;
+    border-color: #1494fb;
+    color: #1494fb;
 }
 
 .ch-month-list {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
 }
 
 .ch-month-row {
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;   /* 内容居中，修掉右侧空一块的问题 */
+    gap: 6px;
 }
 
 .ch-month-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    color: #888;
-    width: 32px;
+    color: #a6abb2;
+    width: 22px;
     flex-shrink: 0;
     text-align: right;
+    letter-spacing: 0;
 }
 
 .ch-month-grid {
     display: grid;
-    grid-template-columns: repeat(7, 14px);
+    grid-template-columns: repeat(7, 15px);
     gap: 2px;
 }
 
 .ch-cell {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     border-radius: 2px;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform .1s;
 }
 
 .ch-cell:hover {
-    transform: scale(1.3);
+    transform: scale(1.35);
+    outline: 1px solid #1494fb;
+    outline-offset: 0;
 }
 
-.ch-cell.level-0 { background: #ebedf0; }
-.ch-cell.level-1 { background: #9be9a7; }
-.ch-cell.level-2 { background: #40c463; }
-.ch-cell.level-3 { background: #30a14e; }
-.ch-cell.level-4 { background: #216e39; }
+/* 配色跟页面主色走，原来是 GitHub 那套绿 */
+.ch-cell.level-0 { background: #eef1f6; }
+.ch-cell.level-1 { background: #cfe6fb; }
+.ch-cell.level-2 { background: #7dc0fa; }
+.ch-cell.level-3 { background: #3ea6f9; }
+.ch-cell.level-4 { background: #1494fb; }
 
 .ch-tooltip {
     display: none;
     position: fixed;
-    background: rgba(0,0,0,0.85);
+    background: rgba(30, 32, 38, .95);
     color: #fff;
-    border-radius: 6px;
+    border-radius: 2px;
     padding: 8px 12px;
     font-size: 12px;
     z-index: 9999;
-    pointer-events: none;
-    max-width: 200px;
+    /* 原来写的是 none，导致里面的文章链接点不到。
+       改成 auto 之后鼠标才能停在上面点击。 */
+    pointer-events: auto;
+    max-width: 220px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
 }
 
 .ch-tooltip-date {
     font-weight: 600;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    color: #fff;
 }
 
 .ch-tooltip-count {
-    color: #aaa;
+    color: #9aa4b5;
     font-size: 11px;
+}
+
+/* tooltip 里的文章条目，可以点 */
+.ch-tooltip-post {
+    display: block;
+    padding: 3px 0;
+    color: #7dc0fa;
+    font-size: 11.5px;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .15s;
+}
+
+.ch-tooltip-post:hover {
+    color: #fff;
+    text-decoration: underline;
 }
 
 /* ========================

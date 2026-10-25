@@ -277,24 +277,43 @@ var SIDEBAR_POSTS = [
             if (yr < currentYear) renderCalendarHeatmap(yr + 1);
         });
 
+        var hideTimer = null;
+
+        function scheduleHide() {
+            hideTimer = setTimeout(function () {
+                tooltip.style.display = 'none';
+            }, 250);
+        }
+
+        // tooltip 的事件只绑一次，不能放进 365 个格子的循环里
+        tooltip.onmouseenter = function () {
+            if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        };
+        tooltip.onmouseleave = scheduleHide;
+
         container.querySelectorAll('.ch-cell').forEach(function(cell) {
-            cell.addEventListener('mouseenter', function(e) {
-                var date = this.getAttribute('data-date');
-                var count = parseInt(this.getAttribute('data-count'));
+            function showTooltip(e) {
+                if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+                var date = cell.getAttribute('data-date');
+                var count = parseInt(cell.getAttribute('data-count'));
                 var posts = dateMap[date] || [];
+                // 用 <a> 而不是 <div>，点击才跳得走；配合 CSS 的 pointer-events:auto
                 var list = posts.map(function(p) {
-                    return '<div style="padding:2px 0;color:#7fc8ff;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + p.title + '</div>';
+                    return '<a class="ch-tooltip-post" href="' + p.url + '">' + p.title + '</a>';
                 }).join('');
                 tooltip.innerHTML = '<div class="ch-tooltip-date">' + date + '</div>' +
                     '<div class="ch-tooltip-count">' + count + ' 篇文章</div>' +
-                    (list ? '<div style="margin-top:4px">' + list + '</div>' : '');
+                    (list ? '<div style="margin-top:5px">' + list + '</div>' : '');
                 tooltip.style.display = 'block';
-                tooltip.style.left = (e.clientX + 12) + 'px';
-                tooltip.style.top = (e.clientY - 80) + 'px';
-            });
-            cell.addEventListener('mouseleave', function() {
-                tooltip.style.display = 'none';
-            });
+                var tw = tooltip.offsetWidth || 220;
+                var left = e.clientX + 12;
+                if (left + tw > window.innerWidth - 8) left = e.clientX - tw - 12;
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = (e.clientY - 60) + 'px';
+            }
+
+            cell.addEventListener('mouseenter', showTooltip);
+            cell.addEventListener('mouseleave', scheduleHide);
         });
     }
 
