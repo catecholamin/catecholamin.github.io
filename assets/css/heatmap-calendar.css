@@ -372,20 +372,40 @@ body.night-mode .scal-post-list {
    ARTICLE CARD — 首页文章列表
    ======================== */
 
-/* app.min.css 里 .article-item .post-meta 写死了 height: 22px，
-   而每个 .post-tag 是 22px 高 + 8px 下边距。
-   标签一多（比如 8 个）就换行，第二行整个溢出卡片边框，
-   日期被顶到框外——2026-08-02 那篇就是这么露出来的。
-   改成高度自适应，卡片跟着内容长。 */
+/* 日期溢出卡片的真正原因不是 meta 的固定高度，而是 .post-tags 用了 float: left。
+   浮动的元素不参与父元素的高度计算，所以 .post-meta 永远只有 22px，
+   标签一多就换行、溢出，日期也被挤出正常位置。
+
+   改成 flex：标签区 flex:1 自动换行，日期 flex-shrink:0 固定在右侧，
+   meta 高度随标签行数自然增长。 */
 .article-item .post-meta {
     height: auto;
     min-height: 22px;
-    overflow: hidden;   /* 收住浮动的日期，避免塌陷 */
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    overflow: visible;
+}
+
+.article-item .post-tags {
+    float: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.article-item .post-date {
+    float: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
 }
 
 /* 标签换行时行间留点空 */
 .article-item .post-tag {
-    margin-bottom: 6px;
+    margin-bottom: 0;
 }
 
 /* 侧边栏标签在纯白底上几乎看不见边界，稍微加深 */
