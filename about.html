@@ -11,10 +11,13 @@ layout: about
 		<img src="/img/wechat-qrcode.jpg" alt="微信公众号：儿茶分安" width="200" />
 </div>
 
-<script src="https://utteranc.es/client.js"
-        repo="catecholamin/catecholamin.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>  
+<div id="tcomment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@2.0.17/dist/twikoo.all.min.js"></script>
+<script>
+twikoo.init({
+  envId: 'https://radiant-brigadeiros-972078.netlify.app/.netlify/functions/twikoo',
+  el: '#tcomment',
+  path: location.pathname,
+  lang: 'zh-CN'
+});
+</script>
