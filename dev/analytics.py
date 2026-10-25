@@ -37,6 +37,53 @@ def _creds():
     return d["cloudflare_api_token"], d["cloudflare_account_id"]
 
 
+_PROXY_CACHE = {}
+
+
+def _proxy_args():
+    """返回 curl 的代理参数。WSL2 是 NAT 模式，127.0.0.1 不是 Windows 宿主，
+    环境变量里的 http_proxy=127.0.0.1:7890 在 WSL 内永远连不上（0.0001s 就 refused）。
+    正确地址是默认网关。探测顺序：网关 → 环境变量（非回环）→ 直连，记住第一个通的。"""
+    if "args" in _PROXY_CACHE:
+        return _PROXY_CACHE["args"]
+
+    import re
+    candidates = []
+    # 1) Windows 宿主的代理监听地址（WSL2 下就是默认网关）
+    try:
+        gw = subprocess.run(["ip", "route"], capture_output=True, text=True, timeout=5).stdout
+        m = re.search(r"default via ([\d.]+)", gw)
+        if m:
+            candidates.append(f"http://{m.group(1)}:7890")
+    except Exception:
+        pass
+    # 2) 环境变量里非回环的代理
+    for var in ("https_proxy", "HTTPS_PROXY", "http_proxy", "HTTP_PROXY"):
+        v = os.environ.get(var)
+        if v and not re.search(r"(127\.0\.0\.1|localhost|\[::1\])", v):
+            candidates.append(v)
+    # 3) 直连
+    candidates.append(None)
+
+    for c in candidates:
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", "12",
+               "https://api.cloudflare.com/client/v4/"]
+        if c:
+            cmd += ["-x", c]
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=20)
+            if r.returncode == 0:
+                _PROXY_CACHE["args"] = ["-x", c] if c else []
+                _PROXY_CACHE["used"] = c or "直连"
+                return _PROXY_CACHE["args"]
+        except Exception:
+            continue
+
+    _PROXY_CACHE["args"] = []
+    _PROXY_CACHE["used"] = "直连（探测未命中）"
+    return []
+
+
 def query(dims, date_from, bot_only_real=True, limit=100, order="count_DESC", with_sampling=False):
     """向 Cloudflare GraphQL 查 rumPageloadEventsAdaptiveGroups。
 
@@ -55,7 +102,7 @@ def query(dims, date_from, bot_only_real=True, limit=100, order="count_DESC", wi
         "{ count sum { visits }%s dimensions { %s } } } } }"
     ) % (acc, limit, filt, order, sampling, dims)
     out = subprocess.run(
-        ["curl", "-s", "-X", "POST", ENDPOINT,
+        ["curl", "-s", *_proxy_args(), "-X", "POST", ENDPOINT,
          "-H", f"Authorization: Bearer {token}",
          "-H", "Content-Type: application/json",
          "-d", json.dumps({"query": gql})],
