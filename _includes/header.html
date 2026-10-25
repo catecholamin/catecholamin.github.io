@@ -18,101 +18,18 @@
 </header>
 
 <!-- Search Overlay -->
+<!-- 交互逻辑统一放在 /assets/js/search-overlay.js，这里只保留结构。
+     以前这里还有一段内联脚本做几乎相同的事，两套并存会互相打脸：
+     内联那段用 querySelector 只抓第一个 .nav-search a，
+     移动端菜单是后插入的，抓不到就会走默认的 href 跳转。
+     注释掉容易忘，所以直接删掉，只留一处实现。 -->
 <div class="search-overlay" id="search-overlay">
     <div class="search-overlay-inner">
         <div class="search-overlay-header">
             <input type="text" id="search-input" class="search-input" placeholder="输入关键词，即时搜索..." autocomplete="off">
-            <button class="search-close" id="search-close"><i class="iconfont icon-close"></i></button>
+            <button class="search-close" id="search-close" aria-label="关闭搜索"><i class="iconfont icon-close"></i></button>
         </div>
         <div class="search-result" id="search-result"></div>
         <div class="search-hint" id="search-hint">输入关键词，搜索标题、标签与全文</div>
     </div>
 </div>
-<script>
-(function() {
-    var overlay = document.getElementById('search-overlay');
-    var input = document.getElementById('search-input');
-    var resultBox = document.getElementById('search-result');
-    var hint = document.getElementById('search-hint');
-
-    // Open: click nav search icon
-    document.querySelector('.nav-search a').addEventListener('click', function(e) {
-        e.preventDefault();
-        overlay.classList.add('active');
-        setTimeout(function() { input.focus(); }, 50);
-    });
-
-    // Close button
-    document.getElementById('search-close').addEventListener('click', function() {
-        overlay.classList.remove('active');
-    });
-
-    // Click outside
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) overlay.classList.remove('active');
-    });
-
-    // ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') overlay.classList.remove('active');
-    });
-
-    // Search
-    var cache = null;
-    function loadData(cb) {
-        if (cache) { cb(cache); return; }
-        var x = new XMLHttpRequest();
-        x.open('GET', '/search-index.json', true);
-        x.onload = function() {
-            if (x.status === 200) {
-                try { cache = JSON.parse(x.responseText); cb(cache); } catch(e) {}
-            }
-        };
-        x.send();
-    }
-
-    input.addEventListener('input', function() {
-        var q = this.value.trim();
-        if (!q) { resultBox.innerHTML = ''; hint.style.display = ''; return; }
-        hint.style.display = 'none';
-        loadData(function(data) {
-            var q2 = q.toLowerCase();
-            var results = [];
-
-            // 命中点在正文里时，截命中位置前后一段做上下文，比固定返回开头 100 字有用
-            function ctxOf(text, needle) {
-                var i = text.toLowerCase().indexOf(needle);
-                if (i < 0) return '';
-                var s = Math.max(0, i - 30);
-                var e = Math.min(text.length, i + needle.length + 70);
-                return (s > 0 ? '…' : '') + text.substring(s, e) + (e < text.length ? '…' : '');
-            }
-
-            for (var i = 0; i < data.length; i++) {
-                var post = data[i];
-                var body = post.content || '';
-                var hitTitle   = post.title   && post.title.toLowerCase().indexOf(q2) >= 0;
-                var hitExcerpt = post.excerpt && post.excerpt.toLowerCase().indexOf(q2) >= 0;
-                var hitTags    = post.tags    && post.tags.toLowerCase().indexOf(q2) >= 0;
-                var hitBody    = body && body.toLowerCase().indexOf(q2) >= 0;
-
-                if (hitTitle || hitExcerpt || hitTags || hitBody) {
-                    var ex = hitBody && !hitTitle && !hitExcerpt && !hitTags
-                        ? ctxOf(body, q2)
-                        : (post.excerpt || '').substring(0, 100);
-                    results.push(
-                        '<a class="search-result-item" href="' + post.url + '">' +
-                        '<span class="result-title">' + post.title + '</span>' +
-                        (post.date ? '<span class="result-date">' + post.date + '</span>' : '') +
-                        (ex ? '<span class="result-excerpt">' + ex + '...</span>' : '') +
-                        '</a>'
-                    );
-                }
-            }
-            resultBox.innerHTML = results.length === 0
-                ? '<div class="search-no-results">没有找到相关文章</div>'
-                : results.join('');
-        });
-    });
-})();
-</script>
