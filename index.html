@@ -43,17 +43,26 @@ header-img: /img/header-bg.jpg
   try { cached = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
   if (cached && cached.date === today && cached.url) { apply(cached.url); return; }
 
-  var res = window.matchMedia('(max-width: 768px)').matches ? 1080 : 1920;
-  var ctrl = window.AbortController ? new AbortController() : null;
-  if (ctrl) setTimeout(function () { ctrl.abort(); }, 6000);
+  function load(res) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    if (ctrl) setTimeout(function () { ctrl.abort(); }, 6000);
+    return fetch('https://bing.biturl.top/?resolution=' + res + '&format=json&index=0&mkt=zh-CN',
+                 ctrl ? { signal: ctrl.signal } : {})
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (data) {
+        if (!data || !data.url) throw new Error('no url');
+        return data.url;
+      });
+  }
 
-  fetch('https://bing.biturl.top/?resolution=' + res + '&format=json&index=0&mkt=zh-CN',
-        ctrl ? { signal: ctrl.signal } : {})
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      if (!data || !data.url) return;
-      apply(data.url);
-      try { localStorage.setItem(KEY, JSON.stringify({ date: today, url: data.url })); } catch (e) {}
+  /* 分辨率白名单：bing.biturl.top 只认 1366 和 1920，400/480/720/768/1080/2560 一律 502。
+     之前移动端传 1080，每次都是 502，json 解析失败被静默吞掉，手机上永远停在本地兜底图。 */
+  var res = window.matchMedia('(max-width: 768px)').matches ? 1366 : 1920;
+  load(res)
+    .catch(function () { return load(1920); })
+    .then(function (url) {
+      apply(url);
+      try { localStorage.setItem(KEY, JSON.stringify({ date: today, url: url })); } catch (e) {}
     })
     .catch(function () { /* 取不到就留着本地兜底图 */ });
 })();
